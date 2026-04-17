@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #0a0a0f;
+  --card: #1a1a28;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --accent3: #43e97b;
+  --text: #f0f0f8;
+  --muted: #9090aa;
+  --border: rgba(108,99,255,0.2);
+  --font-head: 'Montserrat', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 56px;
+  background: rgba(10,10,15,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-right a {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+.nav-right a:hover { color: var(--accent); }
+
+/* ===== HERO ===== */
+.devops-hero {
+  position: relative;
+  padding: 130px 60px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.devops-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(108,99,255,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 9vw, 110px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.hero-title span {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ===== TOOLS SECTION ===== */
+.tools-section {
+  padding: 40px 60px 100px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ===== TOOL ROW ===== */
+.tool-row {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  padding: 70px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.tool-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tool-row.reverse { flex-direction: row-reverse; }
+
+.tool-row:last-child { border-bottom: none; }
+
+/* ===== TOOL TEXT ===== */
+.tool-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tool-number {
+  font-family: var(--font-head);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(108,99,255,0.12);
+  line-height: 1;
+  letter-spacing: 2px;
+  margin-bottom: -10px;
+}
+
+.tool-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(108,99,255,0.1);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 30px;
+  align-self: flex-start;
+}
+
+.tool-text h2 {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(90deg, var(--text), var(--muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tool-text p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 520px;
+}
+
+.tool-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.tool-chips span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 16px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: var(--card);
+  transition: all 0.3s;
+}
+
+.tool-chips span:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(108,99,255,0.12);
+}
+
+/* ===== TOOL IMAGE ===== */
+.tool-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.img-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,0.2) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.tool-image img {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  filter: drop-shadow(0 0 30px rgba(108,99,255,0.2));
+}
+
+.tool-image img:hover {
+  transform: scale(1.06) rotate(-1deg);
+  filter: drop-shadow(0 0 50px rgba(108,99,255,0.45));
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 32px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.footer a { color: var(--accent); transition: color 0.3s; }
+.footer a:hover { color: var(--text); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .tools-section { padding: 40px 20px 80px; }
+  .devops-hero { padding: 100px 20px 60px; }
+
+  .tool-row,
+  .tool-row.reverse {
+    flex-direction: column;
+    gap: 40px;
+    padding: 50px 0;
+  }
+
+  .tool-text h2 { font-size: 36px; }
+  .tool-text p { font-size: 0.95rem; }
+  .tool-number { font-size: 3.5rem; }
+  .footer { flex-direction: column; gap: 12px; text-align: center; }
+}

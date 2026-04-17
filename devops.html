@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevOps — Varad Nagapurkar</title>
+  <link rel="stylesheet" href="css/devops.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">VN<span>.</span></div>
+    <div class="nav-right">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- HERO HEADER -->
+  <section class="devops-hero">
+    <div class="devops-hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-label">MY TECH STACK</p>
+      <h1 class="hero-title">DevOps <span>Arsenal</span></h1>
+      <p class="hero-sub">Tools I have learned, practiced, and deployed in real environments.</p>
+    </div>
+  </section>
+
+  <!-- ZIGZAG TOOLS -->
+  <section class="tools-section">
+
+    <!-- 1. Docker -->
+    <div class="tool-row" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">01</div>
+        <div class="tool-tag">Containerization</div>
+        <h2>Docker</h2>
+        <p>The foundation of containerization. I use Docker to build, ship, and run applications in isolated containers — making deployments consistent across every environment.</p>
+        <div class="tool-chips">
+          <span>Dockerfile</span>
+          <span>Images</span>
+          <span>Containers</span>
+          <span>Docker Hub</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images\docker.png" alt="Docker"/>
+      </div>
+    </div>
+
+    <!-- 2. Podman -->
+    <div class="tool-row reverse" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">02</div>
+        <div class="tool-tag">Containerization</div>
+        <h2>Podman</h2>
+        <p>A daemonless container engine that runs containers without root privileges. Podman is the Red Hat alternative to Docker — essential for RHCSA and enterprise Linux environments.</p>
+        <div class="tool-chips">
+          <span>Daemonless</span>
+          <span>Rootless</span>
+          <span>Red Hat</span>
+          <span>RHCSA</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/podman.png" alt="Podman"/>
+      </div>
+    </div>
+
+    <!-- 3. Containerd -->
+    <div class="tool-row" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">03</div>
+        <div class="tool-tag">Container Runtime</div>
+        <h2>Containerd</h2>
+        <p>An industry-standard container runtime that manages the complete container lifecycle — from image pull to execution. The core engine powering Docker and Kubernetes under the hood.</p>
+        <div class="tool-chips">
+          <span>Runtime</span>
+          <span>CRI</span>
+          <span>Kubernetes</span>
+          <span>Lifecycle</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/containerd.png" alt="Containerd"/>
+      </div>
+    </div>
+
+    <!-- 4. Skopeo -->
+    <div class="tool-row reverse" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">04</div>
+        <div class="tool-tag">Image Management</div>
+        <h2>Skopeo</h2>
+        <p>A command-line tool for working with remote container image registries. Inspect, copy, and sync images between registries without pulling them locally — powerful for CI/CD pipelines.</p>
+        <div class="tool-chips">
+          <span>Registry</span>
+          <span>Image Copy</span>
+          <span>Inspect</span>
+          <span>CI/CD</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/skopeo.png" alt="Skopeo"/>
+      </div>
+    </div>
+
+    <!-- 5. Buildah -->
+    <div class="tool-row" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">05</div>
+        <div class="tool-tag">Image Building</div>
+        <h2>Buildah</h2>
+        <p>A tool for building OCI-compliant container images without a running daemon. Works seamlessly with Podman — giving full control over image creation layer by layer.</p>
+        <div class="tool-chips">
+          <span>OCI Images</span>
+          <span>Daemonless</span>
+          <span>Podman</span>
+          <span>Scripted Builds</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/buildah.png" alt="Buildah"/>
+      </div>
+    </div>
+
+    <!-- 6. Kubernetes -->
+    <div class="tool-row reverse" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">06</div>
+        <div class="tool-tag">Orchestration</div>
+        <h2>Kubernetes</h2>
+        <p>The king of container orchestration. I use Kubernetes to deploy, scale, and manage containerized applications across clusters — automating rollouts, self-healing, and load balancing.</p>
+        <div class="tool-chips">
+          <span>Pods</span>
+          <span>Deployments</span>
+          <span>Services</span>
+          <span>Scaling</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/kubernetes.png" alt="Kubernetes"/>
+      </div>
+    </div>
+
+    <!-- 7. Terraform -->
+    <div class="tool-row" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">07</div>
+        <div class="tool-tag">Infrastructure as Code</div>
+        <h2>Terraform</h2>
+        <p>Infrastructure as Code at its best. I use Terraform to provision and manage cloud infrastructure using simple declarative configuration files — making infrastructure reproducible and version-controlled.</p>
+        <div class="tool-chips">
+          <span>IaC</span>
+          <span>HCL</span>
+          <span>AWS</span>
+          <span>State Management</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images\terraform.png" alt="Terraform"/>
+      </div>
+    </div>
+
+    <!-- 8. AWS -->
+    <div class="tool-row reverse" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">08</div>
+        <div class="tool-tag">Cloud Platform</div>
+        <h2>AWS</h2>
+        <p>Amazon Web Services — the backbone of modern cloud infrastructure. I work with EC2, S3, VPC, IAM, and Lambda to build, deploy, and manage scalable cloud-based applications.</p>
+        <div class="tool-chips">
+          <span>EC2</span>
+          <span>S3</span>
+          <span>VPC</span>
+          <span>IAM</span>
+          <span>Lambda</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/aws.png" alt="AWS"/>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>← <a href="index.html">Back to Home</a></p>
+    <p>Varad Nagapurkar — DevOps Engineer</p>
+  </footer>
+
+  <script src="js/devops.js"></script>
+</body>
+</html>

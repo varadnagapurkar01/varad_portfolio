@@ -1,0 +1,139 @@
+/* personality.css - FINAL DOMINATING VERSION */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --bg: #07070a;
+    --card: #11111d;
+    --gold: #ffcc00;
+    --accent: #43e97b;
+    --text: #ffffff;
+    --muted: #888899;
+    --font-head: 'Montserrat', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container { max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+
+/* Navbar */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; position: fixed; width: 100%; top: 0; 
+    background: rgba(7, 7, 10, 0.95); backdrop-filter: blur(15px);
+    z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-logo { font-family: var(--font-head); font-weight: 900; letter-spacing: 2px; font-size: 1.4rem; }
+.nav-logo span { color: var(--gold); }
+.back-btn { 
+    color: var(--accent); font-weight: 700; text-decoration: none; font-size: 0.8rem; 
+    border: 1px solid var(--accent); padding: 8px 16px; border-radius: 4px; transition: 0.3s;
+}
+.back-btn:hover { background: var(--accent); color: var(--bg); }
+
+/* Hero Section */
+.personality-hero {
+    height: 75vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; background: radial-gradient(circle at center, #1a1a2e 0%, var(--bg) 80%);
+    padding-top: 80px;
+}
+
+.glitch-title {
+    font-family: var(--font-head); font-size: clamp(3rem, 10vw, 6rem); 
+    font-weight: 900; line-height: 0.9; text-transform: uppercase;
+}
+.glitch-title span { display: block; color: var(--gold); text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
+
+/* Section Labels */
+.section-label {
+    font-family: var(--font-head); font-size: 0.9rem; color: var(--accent);
+    letter-spacing: 4px; margin-bottom: 50px; text-transform: uppercase;
+}
+.section-label span { color: var(--text); }
+
+/* Logic Cards */
+.logic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 100px; }
+.logic-card {
+    background: var(--card); padding: 50px; border-radius: 8px;
+    border-left: 4px solid var(--accent); transition: 0.4s;
+}
+.logic-card.gold-border { border-left-color: var(--gold); }
+.logic-card h3 { font-family: var(--font-head); text-transform: uppercase; color: var(--text); }
+
+/* Aura Gallery - The Three Pillars */
+.aura-gallery { padding: 100px 0 20px 0; width: 100%; background: var(--bg); }
+.gallery-layout {
+    display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: auto auto;
+    gap: 30px; height: auto;
+}
+.pillar-box.large { grid-row: span 2; min-height: 600px; }
+.pillar-box { min-height: 300px; background: var(--card); position: relative; border-radius: 12px; overflow: hidden; }
+
+.img-wrapper { width: 100%; height: 100%; position: relative; overflow: hidden; }
+.img-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.8s; }
+.pillar-box:hover img { filter: grayscale(0%); transform: scale(1.05); }
+
+.pillar-info {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 30px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+.pillar-info h4 { color: var(--gold); font-family: var(--font-head); font-weight: 900; }
+
+/* NEW 03. STANDARDS & IMPACT SECTION (Replaces circle) */
+.skill-breakdown {
+    margin-top: -30px; /* Pulls content UP to remove white gap */
+    padding: 100px 0;
+    z-index: 10;
+    position: relative;
+}
+
+/* Side-by-Side Certificate Grid */
+.standards-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px;
+}
+.rank-card {
+    background: var(--card); border-radius: 4px; overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.4s;
+}
+.rank-card:hover { border-color: var(--gold); transform: translateY(-10px); }
+.rank-img { position: relative; height: 380px; }
+.rank-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
+.rank-card:hover img { filter: grayscale(0%); }
+
+.rank-tag {
+    position: absolute; top: 20px; right: 20px; background: var(--gold);
+    color: #000; font-family: var(--font-head); font-weight: 900;
+    padding: 5px 15px; font-size: 0.7rem; letter-spacing: 2px;
+}
+
+/* Aggressive Text - No Circles */
+.comm-impact-box { border-top: 3px solid var(--gold); padding-top: 60px; }
+.impact-line {
+    display: flex; align-items: center; gap: 50px; margin-bottom: 40px;
+    padding: 30px; background: rgba(255,255,255,0.02);
+}
+.impact-word {
+    font-family: var(--font-head); font-size: 1.8rem; font-weight: 900;
+    color: var(--accent); min-width: 280px; letter-spacing: 4px;
+}
+.impact-line p {
+    margin: 0; color: #ccc; font-size: 1.2rem;
+    border-left: 2px solid var(--gold); padding-left: 30px;
+}
+
+/* Responsive Scaling */
+@media (max-width: 1100px) {
+    .gallery-layout, .standards-grid, .logic-grid { grid-template-columns: 1fr; }
+    .skill-breakdown { margin-top: 20px; }
+    .impact-line { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .impact-line p { border-left: none; border-top: 2px solid var(--gold); padding-top: 15px; }
+}
