@@ -22,3 +22,23 @@ document.querySelectorAll('.sec-btn').forEach(btn => {
 console.log('%c👋 Hey Recruiter!', 'color:#6c63ff;font-size:22px;font-weight:bold;');
 console.log('%cBuilt by Varad Nagapurkar — DevOps | Cricket | पौरोहित्य', 'color:#ff6584;font-size:13px;');
 console.log('%cLet\'s connect! 🚀', 'color:#43e97b;font-size:13px;');
+
+const highlights = document.querySelectorAll('.highlight');
+
+highlights.forEach((el) => {
+  el.addEventListener('mouseenter', () => {
+    el.style.transform = "scale(1.05)";
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = "scale(1)";
+  });
+});
+
+document.querySelectorAll('.bio-section').forEach(section => {
+  section.addEventListener('mouseenter', () => {
+    section.style.transform = "translateX(6px)";
+  });
+  section.addEventListener('mouseleave', () => {
+    section.style.transform = "translateX(0)";
+  });
+});
