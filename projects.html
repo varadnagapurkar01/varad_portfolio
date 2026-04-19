@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Varad Nagapurkar</title>
+  <link rel="stylesheet" href="css/projects.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">VN<span>.</span></div>
+    <div class="nav-right">
+      <a href="index.html">← Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="proj-hero">
+    <div class="proj-hero-bg"></div>
+    <div class="hero-particles" id="particles"></div>
+    <div class="proj-hero-content">
+      <p class="proj-label">🚀 BUILD. DEPLOY. REPEAT.</p>
+      <h1 class="proj-title">My <span>Projects</span></h1>
+      <p class="proj-sub">Real DevOps work — from virtual machines to Linux automation. Building more every day.</p>
+      <div class="proj-stats">
+        <div class="pstat"><span>2</span><p>Live Projects</p></div>
+        <div class="pstat-div"></div>
+        <div class="pstat"><span>3</span><p>In Development</p></div>
+        <div class="pstat-div"></div>
+        <div class="pstat"><span>∞</span><p>Learning</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER -->
+  <section class="filter-section">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="devops">DevOps</button>
+      <button class="filter-btn" data-filter="linux">Linux</button>
+      <button class="filter-btn" data-filter="development">In Development</button>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects-section">
+    <div class="projects-grid">
+
+      <!-- ==============================
+           PROJECT 1 — ZENITY
+      ============================== -->
+      <div class="proj-card featured-card" data-aos data-category="linux">
+        <div class="proj-card-top">
+          <div class="proj-status live">● LIVE</div>
+          <div class="proj-type">Linux / Zenity</div>
+        </div>
+
+        <div class="proj-header">
+          <div class="proj-icon-wrap">
+            <div class="proj-icon">🐧</div>
+            <div class="proj-icon-bg"></div>
+          </div>
+          <div>
+            <h3 class="proj-name">Zenity — Linux GUI Automation</h3>
+            <p class="proj-tagline">Command line power with GUI simplicity</p>
+          </div>
+        </div>
+
+        <p class="proj-desc">A Linux automation project using <strong>Zenity</strong> — users interact with a GUI popup, enter details, and background shell scripts execute Linux commands automatically. No terminal knowledge required for the end user.</p>
+
+        <!-- DEMO CLIPS — Zenity -->
+        <div class="clips-section">
+          <div class="clips-label">🎬 Live Demo Clips</div>
+          <div class="clips-grid">
+
+            <!-- CLIP 1: Add User -->
+            <div class="clip-box">
+              <!--
+              ADD USER CLIP:
+              src="" मध्ये path टाक:
+              project-images/zenity-adduser.mp4
+              -->
+              <video class="clip-video" src="project-images/zenity-adduser.mp4"
+                     muted playsinline loop>
+              </video>
+              <div class="clip-placeholder">
+                <span>👤</span>
+                <p>Add User Demo</p>
+              </div>
+              <button class="clip-play-btn">▶ Play</button>
+              <div class="clip-label">Add User</div>
+            </div>
+
+            <!-- CLIP 2: Create Partition -->
+            <div class="clip-box">
+              <!--
+              PARTITION CLIP:
+              src="" मध्ये path टाक:
+              project-images/zenity-partition.mp4
+              -->
+              <video class="clip-video" src="project-images/zenity-partition.mp4"
+                     muted playsinline loop>
+              </video>
+              <div class="clip-placeholder">
+                <span>💾</span>
+                <p>Partition Demo</p>
+              </div>
+              <button class="clip-play-btn">▶ Play</button>
+              <div class="clip-label">Create Partition</div>
+            </div>
+
+            <!-- CLIP 3: Add Group -->
+            <div class="clip-box">
+              <!--
+              GROUP CLIP:
+              src="" मध्ये path टाक:
+              project-images/zenity-group.mp4
+              -->
+              <video class="clip-video" src="project-images/zenity-group.mp4"
+                     muted playsinline loop>
+              </video>
+              <div class="clip-placeholder">
+                <span>👥</span>
+                <p>Group Demo</p>
+              </div>
+              <button class="clip-play-btn">▶ Play</button>
+              <div class="clip-label">Add Group</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="proj-tech">
+          <span>Zenity</span><span>Linux</span><span>Bash</span>
+          <span>Shell Script</span><span>GUI</span><span>Automation</span>
+        </div>
+
+        <div class="proj-actions">
+          <!--
+          GITHUB LINK:
+          data-github="" मध्ये तुझा GitHub URL टाक
+          उदाहरण: https://github.com/varad/zenity-project
+          -->
+          <button class="proj-btn github-btn"
+                  data-github="YOUR_GITHUB_LINK_HERE"
+                  onclick="openGithub(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub Repo
+          </button>
+          <button class="proj-btn detail-btn" onclick="openDetail('zenity')">
+            Full Details →
+          </button>
+        </div>
+      </div>
+
+      <!-- ==============================
+           PROJECT 2 — VIRTUAL MACHINE
+      ============================== -->
+      <div class="proj-card featured-card" data-aos data-category="devops">
+        <div class="proj-card-top">
+          <div class="proj-status live">● LIVE</div>
+          <div class="proj-type">DevOps / VM</div>
+        </div>
+
+        <div class="proj-header">
+          <div class="proj-icon-wrap">
+            <div class="proj-icon">🖥️</div>
+            <div class="proj-icon-bg"></div>
+          </div>
+          <div>
+            <h3 class="proj-name">Virtual Machine Infrastructure</h3>
+            <p class="proj-tagline">3 VMs — pure command line, zero GUI</p>
+          </div>
+        </div>
+
+        <p class="proj-desc">Created and configured <strong>3 Virtual Machines</strong> from scratch using command line only. Network setup, user management, SSH communication, service configuration — all done manually through CLI.</p>
+
+        <!-- VM ARCHITECTURE DIAGRAM -->
+        <div class="vm-architecture">
+          <div class="arch-label">🔗 VM Architecture</div>
+          <div class="arch-diagram">
+            <div class="arch-vm vm1">
+              <span>🖥️</span>
+              <strong>VM 1</strong>
+              <p>Web Server</p>
+            </div>
+            <div class="arch-arrows">
+              <div class="arch-line"></div>
+              <div class="arch-ssh">SSH</div>
+              <div class="arch-line"></div>
+            </div>
+            <div class="arch-vm vm2">
+              <span>🗄️</span>
+              <strong>VM 2</strong>
+              <p>Database</p>
+            </div>
+            <div class="arch-arrows">
+              <div class="arch-line"></div>
+              <div class="arch-ssh">SSH</div>
+              <div class="arch-line"></div>
+            </div>
+            <div class="arch-vm vm3">
+              <span>⚖️</span>
+              <strong>VM 3</strong>
+              <p>Load Balancer</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VM SCREENSHOTS -->
+        <div class="clips-section">
+          <div class="clips-label">📸 Terminal Screenshots</div>
+          <div class="screenshots-grid">
+            <!--
+            SCREENSHOT 1:
+            src="" मध्ये path टाक:
+            project-images/vm1.png
+            -->
+            <div class="screenshot-box">
+              <img src="project-images/vm1.png"
+                   alt="VM 1 Config"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="ss-placeholder">
+                <span>📺</span><p>VM 1 Screenshot</p>
+              </div>
+              <div class="ss-label">VM 1 — Network</div>
+            </div>
+
+            <!--
+            SCREENSHOT 2:
+            src="" मध्ये path टाक:
+            project-images/vm2.png
+            -->
+            <div class="screenshot-box">
+              <img src="project-images/vm2.png"
+                   alt="VM 2 Config"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="ss-placeholder">
+                <span>📺</span><p>VM 2 Screenshot</p>
+              </div>
+              <div class="ss-label">VM 2 — Services</div>
+            </div>
+
+            <!--
+            SCREENSHOT 3:
+            src="" मध्ये path टाक:
+            project-images/vm3.png
+            -->
+            <div class="screenshot-box">
+              <img src="project-images/vm3.png"
+                   alt="VM 3 Config"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+              <div class="ss-placeholder">
+                <span>📺</span><p>VM 3 Screenshot</p>
+              </div>
+              <div class="ss-label">VM 3 — Storage</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="proj-tech">
+          <span>Linux</span><span>CLI</span><span>SSH</span>
+          <span>Networking</span><span>VM</span><span>Services</span>
+        </div>
+
+        <div class="proj-actions">
+          <button class="proj-btn github-btn"
+                  data-github="YOUR_GITHUB_LINK_HERE"
+                  onclick="openGithub(this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub Repo
+          </button>
+          <button class="proj-btn detail-btn" onclick="openDetail('vm')">
+            Full Details →
+          </button>
+        </div>
+      </div>
+
+      <!-- ==============================
+           PROJECT 3 — HOTEL (IN DEV)
+      ============================== -->
+      <div class="proj-card in-dev-card" data-aos data-category="development">
+        <div class="proj-card-top">
+          <div class="proj-status indev">🔨 IN DEV</div>
+          <div class="proj-type">Full Stack</div>
+        </div>
+        <div class="proj-icon-wrap">
+          <div class="proj-icon">🏨</div>
+          <div class="proj-icon-bg indev-bg"></div>
+        </div>
+        <h3 class="proj-name">Hotel Management System</h3>
+        <p class="proj-desc">End-to-end hotel management — room booking, billing, staff management, and guest records. Full stack web application in active development.</p>
+        <div class="dev-progress">
+          <div class="progress-label"><span>Progress</span><span>15%</span></div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--prog:15%"></div>
+          </div>
+        </div>
+        <div class="proj-tech">
+          <span>HTML/CSS</span><span>JavaScript</span>
+          <span>Backend</span><span>Database</span>
+        </div>
+        <div class="proj-actions">
+          <button class="proj-btn coming-btn" disabled>🔨 Coming Soon</button>
+          <button class="proj-btn detail-btn" onclick="openDetail('hotel')">Preview →</button>
+        </div>
+      </div>
+
+      <!-- ==============================
+           PROJECT 4 — BANK (IN DEV)
+      ============================== -->
+      <div class="proj-card in-dev-card" data-aos data-category="development">
+        <div class="proj-card-top">
+          <div class="proj-status indev">🔨 IN DEV</div>
+          <div class="proj-type">Full Stack</div>
+        </div>
+        <div class="proj-icon-wrap">
+          <div class="proj-icon">🏦</div>
+          <div class="proj-icon-bg indev-bg"></div>
+        </div>
+        <h3 class="proj-name">Bank Management System</h3>
+        <p class="proj-desc">Complete banking application — accounts, transactions, loans, and customer portal. Secure and scalable architecture planned.</p>
+        <div class="dev-progress">
+          <div class="progress-label"><span>Progress</span><span>10%</span></div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--prog:10%"></div>
+          </div>
+        </div>
+        <div class="proj-tech">
+          <span>HTML/CSS</span><span>JavaScript</span>
+          <span>Security</span><span>Database</span>
+        </div>
+        <div class="proj-actions">
+          <button class="proj-btn coming-btn" disabled>🔨 Coming Soon</button>
+          <button class="proj-btn detail-btn" onclick="openDetail('bank')">Preview →</button>
+        </div>
+      </div>
+
+      <!-- ==============================
+           PROJECT 5 — HOSPITAL (IN DEV)
+      ============================== -->
+      <div class="proj-card in-dev-card" data-aos data-category="development">
+        <div class="proj-card-top">
+          <div class="proj-status indev">🔨 IN DEV</div>
+          <div class="proj-type">Full Stack</div>
+        </div>
+        <div class="proj-icon-wrap">
+          <div class="proj-icon">🏥</div>
+          <div class="proj-icon-bg indev-bg"></div>
+        </div>
+        <h3 class="proj-name">Hospital Management System</h3>
+        <p class="proj-desc">Full hospital management — patient records, doctor scheduling, pharmacy, billing, and emergency management. Healthcare-grade reliability.</p>
+        <div class="dev-progress">
+          <div class="progress-label"><span>Progress</span><span>5%</span></div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="--prog:5%"></div>
+          </div>
+        </div>
+        <div class="proj-tech">
+          <span>HTML/CSS</span><span>JavaScript</span>
+          <span>Healthcare</span><span>Database</span>
+        </div>
+        <div class="proj-actions">
+          <button class="proj-btn coming-btn" disabled>🔨 Coming Soon</button>
+          <button class="proj-btn detail-btn" onclick="openDetail('hospital')">Preview →</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DETAIL MODAL -->
+  <div class="proj-modal" id="proj-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close">✕ Close</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>← <a href="index.html">Back to Home</a></p>
+    <p>Varad Nagapurkar — Always Building</p>
+  </footer>
+
+  <script src="js/projects.js"></script>
+</body>
+</html>
