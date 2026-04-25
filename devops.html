@@ -27,33 +27,92 @@
     </div>
   </section>
 
-  <!-- ZIGZAG TOOLS -->
-  <section class="tools-section">
+  <!-- ═══════════════════════════════════════════ -->
+  <!--         SECTION 1: OPERATING SYSTEMS        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="os-section">
+    <div class="section-header">
+      <p class="section-label">FOUNDATION</p>
+      <h2 class="section-title">Operating Systems</h2>
+      <p class="section-sub">The Linux environments I work in — from certified enterprise OS to cloud-native deployments.</p>
+    </div>
 
-    <!-- 1. Docker -->
+    <div class="os-grid">
+
+      <!-- RHEL -->
+      <div class="os-card" data-os>
+        <div class="os-card-top">
+          <img src="devops-images/rhel.png" alt="RHEL"/>
+          <div class="os-badge">RHCSA Certified</div>
+        </div>
+        <div class="os-card-body">
+          <div class="tool-tag">Enterprise Linux</div>
+          <h3>RHEL</h3>
+          <p>Red Hat Enterprise Linux — the OS I am officially certified on. My RHCSA validates expertise in system administration, SELinux, storage, and systemd service management.</p>
+          <div class="tool-chips">
+            <span>SELinux</span>
+            <span>systemd</span>
+            <span>DNF / RPM</span>
+            <span>Enterprise Grade</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ubuntu -->
+      <div class="os-card" data-os>
+        <div class="os-card-top">
+          <img src="devops-images/ubuntu.png" alt="Ubuntu"/>
+          <div class="os-badge">Primary Environment</div>
+        </div>
+        <div class="os-card-body">
+          <div class="tool-tag">Cloud & Dev Linux</div>
+          <h3>Ubuntu</h3>
+          <p>My go-to OS for Docker, scripting, and AWS deployments. Ubuntu powers most of my hands-on DevOps work — from building containers to managing EC2 instances.</p>
+          <div class="tool-chips">
+            <span>Debian-based</span>
+            <span>APT</span>
+            <span>Cloud Ready</span>
+            <span>Server LTS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSE -->
+      <div class="os-card" data-os>
+        <div class="os-card-top">
+          <img src="devops-images/suse.png" alt="SUSE"/>
+          <div class="os-badge">Enterprise Stable</div>
+        </div>
+        <div class="os-card-body">
+          <div class="tool-tag">Enterprise Linux</div>
+          <h3>SUSE / openSUSE</h3>
+          <p>Enterprise Linux built for stability and Kubernetes-native workloads. SUSE is designed for production environments where reliability and security are non-negotiable.</p>
+          <div class="tool-chips">
+            <span>YaST</span>
+            <span>Zypper</span>
+            <span>K8s Ready</span>
+            <span>Enterprise Stable</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!--         SECTION 2: DEVOPS TOOLS             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="tools-section">
+    <div class="section-header">
+      <p class="section-label">TOOLS & PLATFORMS</p>
+      <h2 class="section-title">DevOps <span>Toolkit</span></h2>
+      <p class="section-sub">Technologies I have built, deployed, and automated with in real environments.</p>
+    </div>
+
+    <!-- 1. Podman -->
     <div class="tool-row" data-tool>
       <div class="tool-text">
         <div class="tool-number">01</div>
-        <div class="tool-tag">Containerization</div>
-        <h2>Docker</h2>
-        <p>The foundation of containerization. I use Docker to build, ship, and run applications in isolated containers — making deployments consistent across every environment.</p>
-        <div class="tool-chips">
-          <span>Dockerfile</span>
-          <span>Images</span>
-          <span>Containers</span>
-          <span>Docker Hub</span>
-        </div>
-      </div>
-      <div class="tool-image">
-        <div class="img-glow"></div>
-        <img src="devops-images\docker.png" alt="Docker"/>
-      </div>
-    </div>
-
-    <!-- 2. Podman -->
-    <div class="tool-row reverse" data-tool>
-      <div class="tool-text">
-        <div class="tool-number">02</div>
         <div class="tool-tag">Containerization</div>
         <h2>Podman</h2>
         <p>A daemonless container engine that runs containers without root privileges. Podman is the Red Hat alternative to Docker — essential for RHCSA and enterprise Linux environments.</p>
@@ -67,6 +126,26 @@
       <div class="tool-image">
         <div class="img-glow"></div>
         <img src="devops-images/podman.png" alt="Podman"/>
+      </div>
+    </div>
+
+    <!-- 2. Docker -->
+    <div class="tool-row reverse" data-tool>
+      <div class="tool-text">
+        <div class="tool-number">02</div>
+        <div class="tool-tag">Containerization</div>
+        <h2>Docker</h2>
+        <p>The foundation of containerization. I use Docker to build, ship, and run applications in isolated containers — making deployments consistent across every environment.</p>
+        <div class="tool-chips">
+          <span>Dockerfile</span>
+          <span>Images</span>
+          <span>Containers</span>
+          <span>Docker Hub</span>
+        </div>
+      </div>
+      <div class="tool-image">
+        <div class="img-glow"></div>
+        <img src="devops-images/docker.png" alt="Docker"/>
       </div>
     </div>
 
@@ -166,7 +245,7 @@
       </div>
       <div class="tool-image">
         <div class="img-glow"></div>
-        <img src="devops-images\terraform.png" alt="Terraform"/>
+        <img src="devops-images/terraform.png" alt="Terraform"/>
       </div>
     </div>
 
