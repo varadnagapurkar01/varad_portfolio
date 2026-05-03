@@ -2,21 +2,22 @@
 
 // Project details for modal
 const projectDetails = {
-  zenity: {
+zenity: {
     icon: '🐧',
-    name: 'Zenity — Linux GUI Automation',
+    name: 'Zenity — Linux Admin GUI Tool',
     status: 'live',
-    desc: 'A Linux automation project using Zenity — users interact with a GUI popup, and shell scripts run Linux commands automatically in the background.',
+    desc: 'A graphical Linux system administration tool built using Zenity and Bash. Eliminates complex terminal commands — administrators can manage users, packages, services and monitor the system with simple clicks.',
     points: [
-      '<strong>Add User</strong> — GUI popup asks for username → script creates user automatically',
-      '<strong>Create Partition</strong> — GUI selects disk size → script handles fdisk commands',
-      '<strong>Add Group</strong> — Enter group name in popup → script creates group via CLI',
+      '<strong>User Management</strong> — Add, Remove, Lock, Unlock users and view user info via GUI popups',
+      '<strong>Package Management</strong> — Install, Remove and Update packages with proper success/failure acknowledgement',
+      '<strong>Service Management</strong> — Start, Stop, Restart services and view running services list graphically',
+      '<strong>System Monitoring</strong> — View CPU, RAM, Disk usage and Full System Report in one click',
+      '<strong>Role Based Access</strong> — Auto detects sudo privileges, limits access for non-admin users',
       '<strong>Zero Terminal Knowledge</strong> — End user never touches the command line',
-      '<strong>Shell Scripts</strong> — All background automation written in Bash',
-      '<strong>Error Handling</strong> — GUI shows success/failure messages automatically'
+      '<strong>Error Handling</strong> — Every action shows clear success or failure message with next step options'
     ],
-    tech: ['Zenity','Linux','Bash','Shell Script','GUI','Automation','CLI'],
-    github: 'YOUR_GITHUB_LINK_HERE'
+    tech: ['Zenity', 'Linux', 'Bash', 'Shell Script', 'GUI', 'Automation', 'Ubuntu', 'systemctl', 'apt'],
+    github: 'https://github.com/varadnagapurkar01/Linux_Admin_GUI_Tool'
   },
   vm: {
     icon: '🖥️',
@@ -35,21 +36,22 @@ const projectDetails = {
     tech: ['Linux','CLI','SSH','Networking','VM','Services','Storage','User Mgmt'],
     github: 'YOUR_GITHUB_LINK_HERE'
   },
-  hotel: {
-    icon: '🏨',
-    name: 'Hotel Management System',
-    status: 'indev',
-    desc: 'End-to-end hotel management application currently in active development.',
-    points: [
-      '<strong>Room Booking</strong> — Real-time availability and reservation system',
-      '<strong>Guest Records</strong> — Complete profile and stay history',
-      '<strong>Billing</strong> — Automated invoice and payment processing',
-      '<strong>Staff Portal</strong> — Scheduling and task management',
-      '<strong>Analytics</strong> — Occupancy reports and revenue tracking'
-    ],
-    tech: ['HTML/CSS','JavaScript','Backend','Database','REST API'],
-    github: null
-  },
+hotel: {
+  icon: '🏨',
+  name: 'VKVV Hotel Management',
+  status: 'completed',
+  desc: 'Full-stack hotel management web application with room booking, billing, staff management and guest records. Containerized using Docker and deployed with CI/CD pipeline.',
+  points: [
+    '<strong>Room Booking</strong> — Real-time availability and reservation system',
+    '<strong>Guest Records</strong> — Aadhar verification, phone, complete stay history',
+    '<strong>Billing System</strong> — Automated invoice generation with group discounts',
+    '<strong>Docker</strong> — Fully containerized application',
+    '<strong>CI/CD Pipeline</strong> — GitHub Actions with auto deploy on Render'
+  ],
+  tech: ['HTML/CSS','JavaScript','Node.js','SQLite','Docker','GitHub Actions'],
+  live: 'https://varad-nagapurkar-vkvv-hotel-management.onrender.com',
+  github: 'https://github.com/varadnagapurkar01/hotel_management'
+},
   bank: {
     icon: '🏦',
     name: 'Bank Management System',
@@ -311,3 +313,25 @@ window.addEventListener('scroll', () => {
 });
 
 console.log('%c🚀 Projects — Varad Nagapurkar', 'color:#6c63ff;font-size:16px;font-weight:bold;');
+
+function switchImg(dot, index, galleryId) {
+  const card = dot.closest('.proj-card');
+  card.querySelectorAll('.gallery-img').forEach((img, i) => {
+    img.classList.toggle('active', i === index);
+  });
+  card.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === index);
+  });
+}
+
+// Auto slide
+setInterval(() => {
+  document.querySelectorAll('.proj-img-gallery').forEach(gallery => {
+    const imgs = gallery.querySelectorAll('.gallery-img');
+    const dots = gallery.querySelectorAll('.dot');
+    let active = [...imgs].findIndex(img => img.classList.contains('active'));
+    let next = (active + 1) % imgs.length;
+    imgs.forEach((img, i) => img.classList.toggle('active', i === next));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === next));
+  });
+}, 3000);
