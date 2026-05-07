@@ -1,0 +1,24 @@
+name: Deploy Portfolio
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GCP VM
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            cd /root/varad_portfolio
+            git pull
+            podman stop portfolio || true
+            podman rm portfolio || true
+            podman build -t varad-portfolio .
+            podman run -d -p 80:80 --name portfolio varad-portfolio
