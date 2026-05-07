@@ -20,5 +20,6 @@ jobs:
             git pull
             podman stop portfolio || true
             podman rm portfolio || true
-            podman build -t varad-portfolio .
+            podman rmi varad-portfolio || true
+            podman build --no-cache -t varad-portfolio .
             podman run -d -p 80:80 --name portfolio varad-portfolio
