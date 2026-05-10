@@ -42,3 +42,123 @@ document.querySelectorAll('.bio-section').forEach(section => {
     section.style.transform = "translateX(0)";
   });
 });
+
+
+(function() {
+
+  const logoData = {
+    tux:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg',      color: '#FFD700', name: 'LINUX'  },
+    aws:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg',  color: '#FF9900', name: 'AWS'    },
+    redhat:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/redhat.svg',     color: '#EE0000', name: 'REDHAT' },
+    ansible: { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ansible.svg',    color: '#EE0000', name: 'ANSIBLE'},
+    docker:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/docker.svg',     color: '#2496ED', name: 'DOCKER' },
+    k8s:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kubernetes.svg', color: '#326CE5', name: 'K8S'   },
+    git:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/git.svg',        color: '#F05032', name: 'GIT'   },
+    podman:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/podman.svg',     color: '#892CA0', name: 'PODMAN'},
+    ubuntu:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ubuntu.svg',     color: '#E95420', name: 'UBUNTU'},
+    bash:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gnubash.svg',    color: '#4EAA25', name: 'BASH'  },
+    terraform:{ src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/terraform.svg', color: '#7B42BC', name: 'TERRA' },
+  };
+
+  // V A R A D
+  const row1 = [
+    { l: 'V', logo: 'tux'     },
+    { l: 'A', logo: 'aws'     },
+    { l: 'R', logo: 'redhat'  },
+    { l: 'A', logo: 'ansible' },
+    { l: 'D', logo: 'docker'  },
+  ];
+
+  // N A G A P U R K A R
+  const row2 = [
+    { l: 'N', logo: 'k8s'      },
+    { l: 'A', logo: 'aws'      },
+    { l: 'G', logo: 'git'      },
+    { l: 'A', logo: 'ansible'  },
+    { l: 'P', logo: 'podman'   },
+    { l: 'U', logo: 'ubuntu'   },
+    { l: 'R', logo: 'redhat'   },
+    { l: 'K', logo: 'k8s'      },
+    { l: 'A', logo: 'aws'      },
+    { l: 'R', logo: 'terraform'},
+  ];
+
+  function buildRow(rowData, containerId, ltrClass) {
+    const container = document.getElementById(containerId);
+    if (!container) return [];
+    const cells = [];
+
+    rowData.forEach(({ l, logo }) => {
+      const cell = document.createElement('div');
+      cell.className = 'dn-cell';
+
+      const ld = logoData[logo];
+      const logoBox = document.createElement('div');
+      logoBox.className = 'dn-logo';
+
+      const img = document.createElement('img');
+      img.src = ld.src;
+      img.style.cssText = `filter: invert(1) sepia(1) saturate(5) hue-rotate(0deg); opacity:0.9;`;
+
+      const toolLabel = document.createElement('div');
+      toolLabel.className = 'dn-tool';
+      toolLabel.textContent = ld.name;
+      toolLabel.style.color = ld.color;
+
+      logoBox.appendChild(img);
+      logoBox.appendChild(toolLabel);
+
+      const ltrEl = document.createElement('div');
+      ltrEl.className = `dn-ltr ${ltrClass}`;
+      ltrEl.textContent = l;
+
+      cell.appendChild(logoBox);
+      cell.appendChild(ltrEl);
+      container.appendChild(cell);
+      cells.push({ logoBox, ltrEl });
+    });
+
+    return cells;
+  }
+
+  const cells1 = buildRow(row1, 'nameRow1', 'row1-ltr');
+  const cells2 = buildRow(row2, 'nameRow2', 'row2-ltr');
+  const allCells = [...cells1, ...cells2];
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function animate() {
+    for (let c of allCells) {
+      c.logoBox.classList.remove('show', 'hide');
+      c.ltrEl.classList.remove('show');
+    }
+
+    await sleep(200);
+
+    // Logo flow — continuous, no pause
+    allCells.forEach((c, i) => {
+      setTimeout(() => {
+        c.logoBox.classList.add('show');
+      }, i * 180);
+    });
+
+    // Letter flow — starts 1 second after logo flow, continuous
+    allCells.forEach((c, i) => {
+      setTimeout(() => {
+        c.logoBox.classList.add('hide');
+        c.logoBox.classList.remove('show');
+        setTimeout(() => {
+          c.ltrEl.classList.add('show');
+        }, 500);
+      }, 1000 + i * 180);
+    });
+
+    // Total time = 1000 + 15*180 + 150 + buffer = ~4500ms → then 5sec pause → loop
+    const totalTime = 1000 + (allCells.length * 180) + 500;
+    setTimeout(() => {
+      sleep(4000).then(() => animate());
+    }, totalTime);
+  }
+  animate();
+
+})();
