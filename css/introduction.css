@@ -214,13 +214,65 @@ a { text-decoration: none; color: inherit; }
 }
 
 .quick-item:hover { border-color: var(--accent); }
-
 .quick-item span { font-size: 1.4rem; }
 
 .quick-item p {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text);
+}
+
+/* ===== SOCIAL BUTTONS ===== */
+.social-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.linkedin-btn,
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 50px;
+  font-family: var(--font-head);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  width: auto;
+  align-self: auto;
+}
+
+.linkedin-btn {
+  background: #0077B5;
+  color: #fff;
+  border: 1px solid #0077B5;
+}
+
+.linkedin-btn:hover {
+  background: #005fa3;
+  box-shadow: 0 0 16px rgba(0,119,181,0.5);
+  transform: translateY(-2px);
+}
+
+.github-btn {
+  background: #161b22;
+  color: #f0f0f8;
+  border: 1px solid rgba(240,240,248,0.2);
+}
+
+.github-btn:hover {
+  background: #238636;
+  border-color: #238636;
+  box-shadow: 0 0 16px rgba(35,134,54,0.4);
+  transform: translateY(-2px);
 }
 
 /* ===== CARDS GRID ===== */
@@ -256,10 +308,7 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 12px 40px rgba(108,99,255,0.12);
 }
 
-.card-icon {
-  font-size: 2.4rem;
-  line-height: 1;
-}
+.card-icon { font-size: 2.4rem; line-height: 1; }
 
 .card-label {
   font-size: 0.72rem;
@@ -289,23 +338,17 @@ a { text-decoration: none; color: inherit; }
 
 .about-card strong { color: var(--text); font-weight: 600; }
 
-/* Card accent borders */
-.card-name:hover    { border-color: var(--accent); }
-.card-family:hover  { border-color: var(--accent2); }
-.card-edu:hover     { border-color: var(--gold); }
-.card-hobbies:hover { border-color: var(--accent3); }
+.card-name:hover     { border-color: var(--accent); }
+.card-family:hover   { border-color: var(--accent2); }
+.card-edu:hover      { border-color: var(--gold); }
+.card-hobbies:hover  { border-color: var(--accent3); }
 .card-strength:hover { border-color: var(--accent3); }
 .card-weakness:hover { border-color: #50c8ff; }
-.card-rolemodel:hover { border-color: var(--gold); }
-.card-aim:hover     { border-color: var(--accent); }
+.card-rolemodel:hover{ border-color: var(--gold); }
+.card-aim:hover      { border-color: var(--accent); }
 
-/* Family card */
-.family-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 4px;
-}
+/* ===== FAMILY ===== */
+.family-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
 
 .family-member {
   display: flex;
@@ -318,26 +361,12 @@ a { text-decoration: none; color: inherit; }
 }
 
 .family-member span { font-size: 1.4rem; flex-shrink: 0; }
+.family-member strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.family-member p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin: 0; }
 
-.family-member strong {
-  display: block;
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.family-member p {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Education card */
+/* ===== EDUCATION ===== */
 .edu-stats {
   display: flex;
-  gap: 0;
   background: var(--card2);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -345,37 +374,13 @@ a { text-decoration: none; color: inherit; }
   margin-top: 8px;
 }
 
-.edu-stat {
-  flex: 1;
-  text-align: center;
-  padding: 12px 8px;
-  border-right: 1px solid var(--border);
-}
-
+.edu-stat { flex: 1; text-align: center; padding: 12px 8px; border-right: 1px solid var(--border); }
 .edu-stat:last-child { border-right: none; }
+.edu-stat span { display: block; font-family: var(--font-head); font-size: 1.1rem; font-weight: 900; color: var(--gold); }
+.edu-stat p { font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; margin: 0; }
 
-.edu-stat span {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: var(--gold);
-}
-
-.edu-stat p {
-  font-size: 0.68rem;
-  color: var(--muted);
-  letter-spacing: 1px;
-  margin: 0;
-}
-
-/* Hobbies */
-.hobbies-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
+/* ===== HOBBIES ===== */
+.hobbies-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 
 .hobby-chip {
   font-size: 0.82rem;
@@ -389,28 +394,14 @@ a { text-decoration: none; color: inherit; }
   cursor: default;
 }
 
-.hobby-chip:hover {
-  border-color: var(--accent3);
-  color: var(--text);
-  background: rgba(67,233,123,0.08);
-}
+.hobby-chip:hover { border-color: var(--accent3); color: var(--text); background: rgba(67,233,123,0.08); }
 
-/* Strengths */
-.strength-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.strength-item {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-}
+/* ===== STRENGTHS ===== */
+.strength-list { display: flex; flex-direction: column; gap: 14px; }
+.strength-item { display: flex; gap: 14px; align-items: flex-start; }
 
 .strength-dot {
-  width: 10px;
-  height: 10px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   background: var(--accent3);
   flex-shrink: 0;
@@ -418,57 +409,14 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 0 10px rgba(67,233,123,0.5);
 }
 
-.strength-item strong {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 3px;
-}
+.strength-item strong { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.strength-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
-.strength-item p {
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.6;
-  margin: 0;
-}
+/* ===== WEAKNESS ===== */
+.weakness-text { font-size: 0.92rem; line-height: 1.8; }
+.weakness-note { font-size: 0.8rem; font-style: italic; color: var(--accent); opacity: 0.8; }
 
-/* Weakness */
-.weakness-text {
-  font-size: 0.92rem;
-  line-height: 1.8;
-}
-
-.weakness-note {
-  font-size: 0.8rem;
-  font-style: italic;
-  color: var(--accent);
-  opacity: 0.8;
-}
-
-.linkedin-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #0077b5;
-  color: #fff;
-  font-family: var(--font-head);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 10px 20px;
-  border-radius: 8px;
-  margin-top: 4px;
-  align-self: flex-start;
-  transition: all 0.3s;
-}
-
-.linkedin-btn:hover {
-  background: #005fa3;
-  transform: translateY(-2px);
-}
-
-/* Role Model */
+/* ===== ROLE MODEL ===== */
 .dhoni-quote {
   background: var(--card2);
   border-left: 3px solid var(--gold);
@@ -476,24 +424,9 @@ a { text-decoration: none; color: inherit; }
   padding: 14px 18px;
 }
 
-.dhoni-quote p {
-  font-size: 0.88rem;
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
-.rolemodel-why {
-  font-size: 0.85rem;
-  line-height: 1.8;
-}
-
-.dhoni-traits {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
+.dhoni-quote p { font-size: 0.88rem; font-style: italic; color: var(--muted); line-height: 1.7; }
+.rolemodel-why { font-size: 0.85rem; line-height: 1.8; }
+.dhoni-traits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 
 .dhoni-traits span {
   font-size: 0.75rem;
@@ -505,7 +438,7 @@ a { text-decoration: none; color: inherit; }
   background: rgba(255,215,0,0.06);
 }
 
-/* Aim card */
+/* ===== AIM ===== */
 .card-aim { grid-column: span 2; }
 
 .aim-options {
@@ -519,47 +452,12 @@ a { text-decoration: none; color: inherit; }
   margin-top: 4px;
 }
 
-.aim-opt {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  flex: 1;
-}
-
+.aim-opt { display: flex; align-items: flex-start; gap: 12px; flex: 1; }
 .aim-opt span { font-size: 1.8rem; }
-
-.aim-opt strong {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-
-.aim-opt p {
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.6;
-  margin: 0;
-}
-
-.aim-divider {
-  font-family: var(--font-head);
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: var(--muted);
-  letter-spacing: 2px;
-  flex-shrink: 0;
-}
-
-.aim-bottom {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.7;
-  border-top: 1px solid var(--border);
-  padding-top: 12px;
-  margin-top: 4px;
-}
+.aim-opt strong { display: block; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.aim-opt p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin: 0; }
+.aim-divider { font-family: var(--font-head); font-size: 0.85rem; font-weight: 900; color: var(--muted); letter-spacing: 2px; flex-shrink: 0; }
+.aim-bottom { font-size: 0.9rem; color: var(--muted); line-height: 1.7; border-top: 1px solid var(--border); padding-top: 12px; margin-top: 4px; }
 
 /* ===== FOOTER ===== */
 .footer {
@@ -577,15 +475,8 @@ a { text-decoration: none; color: inherit; }
 .footer a:hover { color: var(--text); }
 
 /* ===== AOS ===== */
-[data-aos] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-[data-aos].visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+[data-aos] { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+[data-aos].visible { opacity: 1; transform: translateY(0); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
@@ -602,4 +493,5 @@ a { text-decoration: none; color: inherit; }
   .card-aim { grid-column: span 1; }
   .aim-options { flex-direction: column; }
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+  .social-buttons { flex-direction: column; align-items: flex-start; }
 }
