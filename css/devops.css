@@ -136,14 +136,6 @@ a { text-decoration: none; color: inherit; }
   flex-direction: row-reverse;
 }
 
-.tool-row.reverse .tool-text {
-  order: 2;
-}
-
-.tool-row.reverse .tool-image {
-  order: 1;
-}
-
 .tool-row:last-child { border-bottom: none; }
 
 /* ===== TOOL TEXT ===== */
