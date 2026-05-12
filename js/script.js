@@ -44,44 +44,48 @@ document.querySelectorAll('.bio-section').forEach(section => {
 });
 
 
-(function() {
+(function() { 
+ 
+  const logoData = { 
+  tux:       { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg',        color: '#FFD700', name: 'LINUX'      }, 
+  aws:       { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg',    color: '#FF9900', name: 'AWS'        }, 
+  redhat:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/redhat.svg',       color: '#EE0000', name: 'REDHAT'     }, 
+  ansible:   { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ansible.svg',      color: '#EE0000', name: 'ANSIBLE'    }, 
+  docker:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/docker.svg',       color: '#2496ED', name: 'DOCKER'     }, 
+  k8s:       { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kubernetes.svg',   color: '#326CE5', name: 'K8S'        }, 
+  git:       { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/git.svg',          color: '#F05032', name: 'GIT'        }, 
+  podman:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/podman.svg',       color: '#892CA0', name: 'PODMAN'     }, 
+  ubuntu:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ubuntu.svg',       color: '#E95420', name: 'UBUNTU'     }, 
+  python:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg',       color: '#3776AB', name: 'PYTHON'     }, 
+  terraform: { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/terraform.svg',   color: '#7B42BC', name: 'TERRA'      }, 
+  bash:      { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gnubash.svg',      color: '#4EAA25', name: 'BASH'       }, 
+  github:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg',       color: '#ffffff', name: 'GITHUB'     }, 
+  jenkins:   { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jenkins.svg',      color: '#D24939', name: 'JENKINS'    }, 
+  prometheus:{ src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/prometheus.svg',   color: '#E6522C', name: 'PROMETHEUS' }, 
+}; 
 
-  const logoData = {
-    tux:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg',      color: '#FFD700', name: 'LINUX'  },
-    aws:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg',  color: '#FF9900', name: 'AWS'    },
-    redhat:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/redhat.svg',     color: '#EE0000', name: 'REDHAT' },
-    ansible: { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ansible.svg',    color: '#EE0000', name: 'ANSIBLE'},
-    docker:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/docker.svg',     color: '#2496ED', name: 'DOCKER' },
-    k8s:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kubernetes.svg', color: '#326CE5', name: 'K8S'   },
-    git:     { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/git.svg',        color: '#F05032', name: 'GIT'   },
-    podman:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/podman.svg',     color: '#892CA0', name: 'PODMAN'},
-    ubuntu:  { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/ubuntu.svg',     color: '#E95420', name: 'UBUNTU'},
-    bash:    { src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/gnubash.svg',    color: '#4EAA25', name: 'BASH'  },
-    terraform:{ src: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/terraform.svg', color: '#7B42BC', name: 'TERRA' },
-  };
+// V A R A D 
+const row1 = [ 
+  { l: 'V', logo: 'tux'       }, 
+  { l: 'A', logo: 'aws'       }, 
+  { l: 'R', logo: 'redhat'    }, 
+  { l: 'A', logo: 'ansible'   }, 
+  { l: 'D', logo: 'docker'    }, 
+]; 
 
-  // V A R A D
-  const row1 = [
-    { l: 'V', logo: 'tux'     },
-    { l: 'A', logo: 'aws'     },
-    { l: 'R', logo: 'redhat'  },
-    { l: 'A', logo: 'ansible' },
-    { l: 'D', logo: 'docker'  },
-  ];
-
-  // N A G A P U R K A R
-  const row2 = [
-    { l: 'N', logo: 'k8s'      },
-    { l: 'A', logo: 'aws'      },
-    { l: 'G', logo: 'git'      },
-    { l: 'A', logo: 'ansible'  },
-    { l: 'P', logo: 'podman'   },
-    { l: 'U', logo: 'ubuntu'   },
-    { l: 'R', logo: 'redhat'   },
-    { l: 'K', logo: 'k8s'      },
-    { l: 'A', logo: 'aws'      },
-    { l: 'R', logo: 'terraform'},
-  ];
+// N A G A P U R K A R 
+const row2 = [ 
+  { l: 'N', logo: 'k8s'       }, 
+  { l: 'A', logo: 'git'       }, 
+  { l: 'G', logo: 'podman'    }, 
+  { l: 'A', logo: 'ubuntu'    }, 
+  { l: 'P', logo: 'python'    }, 
+  { l: 'U', logo: 'terraform' }, 
+  { l: 'R', logo: 'bash'      }, 
+  { l: 'K', logo: 'github'    }, 
+  { l: 'A', logo: 'jenkins'   }, 
+  { l: 'R', logo: 'prometheus'}, 
+];
 
   function buildRow(rowData, containerId, ltrClass) {
     const container = document.getElementById(containerId);
