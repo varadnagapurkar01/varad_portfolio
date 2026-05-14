@@ -515,23 +515,23 @@ a { text-decoration: none; color: inherit; }
 
   /* Name animation — scale down for mobile */
   .dn-cell {
-    width: 32px;
-    height: 40px;
+    width: clamp(27px, 8.5vw, 36px);
+    height: clamp(34px, 10.5vw, 46px);
   }
   .dn-logo {
-    width: 30px;
-    height: 30px;
+    width: clamp(24px, 7.5vw, 32px);
+    height: clamp(24px, 7.5vw, 32px);
     border-radius: 6px;
   }
   .dn-logo img {
-    width: 20px;
-    height: 20px;
+    width: clamp(14px, 4.5vw, 20px);
+    height: clamp(14px, 4.5vw, 20px);
   }
   .dn-logo .dn-tool {
-    font-size: 4px;
+    font-size: 4.5px;
   }
   .dn-ltr {
-    font-size: clamp(22px, 6vw, 30px) !important;
+    font-size: clamp(24px, 7.5vw, 32px) !important;
   }
   .devops-name-wrap {
     gap: 4px;
@@ -616,7 +616,7 @@ a { text-decoration: none; color: inherit; }
     height: 210px;
   }
   .dn-cell {
-    width: 26px;
+    width: 27px;
     height: 34px;
   }
   .dn-logo {
@@ -624,11 +624,11 @@ a { text-decoration: none; color: inherit; }
     height: 24px;
   }
   .dn-logo img {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
   .dn-ltr {
-    font-size: 20px !important;
+    font-size: 24px !important;
   }
   .section-buttons {
     grid-template-columns: repeat(2,1fr);
@@ -1078,23 +1078,23 @@ a { text-decoration: none; color: inherit; }
   }
 
   .dn-cell {
-    width: clamp(22px, 7vw, 30px) !important;
-    height: clamp(28px, 9vw, 38px) !important;
+    width: clamp(27px, 8.5vw, 36px) !important;
+    height: clamp(34px, 10.5vw, 46px) !important;
   }
   .dn-logo {
-    width: clamp(20px, 6vw, 28px) !important;
-    height: clamp(20px, 6vw, 28px) !important;
+    width: clamp(24px, 7.5vw, 32px) !important;
+    height: clamp(24px, 7.5vw, 32px) !important;
     border-radius: 6px !important;
   }
   .dn-logo img {
-    width: clamp(12px, 3.5vw, 18px) !important;
-    height: clamp(12px, 3.5vw, 18px) !important;
+    width: clamp(14px, 4.5vw, 20px) !important;
+    height: clamp(14px, 4.5vw, 20px) !important;
   }
   .dn-logo .dn-tool {
-    font-size: 4px !important;
+    font-size: 4.5px !important;
   }
   .dn-ltr {
-    font-size: clamp(18px, 5.5vw, 28px) !important;
+    font-size: clamp(24px, 7.5vw, 32px) !important;
   }
   .devops-name-wrap {
     gap: 4px !important;
@@ -1176,19 +1176,19 @@ a { text-decoration: none; color: inherit; }
     height: 210px !important;
   }
   .dn-cell {
-    width: 24px !important;
-    height: 32px !important;
+    width: 27px !important;
+    height: 34px !important;
   }
   .dn-logo {
-    width: 22px !important;
-    height: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
   }
   .dn-logo img {
     width: 14px !important;
     height: 14px !important;
   }
   .dn-ltr {
-    font-size: 18px !important;
+    font-size: 24px !important;
   }
   .section-buttons {
     grid-template-columns: repeat(2,1fr) !important;
