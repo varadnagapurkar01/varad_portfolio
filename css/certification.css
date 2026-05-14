@@ -239,4 +239,13 @@ a { text-decoration: none; color: inherit; }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) { .certs-grid { grid-template-columns: repeat(2,1fr); } .certs-section { padding: 40px 24px 80px; } }
-@media (max-width: 640px) { .certs-grid { grid-template-columns: 1fr; } .cert-hero { padding: 80px 20px 40px; } .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; } }
+@media (max-width: 640px) { 
+  .certs-grid { grid-template-columns: 1fr; } 
+  .cert-hero { padding: 80px 20px 40px; } 
+  .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; } 
+  .pdf-lb-box { width: 95vw; height: 95vh; }
+}
+@media (max-width: 400px) {
+  .cert-title { font-size: 32px; }
+  .cert-hero { padding: 70px 16px 30px; }
+}

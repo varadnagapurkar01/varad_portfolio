@@ -228,4 +228,6 @@ a{text-decoration:none;color:inherit;}
   .img-landscape{height:160px;}
   .portrait-ph{height:220px;}
   .landscape-ph{height:160px;}
+  .mc-title{font-size:32px;}
+  .mc-hero-stats{justify-content:center;padding:10px 16px;}
 }

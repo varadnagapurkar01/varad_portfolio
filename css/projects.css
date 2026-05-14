@@ -187,6 +187,11 @@ a{text-decoration:none;color:inherit;}
   .filter-tabs{flex-wrap:wrap;border-radius:16px;}
   .footer{flex-direction:column;gap:10px;text-align:center;padding:24px 20px;}
 }
+@media(max-width:400px){
+  .proj-title{font-size:32px;}
+  .proj-stats{padding:10px 16px; flex-wrap:wrap; justify-content:center;}
+  .pstat span{font-size:1.1rem;}
+}
 
 .github-btn {
   background: rgba(255,255,255,0.06);

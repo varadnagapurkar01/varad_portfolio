@@ -361,3 +361,9 @@ a { text-decoration: none; color: inherit; }
   .docs-hero { padding: 80px 20px 40px; }
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
 }
+
+@media (max-width: 400px) {
+  .docs-title { font-size: 32px; }
+  .docs-stats { padding: 10px 16px; flex-wrap: wrap; justify-content: center; }
+  .dstat span { font-size: 1.1rem; }
+}

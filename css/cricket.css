@@ -634,6 +634,9 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+  .cricket-hero { padding: 60px 20px 40px; }
+  .hero-title { font-size: clamp(36px, 8vw, 64px); }
+  .section-title { font-size: clamp(28px, 6vw, 48px); }
   .traits-section { grid-template-columns: 1fr; padding: 0 20px 60px; }
   .timeline-section { padding: 60px 20px; }
   .timeline::before { left: 20px; }
@@ -651,6 +654,13 @@ a { text-decoration: none; color: inherit; }
   .bpl-grid { grid-template-columns: 1fr; }
   .deeper-section { padding: 60px 20px; }
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+}
+
+@media (max-width: 400px) {
+  .hero-title { font-size: 32px; }
+  .section-title { font-size: 26px; }
+  .timeline-item, .timeline-item.right { padding: 0 0 0 40px; }
+  .timeline-card { padding: 20px; }
 }
 
 

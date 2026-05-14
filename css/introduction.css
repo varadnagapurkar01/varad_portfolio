@@ -493,5 +493,13 @@ a { text-decoration: none; color: inherit; }
   .card-aim { grid-column: span 1; }
   .aim-options { flex-direction: column; }
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
-  .social-buttons { flex-direction: column; align-items: flex-start; }
+  .social-buttons { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 400px) {
+  .about-title { font-size: 32px; }
+  .about-photo { width: 220px; height: 220px; }
+  .photo-ring-outer { width: 250px; height: 250px; }
+  .photo-ring-inner { width: 232px; height: 232px; }
+  .about-quick { grid-template-columns: 1fr; }
 }

@@ -137,3 +137,15 @@ body {
     .impact-line { flex-direction: column; align-items: flex-start; gap: 15px; }
     .impact-line p { border-left: none; border-top: 2px solid var(--gold); padding-top: 15px; }
 }
+
+@media (max-width: 768px) {
+    .glitch-title { font-size: clamp(2.5rem, 8vw, 4rem); }
+    .logic-card { padding: 30px; }
+    .rank-img { height: 250px; }
+}
+
+@media (max-width: 400px) {
+    .glitch-title { font-size: 32px; }
+    .logic-card { padding: 20px; }
+    .impact-word { font-size: 1.4rem; min-width: auto; }
+}
