@@ -2,7 +2,8 @@ name: Deploy Portfolio
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -17,9 +18,21 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
             cd /root/varad_portfolio
+
             git pull
+
             podman stop portfolio || true
             podman rm portfolio || true
             podman rmi varad-portfolio || true
+
             podman build --no-cache -t varad-portfolio .
-            podman run -d -p 80:80 --name portfolio varad-portfolio
+
+            podman run -d \
+              -p 80:80 \
+              -p 443:443 \
+              --name portfolio \
+              -v /etc/letsencrypt:/etc/letsencrypt:ro \
+              -v /root/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+              varad-portfolio
+
+            podman ps
