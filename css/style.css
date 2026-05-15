@@ -531,7 +531,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 6px;
   }
   .dn-ltr {
-    font-size: clamp(36px, 11vw, 48px) !important;
+    font-size: clamp(44px, 13vw, 56px) !important;
   }
   .devops-name-wrap {
     gap: 8px;
@@ -628,7 +628,7 @@ a { text-decoration: none; color: inherit; }
     height: 20px;
   }
   .dn-ltr {
-    font-size: 34px !important;
+    font-size: 40px !important;
   }
   .section-buttons {
     grid-template-columns: repeat(2,1fr);
@@ -929,15 +929,15 @@ a { text-decoration: none; color: inherit; }
   color: #c8f400;
   font-weight: 700;
   text-shadow:
-    0 0 6px rgba(200, 244, 0, 0.6);
+    0 0 2px rgba(200, 244, 0, 0.15);
   transition: all 0.3s ease;
 }
 
 .kw:hover {
   color: #ffe600;
   text-shadow:
-    0 0 6px rgba(200, 244, 0, 0.6),
-    0 0 6px rgba(200, 244, 0, 0.6);
+    0 0 2px rgba(200, 244, 0, 0.15),
+    0 0 2px rgba(200, 244, 0, 0.15);
 }
 
 
@@ -1094,7 +1094,7 @@ a { text-decoration: none; color: inherit; }
     font-size: 4.5px !important;
   }
   .dn-ltr {
-    font-size: clamp(24px, 7.5vw, 32px) !important;
+    font-size: clamp(32px, 10vw, 42px) !important;
   }
   .devops-name-wrap {
     gap: 4px !important;
@@ -1188,7 +1188,7 @@ a { text-decoration: none; color: inherit; }
     height: 14px !important;
   }
   .dn-ltr {
-    font-size: 24px !important;
+    font-size: 30px !important;
   }
   .section-buttons {
     grid-template-columns: repeat(2,1fr) !important;
