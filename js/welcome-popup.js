@@ -11,7 +11,7 @@
     typewriterDelay: 500,
 welcomeMessages: [
 
-  "✋ no tricks. just one tiny thing.",
+  // "✋ no tricks. just one tiny thing.",
   "I just need to know you can ⌨️type. that's it.  👀 ",
   "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",   //the work, the vibe, everything
   "🎯 I HOPE THAT'S WHAT YOU WANT ..." ,
