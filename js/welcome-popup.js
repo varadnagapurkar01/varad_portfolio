@@ -9,10 +9,12 @@
   const CONFIG = {
     typewriterSpeed: 80,
     typewriterDelay: 500,
-   welcomeMessages: [
-  "nameless visitors get the boring version.",
-  "The real portfolio is behind this field.",
-  "One name. That's all it costs. TYPE OG one ?",
+welcomeMessages: [
+
+  "✋ no tricks. just one tiny thing.",
+  "I just need to know you can ⌨️type. that's it.  👀 ",
+  "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",   //the work, the vibe, everything
+  "🎯 I HOPE THAT'S WHAT YOU WANT ..." ,
 ],
     particleCount: 100,
     storageKey: 'portfolioVisitorName',
