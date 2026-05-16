@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap');
 
-
 :root {
   --bg: #0a0a0f;
   --card: #1a1a28;
@@ -16,10 +15,8 @@
   --font-body: 'Poppins', sans-serif;
 }
 
-
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-
 
 body {
   font-family: var(--font-body);
@@ -28,11 +25,9 @@ body {
   overflow-x: hidden;
 }
 
-
 a { text-decoration: none; color: inherit; }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: var(--accent3); border-radius: 4px; }
-
 
 /* ===== NAVBAR ===== */
 .navbar {
@@ -49,14 +44,12 @@ a { text-decoration: none; color: inherit; }
   border-bottom: 1px solid var(--border);
 }
 
-
 .nav-logo {
   font-family: var(--font-head);
   font-size: 1.6rem;
   font-weight: 900;
 }
 .nav-logo span { color: var(--accent3); }
-
 
 .nav-right a {
   font-size: 0.92rem;
@@ -67,7 +60,6 @@ a { text-decoration: none; color: inherit; }
   transition: color 0.3s;
 }
 .nav-right a:hover { color: var(--accent3); }
-
 
 /* ===== HERO ===== */
 .cricket-hero {
@@ -80,7 +72,6 @@ a { text-decoration: none; color: inherit; }
   padding: 80px 40px 60px;
 }
 
-
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -90,13 +81,11 @@ a { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
-
 .hero-content {
   text-align: center;
   position: relative;
   z-index: 2;
 }
-
 
 .hero-label {
   font-size: 1rem;
@@ -107,7 +96,6 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 
-
 .hero-title {
   font-family: var(--font-head);
   font-size: clamp(52px, 10vw, 120px);
@@ -117,14 +105,12 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: 2px;
 }
 
-
 .hero-title span {
   background: linear-gradient(90deg, var(--accent3), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 
 .hero-sub {
   font-size: 1.15rem;
@@ -134,8 +120,6 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.85;
 }
 
-
-/* Animated cricket ball */
 .cricket-ball {
   position: absolute;
   width: 80px;
@@ -149,7 +133,6 @@ a { text-decoration: none; color: inherit; }
   z-index: 1;
 }
 
-
 .ball-seam {
   position: absolute;
   inset: 8px;
@@ -160,12 +143,10 @@ a { text-decoration: none; color: inherit; }
   transform: rotate(45deg);
 }
 
-
 @keyframes ballFloat {
   0%,100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-20px) rotate(180deg); }
 }
-
 
 /* ===== TRAITS ===== */
 .traits-section {
@@ -176,7 +157,6 @@ a { text-decoration: none; color: inherit; }
   max-width: 1300px;
   margin: 0 auto;
 }
-
 
 .trait-card {
   background: var(--card);
@@ -189,12 +169,7 @@ a { text-decoration: none; color: inherit; }
   transition: all 0.6s ease;
 }
 
-
-.trait-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+.trait-card.visible { opacity: 1; transform: translateY(0); }
 
 .trait-card:hover {
   border-color: var(--accent3);
@@ -202,12 +177,7 @@ a { text-decoration: none; color: inherit; }
   box-shadow: 0 12px 40px rgba(67,233,123,0.12);
 }
 
-
-.trait-icon {
-  font-size: 3rem;
-  margin-bottom: 16px;
-}
-
+.trait-icon { font-size: 3rem; margin-bottom: 16px; }
 
 .trait-card h3 {
   font-family: var(--font-head);
@@ -217,13 +187,7 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 12px;
 }
 
-
-.trait-card p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
+.trait-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; }
 
 /* ===== SECTION TITLE ===== */
 .section-title {
@@ -235,7 +199,6 @@ a { text-decoration: none; color: inherit; }
   text-align: center;
 }
 
-
 .section-title span {
   background: linear-gradient(90deg, var(--accent3), var(--accent));
   -webkit-background-clip: text;
@@ -243,20 +206,14 @@ a { text-decoration: none; color: inherit; }
   background-clip: text;
 }
 
-
 /* ===== TIMELINE ===== */
 .timeline-section {
-  padding: 80px 60px;
-  max-width: 1100px;
+  padding: 80px 40px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-
-.timeline {
-  position: relative;
-  padding: 0 0 0 0;
-}
-
+.timeline { position: relative; }
 
 .timeline::before {
   content: '';
@@ -268,11 +225,10 @@ a { text-decoration: none; color: inherit; }
   transform: translateX(-50%);
 }
 
-
 .timeline-item {
   display: flex;
   justify-content: flex-end;
-  padding-right: calc(50% + 40px);
+  padding-right: calc(50% + 48px);
   margin-bottom: 60px;
   position: relative;
   opacity: 0;
@@ -280,20 +236,14 @@ a { text-decoration: none; color: inherit; }
   transition: all 0.7s ease;
 }
 
-
 .timeline-item.right {
   justify-content: flex-start;
   padding-right: 0;
-  padding-left: calc(50% + 40px);
+  padding-left: calc(50% + 48px);
   transform: translateX(40px);
 }
 
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
+.timeline-item.visible { opacity: 1; transform: translateX(0); }
 
 .timeline-dot {
   position: absolute;
@@ -309,12 +259,10 @@ a { text-decoration: none; color: inherit; }
   animation: dotPulse 2s ease-in-out infinite;
 }
 
-
 @keyframes dotPulse {
   0%,100% { box-shadow: 0 0 20px rgba(67,233,123,0.6); }
   50% { box-shadow: 0 0 35px rgba(67,233,123,1); }
 }
-
 
 .timeline-year {
   position: absolute;
@@ -329,27 +277,25 @@ a { text-decoration: none; color: inherit; }
   white-space: nowrap;
 }
 
-
 .timeline-item.right .timeline-year {
   transform: translateX(calc(-100% - 28px));
 }
 
-
+/* ── BIGGER CARD ── */
 .timeline-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 28px;
-  max-width: 420px;
+  width: 100%;
+  max-width: 500px;   /* was 420px — now bigger */
   transition: all 0.3s;
 }
-
 
 .timeline-card:hover {
   border-color: var(--accent3);
   box-shadow: 0 8px 32px rgba(67,233,123,0.1);
 }
-
 
 .timeline-card h3 {
   font-family: var(--font-head);
@@ -359,339 +305,373 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 10px;
 }
 
-
-.timeline-card p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-
+.timeline-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
 .timeline-card strong { color: var(--text); }
 
-
-/* Highlight card */
-.highlight-card {
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 30px rgba(255,215,0,0.15);
-  position: relative;
-}
-
-
-.winner-badge {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--gold), #ffaa00);
-  color: #0a0a0f;
-  font-family: var(--font-head);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  padding: 5px 14px;
-  border-radius: 30px;
-  margin-bottom: 10px;
-}
-
-
-/* Media row: Improved for split-screen flexibility */
+/* ===== MEDIA ROW ===== */
 .media-row {
   display: flex;
   gap: 12px;
   margin-top: 18px;
   width: 100%;
-  flex-wrap: nowrap; /* Keeps them side-by-side until the screen is very small */
 }
-
 
 .media-box {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
+/* ── Caption — ALWAYS visible, proper styling, NO black box ── */
+.media-caption {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 6px 4px 2px;
+  background: transparent;   /* NO black background */
+  margin-top: 4px;
+  line-height: 1.4;
+}
 
-/* THE FIX: Use aspect-ratio instead of fixed height */
-.media-box img,
-.timeline-video {
+/* ===== IMAGES ===== */
+.media-box img {
   width: 100%;
-  /* This creates a perfect landscape box that scales with the window size */
-  aspect-ratio: 16 / 10;
- 
-  /* 'cover' fills the box. If you find important parts of a specific
-     photo are still cut, you can change this to 'revert' or 'contain'
-     for that specific image only. */
+  aspect-ratio: 4 / 3;
   object-fit: cover;
- 
+  object-position: center;
   border-radius: 12px;
   border: 1px solid var(--border);
+  display: block;
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background: #000;
-  transition: transform 0.3s ease;
 }
 
-
-/* Split-screen & Mobile optimization */
-@media (max-width: 768px) {
-  .media-row {
-    flex-direction: column; /* Stacks them so they have more room */
-    gap: 15px;
-  }
- 
-  .media-box img,
-  .timeline-video {
-    aspect-ratio: 16 / 9; /* Slightly wider for mobile/stacked view */
-  }
+.media-box img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 30px rgba(67,233,123,0.2);
 }
 
-
-/* ===== BPL SECTION ===== */
-.bpl-section {
-  padding: 80px 60px;
-  max-width: 1300px;
-  margin: 0 auto;
+/* ===== VIDEO BOX ===== */
+.video-box {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-radius: 12px;
+  overflow: visible;       /* let caption sit outside */
+  background: transparent;
 }
 
-
-.bpl-intro {
-  text-align: center;
-  font-size: 1.05rem;
-  color: var(--muted);
-  margin-top: -40px;
-  margin-bottom: 56px;
-  line-height: 1.8;
+/* Video element — same sizing as images */
+.timeline-video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--accent3);
+  cursor: zoom-in;
+  background: #000;
 }
 
+/* Hide ALL browser-native controls */
+.timeline-video::-webkit-media-controls,
+.timeline-video::-webkit-media-controls-enclosure,
+.timeline-video::-webkit-media-controls-panel { display: none !important; }
 
-.bpl-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 32px;
+/* Overlay sits ON TOP of video only — does not cover caption */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* height = same as video (aspect-ratio 16/10 = 62.5% of width) */
+  /* We use aspect-ratio on the pseudo container instead */
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 5;
 }
 
-
-.bpl-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s ease;
-}
-
-
-.bpl-card.visible {
+/* ── PLAY button — centered in overlay ── */
+.video-ctrl-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(67,233,123,0.88);
+  border: none;
+  color: #000;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   opacity: 1;
-  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.2s ease;
+  pointer-events: all;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(67,233,123,0.5);
 }
 
-
-.bpl-card:hover {
-  border-color: var(--accent2);
-  box-shadow: 0 12px 48px rgba(255,101,132,0.15);
+.video-ctrl-btn:hover {
+  background: rgba(67,233,123,1);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
+/* ── ZOOM button — top-right corner of overlay ── */
+.video-zoom-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(67,233,123,0.5);
+  color: var(--accent3);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s ease;
+  pointer-events: all;
+  z-index: 10;
+}
 
-.bpl-year {
+/* Zoom button shows on hover */
+.video-box:hover .video-overlay { pointer-events: all; }
+.video-box:hover .video-zoom-btn { opacity: 1; }
+
+.video-zoom-btn:hover {
+  background: rgba(67,233,123,0.2);
+  border-color: var(--accent3);
+}
+
+/* Playing state — hide play button, show on hover */
+.video-box.is-playing .video-ctrl-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.video-box.is-playing:hover .video-ctrl-btn {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ===== VIDEO MODAL PLAYER ===== */
+.video-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(0,0,0,0.96);
+  backdrop-filter: blur(16px);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.video-modal.active { display: flex; }
+
+.video-modal-inner {
+  background: #13131f;
+  border: 1px solid rgba(67,233,123,0.3);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(67,233,123,0.15);
+}
+
+.video-modal-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.video-modal-title {
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent3);
+  letter-spacing: 1px;
+}
+
+.video-modal-close {
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: var(--text);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.video-modal-close:hover { background: rgba(255,101,132,0.3); color: var(--accent2); }
+
+.video-modal-screen {
+  width: 100%;
+  background: #000;
+  position: relative;
+}
+
+#modal-video {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+.video-modal-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 20px 8px;
+  flex-wrap: wrap;
+}
+
+.vmc-btn {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text);
+  padding: 8px 18px;
+  border-radius: 30px;
   font-family: var(--font-head);
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent2);
-  padding: 20px 24px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
+.vmc-btn:hover { background: rgba(67,233,123,0.15); border-color: var(--accent3); color: var(--accent3); }
 
-.bpl-badge {
+.vmc-play-btn {
+  background: var(--accent3);
+  color: #000;
+  border-color: var(--accent3);
+  padding: 10px 28px;
+  font-size: 0.85rem;
+}
+
+.vmc-play-btn:hover { background: #5fffaa; color: #000; }
+
+.video-modal-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px 18px;
+}
+
+.vmc-time {
   font-family: var(--font-head);
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: var(--gold);
-  padding: 8px 24px 16px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 36px;
 }
 
-
-.bpl-media {
-  width: 100%;
-  height: 240px;
-  overflow: hidden;
+.video-modal-progress {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--accent3);
 }
 
+.video-modal-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent3);
+  cursor: pointer;
+}
 
-.bpl-media img {
+/* ===== IMAGE LIGHTBOX ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  inset: 0;
+  background: rgba(0,0,0,0.97);
+  backdrop-filter: blur(15px);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox.active { display: flex; }
+
+.lightbox-content-wrapper {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-
-.bpl-card:hover .bpl-media img { transform: scale(1.05); }
-
-
-.bpl-story {
-  padding: 20px 24px 28px;
-}
-
-
-.bpl-story p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.8;
-  margin-bottom: 14px;
-}
-
-
-.bpl-story strong { color: var(--text); }
-
-
-.bpl-quote {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--accent2);
-  border-left: 3px solid var(--accent2);
-  padding-left: 14px;
-  line-height: 1.6;
-}
-
-
-/* ===== DEEPER SECTION ===== */
-.deeper-section {
-  padding: 80px 60px;
-  text-align: center;
-  background: linear-gradient(135deg, rgba(67,233,123,0.05), rgba(108,99,255,0.05));
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-
-.deeper-content h3 {
-  font-family: var(--font-head);
-  font-size: 2rem;
-  font-weight: 900;
-  margin-bottom: 12px;
-}
-
-
-.deeper-content p {
-  font-size: 1rem;
-  color: var(--muted);
-  margin-bottom: 32px;
-  line-height: 1.8;
-}
-
-
-.btn-deeper {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--accent3), var(--accent));
-  color: #0a0a0f;
-  font-family: var(--font-head);
-  font-size: 0.95rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 18px 44px;
-  border-radius: 50px;
-  transition: all 0.3s;
-  box-shadow: 0 4px 28px rgba(67,233,123,0.35);
-}
-
-
-.btn-deeper:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 40px rgba(67,233,123,0.55);
-}
-
-
-/* ===== FOOTER ===== */
-.footer {
-  background: var(--card);
-  border-top: 1px solid var(--border);
-  padding: 28px 60px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  font-size: 0.9rem;
-  color: var(--muted);
+  padding: 20px;
 }
 
-
-.footer a { color: var(--accent3); }
-.footer a:hover { color: var(--text); }
-
-
-/* ===== AOS ANIMATION ===== */
-[data-aos] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-[data-aos].visible {
-  opacity: 1;
-  transform: translateY(0);
+.lightbox-content-wrapper img {
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.9);
+  border: 1px solid rgba(67,233,123,0.3);
 }
 
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .cricket-hero { padding: 60px 20px 40px; }
-  .hero-title { font-size: clamp(36px, 8vw, 64px); }
-  .section-title { font-size: clamp(28px, 6vw, 48px); }
-  .traits-section { grid-template-columns: 1fr; padding: 0 20px 60px; }
-  .timeline-section { padding: 60px 20px; }
-  .timeline::before { left: 20px; }
-  .timeline-item,
-  .timeline-item.right {
-    justify-content: flex-start;
-    padding: 0 0 0 50px;
-    transform: translateX(-20px);
-  }
-  .timeline-dot { left: 20px; }
-  .timeline-year { left: 20px; transform: translateX(28px); }
-  .timeline-item.right .timeline-year { transform: translateX(28px); }
-  .timeline-card { max-width: 100%; }
-  .bpl-section { padding: 60px 20px; }
-  .bpl-grid { grid-template-columns: 1fr; }
-  .deeper-section { padding: 60px 20px; }
-  .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 36px;
+  color: #fff;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100001;
+  line-height: 1;
+  transition: color 0.2s;
 }
 
-@media (max-width: 400px) {
-  .hero-title { font-size: 32px; }
-  .section-title { font-size: 26px; }
-  .timeline-item, .timeline-item.right { padding: 0 0 0 40px; }
-  .timeline-card { padding: 20px; }
-}
+.lightbox-close:hover { color: var(--accent3); }
 
+/* ===== BADGE STYLES ===== */
+.highlight-card { border-color: var(--gold) !important; box-shadow: 0 0 30px rgba(255,215,0,0.15); }
+.motm-card { border-color: var(--gold) !important; box-shadow: 0 0 30px rgba(255,215,0,0.15); }
+.comeback-card { border-color: var(--accent2) !important; box-shadow: 0 0 30px rgba(255,101,132,0.15); }
 
-/* ===== EXTRA TIMELINE CARD STYLES ===== */
-
-
-.dot-gold {
-  background: var(--gold) !important;
-  box-shadow: 0 0 20px rgba(255,215,0,0.7) !important;
-}
-
-
-.dot-silver {
-  background: #c0c0c0 !important;
-  box-shadow: 0 0 20px rgba(192,192,192,0.7) !important;
-}
-
-
-.dot-fire {
-  background: var(--accent2) !important;
-  box-shadow: 0 0 20px rgba(255,101,132,0.7) !important;
-}
-
-
-.motm-card {
-  border-color: var(--gold) !important;
-  box-shadow: 0 0 30px rgba(255,215,0,0.15);
-}
-
-
-.motm-badge {
+.winner-badge, .motm-badge {
   display: inline-block;
   background: linear-gradient(90deg, var(--gold), #ffaa00);
   color: #0a0a0f;
@@ -703,7 +683,6 @@ a { text-decoration: none; color: inherit; }
   border-radius: 30px;
   margin-bottom: 10px;
 }
-
 
 .runner-badge {
   display: inline-block;
@@ -718,13 +697,6 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 10px;
 }
 
-
-.comeback-card {
-  border-color: var(--accent2) !important;
-  box-shadow: 0 0 30px rgba(255,101,132,0.15);
-}
-
-
 .comeback-badge {
   display: inline-block;
   background: linear-gradient(90deg, var(--accent2), #ff3366);
@@ -738,7 +710,6 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 10px;
 }
 
-
 .timeline-quote {
   font-size: 0.85rem;
   font-style: italic;
@@ -749,317 +720,113 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.6;
 }
 
+.motm-card .timeline-quote { color: var(--gold); border-left-color: var(--gold); }
 
-.motm-card .timeline-quote {
-  color: var(--gold);
-  border-left-color: var(--gold);
+/* ===== DOT VARIANTS ===== */
+.dot-gold { background: var(--gold) !important; box-shadow: 0 0 20px rgba(255,215,0,0.7) !important; }
+.dot-silver { background: #c0c0c0 !important; box-shadow: 0 0 20px rgba(192,192,192,0.7) !important; }
+.dot-fire { background: var(--accent2) !important; box-shadow: 0 0 20px rgba(255,101,132,0.7) !important; }
+
+/* ===== AOS ANIMATION ===== */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+[data-aos].visible { opacity: 1; transform: translateY(0); }
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 28px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.footer a { color: var(--accent3); }
+.footer a:hover { color: var(--text); }
+
+/* ===== RESPONSIVE — TABLET ===== */
+@media (max-width: 1000px) {
+  .timeline-section { max-width: 100%; padding: 80px 30px; }
+  .timeline-card { max-width: 460px; }
+}
+
+/* ===== RESPONSIVE — MOBILE ===== */
+@media (max-width: 768px) {
+  .cricket-hero { padding: 80px 20px 50px; }
+  .hero-title { font-size: clamp(36px, 9vw, 64px); }
+  .hero-sub { font-size: 1rem; }
+  .cricket-ball { width: 55px; height: 55px; right: 20px; bottom: 30px; }
+
+  .traits-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 0 16px 60px;
+  }
+
+  .timeline-section { padding: 60px 16px; }
+  .section-title { font-size: clamp(28px, 7vw, 48px); margin-bottom: 40px; }
+
+  .timeline::before { left: 18px; }
+
+  .timeline-item,
+  .timeline-item.right {
+    justify-content: flex-start;
+    padding: 0 0 0 46px;
+    transform: translateX(-20px);
+  }
+
+  .timeline-dot { left: 18px; }
+  .timeline-year { left: 18px; transform: translateX(26px); }
+  .timeline-item.right .timeline-year { transform: translateX(26px); }
+
+  .timeline-card {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+
+  /* Stack media on mobile */
+  .media-row { flex-direction: column; gap: 14px; }
+
+  .media-box img,
+  .timeline-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-overlay { aspect-ratio: 16 / 9; }
+
+  /* Video modal full screen on mobile */
+  .video-modal { padding: 0; align-items: flex-end; }
+  .video-modal-inner { border-radius: 20px 20px 0 0; max-width: 100%; }
+  #modal-video { max-height: 45vh; }
+
+  .video-modal-controls { gap: 8px; padding: 12px 12px 6px; }
+  .vmc-btn { padding: 7px 14px; font-size: 0.72rem; }
+  .vmc-play-btn { padding: 9px 20px; }
+
+  .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+}
+
+@media (max-width: 480px) {
+  .traits-section { grid-template-columns: 1fr; }
+  .hero-title { font-size: 34px; }
+  .timeline-card { padding: 18px 14px; }
+  .video-zoom-btn { opacity: 1; }  /* always show zoom on touch devices */
 }
 
 
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 99999;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.96);
-  backdrop-filter: blur(8px);
-  justify-content: center; align-items: center;
-}
-.lightbox.active { display: flex; }
-.lightbox-content-wrapper img, .lightbox-content-wrapper video {
-  max-width: 90vw; max-height: 85vh;
-  object-fit: contain; border-radius: 12px;
-  border: 1px solid rgba(67, 233, 123, 0.4);
-}
-.lightbox-close {
-  position: absolute; top: 30px; right: 40px;
-  color: #fff; font-size: 45px; cursor: pointer;
-}
-.media-box img, .timeline-video { cursor: zoom-in; }
-
-
-
-
-/* Better Image Proportion */
-.media-box img {
-    width: 100%;
-    height: auto; /* Allows the image to dictate its own height */
-    max-height: 300px; /* Limits giant images from breaking the layout */
-    object-fit: contain; /* Shows the ENTIRE image without cropping */
-    background: #000; /* Adds black bars if the image is weirdly shaped */
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    transition: transform 0.3s;
+.nashik-video .timeline-video {
+  aspect-ratio: 4 / 4;
+  object-fit: fill;
+  object-position: right right;
+  background: transparent;
 }
 
-
-/* Video Styling */
-.video-box {
-    position: relative;
-    overflow: hidden;
+.nashik-video {
+  aspect-ratio: 4 / 4;
 }
-
-
-.timeline-video {
-    width: 100%;
-    border-radius: 12px;
-    border: 1px solid var(--accent3);
-    cursor: pointer;
-}
-
-
-.video-ctrl-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(67, 233, 123, 0.8);
-    border: none;
-    color: #000;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 0.7rem;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: 0.3s;
-    z-index: 5;
-}
-
-
-.video-box:hover .video-ctrl-btn {
-    opacity: 1;
-}
-/* Better Image Proportion */
-.media-box img {
-    width: 100%;
-    height: auto; /* Allows the image to dictate its own height */
-    max-height: 300px; /* Limits giant images from breaking the layout */
-    object-fit: contain; /* Shows the ENTIRE image without cropping */
-    background: #000; /* Adds black bars if the image is weirdly shaped */
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    transition: transform 0.3s;
-}
-
-
-/* Video Styling */
-.video-box {
-    position: relative;
-    overflow: hidden;
-}
-
-
-.timeline-video {
-    width: 100%;
-    border-radius: 12px;
-    border: 1px solid var(--accent3);
-    cursor: pointer;
-}
-
-
-.video-ctrl-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(67, 233, 123, 0.8);
-    border: none;
-    color: #000;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 0.7rem;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: 0.3s;
-    z-index: 5;
-}
-
-
-.video-box:hover .video-ctrl-btn {
-    opacity: 1;
-}
-
-
-/* Fix for Black Spaces */
-.media-box img,
-.timeline-video {
-  width: 100%;
-  height: 200px; /* Adjust height to match your card design */
-  object-fit: cover; /* This removes the black bars by filling the space */
-  display: block;
-  border-radius: 8px;
-}
-
-
-/* Ensure the video box doesn't have a black background showing */
-.video-box {
-  background: none !important;
-  overflow: hidden;
-}
-
-
-/* Maintain aspect ratio in the popup so it doesn't crop when zoomed */
-.lightbox-content-wrapper img,
-.lightbox-content-wrapper video {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain; /* Keep contain ONLY for the popup so you see the full image */
-}
-/* ============================================================
-   FINAL RESOLUTION: NO CROPPING & FULL SCREEN ZOOM
-   ============================================================ */
-
-
-/* 1. TIMELINE MEDIA: Edge-to-edge with no black bars */
-.media-box img,
-.timeline-video {
-    width: 100% !important;
-    aspect-ratio: 16 / 10 !important;
-    object-fit: cover !important; /* Fills the container completely */
-    object-position: center !important;
-    border-radius: 12px !important;
-    border: 1px solid var(--border) !important;
-    cursor: zoom-in !important;
-    display: block !important;
-}
-
-
-/* 2. LIGHTBOX (ZOOM): Fixes the "small image" issue */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 99999;
-    top: 0; left: 0;
-    width: 100vw !important; /* Force full screen width */
-    height: 100vh !important; /* Force full screen height */
-    background-color: rgba(0, 0, 0, 0.98);
-    backdrop-filter: blur(15px);
-    justify-content: center;
-    align-items: center;
-}
-
-
-.lightbox.active {
-    display: flex !important;
-}
-
-
-/* Ensure the zoomed content is actually large */
-.lightbox-content-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.lightbox-content-wrapper img,
-.lightbox-content-wrapper video {
-    max-width: 95vw !important; /* Use 95% of screen width */
-    max-height: 90vh !important;
-    width: auto !important;
-    height: auto !important;
-    object-fit: contain !important; /* Show the WHOLE image when zoomed */
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-
-/* 3. CLOSE BUTTON */
-.lightbox-close {
-    position: absolute;
-    top: 25px;
-    right: 35px;
-    color: #fff;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 100001;
-}
-
-/* ==========================================
-   FINAL CONSOLIDATED MEDIA & LIGHTBOX 
-   ========================================== */
-
-/* 1. THE MEDIA ROW - Edge-to-edge container */
-.media-row {
-    display: flex;
-    gap: 12px;
-    margin-top: 18px;
-    width: 100%;
-}
-
-/* 2. TIMELINE IMAGES & VIDEOS - No empty space, no cropping */
-.media-box img, 
-.timeline-video {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 200px !important;
-    max-height: 400px !important;
-    /* 'cover' removes the black bars by filling the entire box */
-    object-fit: cover !important; 
-    object-position: center;
-    border-radius: 12px !important;
-    border: 1px solid var(--border) !important;
-    display: block !important;
-    cursor: zoom-in;
-    background: none !important;
-}
-
-/* 3. LIGHTBOX (ZOOM) - Full screen resolution */
-.lightbox {
-    display: none; 
-    position: fixed; 
-    z-index: 99999; 
-    top: 0; left: 0; 
-    width: 100vw !important; 
-    height: 100vh !important; 
-    background-color: rgba(0, 0, 0, 0.98); 
-    backdrop-filter: blur(15px);
-    justify-content: center; 
-    align-items: center;
-}
-
-.lightbox.active { display: flex !important; }
-
-/* Forces zoomed content to be large and clear */
-.lightbox-content-wrapper img, 
-.lightbox-content-wrapper video {
-    max-width: 95vw !important; 
-    max-height: 90vh !important;
-    width: auto !important;
-    height: auto !important;
-    /* Shows the WHOLE media when zoomed */
-    object-fit: contain !important; 
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;  /* contain cha cover kar */
-  display: block;
-}
-
-.media-box video {
-  width: 100%;
-  max-width: 100%;
-  object-fit: cover;
-}
-
-.lightbox-close {
-    position: absolute; 
-    top: 25px; 
-    right: 35px;
-    color: #fff; 
-    font-size: 50px; 
-    cursor: pointer;
-}
-
-
