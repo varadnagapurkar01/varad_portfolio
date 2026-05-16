@@ -1,5 +1,8 @@
 // === VARAD NAGAPURKAR — script.js ===
 
+// Defer animations until page is loaded
+let animationsReady = false;
+
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -8,13 +11,36 @@ window.addEventListener('scroll', () => {
     : 'rgba(10,10,15,0.85)';
 });
 
-// Section buttons — hover sound feel (visual pulse)
-document.querySelectorAll('.sec-btn').forEach(btn => {
-  btn.addEventListener('mouseenter', () => {
-    btn.style.transform = 'translateY(-4px) scale(1.03)';
+// Defer hover effects until page is loaded
+window.addEventListener('load', () => {
+  animationsReady = true;
+  
+  document.querySelectorAll('.sec-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      btn.style.transform = 'translateY(-4px) scale(1.03)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
   });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
+
+  const highlights = document.querySelectorAll('.highlight');
+  highlights.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      el.style.transform = "scale(1.05)";
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = "scale(1)";
+    });
+  });
+
+  document.querySelectorAll('.bio-section').forEach(section => {
+    section.addEventListener('mouseenter', () => {
+      section.style.transform = "translateX(6px)";
+    });
+    section.addEventListener('mouseleave', () => {
+      section.style.transform = "translateX(0)";
+    });
   });
 });
 
@@ -22,26 +48,6 @@ document.querySelectorAll('.sec-btn').forEach(btn => {
 console.log('%c👋 Hey Recruiter!', 'color:#6c63ff;font-size:22px;font-weight:bold;');
 console.log('%cBuilt by Varad Nagapurkar — DevOps | Cricket | पौरोहित्य', 'color:#ff6584;font-size:13px;');
 console.log('%cLet\'s connect! 🚀', 'color:#43e97b;font-size:13px;');
-
-const highlights = document.querySelectorAll('.highlight');
-
-highlights.forEach((el) => {
-  el.addEventListener('mouseenter', () => {
-    el.style.transform = "scale(1.05)";
-  });
-  el.addEventListener('mouseleave', () => {
-    el.style.transform = "scale(1)";
-  });
-});
-
-document.querySelectorAll('.bio-section').forEach(section => {
-  section.addEventListener('mouseenter', () => {
-    section.style.transform = "translateX(6px)";
-  });
-  section.addEventListener('mouseleave', () => {
-    section.style.transform = "translateX(0)";
-  });
-});
 
 
 (function() { 
@@ -102,6 +108,7 @@ const row2 = [
 
       const img = document.createElement('img');
       img.src = ld.src;
+      img.loading = 'lazy'; // Lazy load images
       img.style.cssText = `filter: invert(1) sepia(1) saturate(5) hue-rotate(0deg); opacity:0.9;`;
 
       const toolLabel = document.createElement('div');
@@ -125,45 +132,60 @@ const row2 = [
     return cells;
   }
 
-  const cells1 = buildRow(row1, 'nameRow1', 'row1-ltr');
-  const cells2 = buildRow(row2, 'nameRow2', 'row2-ltr');
-  const allCells = [...cells1, ...cells2];
+  // Defer name animation until page is loaded
+  let animationStarted = false;
+  
+  function startNameAnimation() {
+    if (animationStarted) return;
+    animationStarted = true;
+    
+    const cells1 = buildRow(row1, 'nameRow1', 'row1-ltr');
+    const cells2 = buildRow(row2, 'nameRow2', 'row2-ltr');
+    const allCells = [...cells1, ...cells2];
 
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-async function animate() {
-    for (let c of allCells) {
-      c.logoBox.classList.remove('show', 'hide');
-      c.ltrEl.classList.remove('show');
-    }
+    async function animate() {
+      for (let c of allCells) {
+        c.logoBox.classList.remove('show', 'hide');
+        c.ltrEl.classList.remove('show');
+      }
 
-    await sleep(200);
+      await sleep(200);
 
-    // Logo flow — continuous, no pause
-    allCells.forEach((c, i) => {
-      setTimeout(() => {
-        c.logoBox.classList.add('show');
-      }, i * 180);
-    });
-
-    // Letter flow — starts 1 second after logo flow, continuous
-    allCells.forEach((c, i) => {
-      setTimeout(() => {
-        c.logoBox.classList.add('hide');
-        c.logoBox.classList.remove('show');
+      // Logo flow — continuous, no pause
+      allCells.forEach((c, i) => {
         setTimeout(() => {
-          c.ltrEl.classList.add('show');
-        }, 500);
-      }, 1000 + i * 180);
-    });
+          c.logoBox.classList.add('show');
+        }, i * 180);
+      });
 
-    // Total time = 1000 + 15*180 + 150 + buffer = ~4500ms → then 5sec pause → loop
-    const totalTime = 1000 + (allCells.length * 180) + 500;
-    setTimeout(() => {
-      sleep(4000).then(() => animate());
-    }, totalTime);
+      // Letter flow — starts 1 second after logo flow, continuous
+      allCells.forEach((c, i) => {
+        setTimeout(() => {
+          c.logoBox.classList.add('hide');
+          c.logoBox.classList.remove('show');
+          setTimeout(() => {
+            c.ltrEl.classList.add('show');
+          }, 500);
+        }, 1000 + i * 180);
+      });
+
+      // Total time = 1000 + 15*180 + 150 + buffer = ~4500ms → then 5sec pause → loop
+      const totalTime = 1000 + (allCells.length * 180) + 500;
+      setTimeout(() => {
+        sleep(4000).then(() => animate());
+      }, totalTime);
+    }
+    animate();
   }
-  animate();
+
+  // Start animation after page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startNameAnimation);
+  } else {
+    startNameAnimation();
+  }
 
 })();
 

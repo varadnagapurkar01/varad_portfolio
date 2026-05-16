@@ -5,20 +5,18 @@
 (function() {
   'use strict';
 
-  // Configuration
+  // Configuration - OPTIMIZED for performance
   const CONFIG = {
     typewriterSpeed: 80,
     typewriterDelay: 500,
-welcomeMessages: [
-
-  // "✋ no tricks. just one tiny thing.",
-  "I just need to know you can ⌨️type. that's it.  👀 ",
-  "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",   //the work, the vibe, everything
-  "🎯 I HOPE THAT'S WHAT YOU WANT ..." ,
-],
-    particleCount: 100,
+    welcomeMessages: [
+      "I just need to know you can ⌨️type. that's it.  👀 ",
+      "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",
+      "🎯 I HOPE THAT'S WHAT YOU WANT ..." ,
+    ],
+    particleCount: 50,
     storageKey: 'portfolioVisitorName',
-    apiEndpoint: '/api/store-name' // For future backend integration
+    apiEndpoint: '/api/store-name'
   };
 
   // State
@@ -26,6 +24,7 @@ welcomeMessages: [
   let particles = [];
   let animationFrame;
   let hasVisited = false;
+  let isCanvasActive = false;
 
   // Initialize on DOM load
   document.addEventListener('DOMContentLoaded', init);
@@ -39,29 +38,39 @@ welcomeMessages: [
       return;
     }
 
-    // Setup canvas and particles
+    // Setup canvas and particles (but don't start immediately)
     setupCanvas();
-    createParticles();
-    animateParticles();
-
-    // Start typewriter effect
+    
+    // Start typewriter effect only
     setTimeout(() => {
       typewriterEffect();
     }, CONFIG.typewriterDelay);
+
+    // Start canvas animation after user focuses input
+    const nameInput = document.getElementById('nameInput');
+    if (nameInput) {
+      nameInput.addEventListener('focus', () => {
+        if (!isCanvasActive) {
+          isCanvasActive = true;
+          createParticles();
+          animateParticles();
+        }
+      }, { once: true });
+    }
 
     // Setup input listener
     setupInputListener();
   }
 
   // ============================================
-  // CANVAS & PARTICLE SYSTEM
+  // CANVAS & PARTICLE SYSTEM - OPTIMIZED
   // ============================================
 
   function setupCanvas() {
     canvas = document.getElementById('galaxyCanvas');
     if (!canvas) return;
 
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', { alpha: true });
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
   }
@@ -73,49 +82,32 @@ welcomeMessages: [
 
   function createParticles() {
     particles = [];
-    const particleCount = window.innerWidth < 768 ? 50 : 150;
+    const particleCount = window.innerWidth < 768 ? 30 : 80;
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.5,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random() * 0.5 + 0.3,
-        twinkleSpeed: Math.random() * 0.02 + 0.01
+        size: Math.random() * 1.5 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        opacity: Math.random() * 0.4 + 0.2,
+        twinkleSpeed: Math.random() * 0.01 + 0.005
       });
     }
   }
 
   function animateParticles() {
-    if (!ctx) return;
+    if (!ctx || !isCanvasActive) return;
 
+    // Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw connections between nearby particles
-    particles.forEach((p1, i) => {
-      particles.slice(i + 1).forEach(p2 => {
-        const dx = p1.x - p2.x;
-        const dy = p1.y - p2.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 150) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(0, 200, 255, ${0.15 * (1 - distance / 150)})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        }
-      });
-    });
-
     // Draw and update particles
-    particles.forEach(particle => {
+    particles.forEach((particle, index) => {
       // Twinkling effect
       particle.opacity += particle.twinkleSpeed;
-      if (particle.opacity > 1 || particle.opacity < 0.3) {
+      if (particle.opacity > 0.8 || particle.opacity < 0.2) {
         particle.twinkleSpeed *= -1;
       }
 
@@ -123,20 +115,38 @@ welcomeMessages: [
       ctx.beginPath();
       ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(0, 200, 255, ${particle.opacity})`;
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = 'rgba(0, 200, 255, 0.8)';
       ctx.fill();
 
-      // Update position
+      // Update position with wrapping
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // Wrap around edges
       if (particle.x < 0) particle.x = canvas.width;
       if (particle.x > canvas.width) particle.x = 0;
       if (particle.y < 0) particle.y = canvas.height;
       if (particle.y > canvas.height) particle.y = 0;
     });
+
+    // Only draw connections between every 2nd particle (reduced CPU usage)
+    for (let i = 0; i < particles.length; i += 2) {
+      const p1 = particles[i];
+      for (let j = i + 1; j < Math.min(i + 4, particles.length); j++) {
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distSquared = dx * dx + dy * dy;
+        
+        if (distSquared < 22500) { // 150^2
+          const distance = Math.sqrt(distSquared);
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0, 200, 255, ${0.1 * (1 - distance / 150)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
 
     animationFrame = requestAnimationFrame(animateParticles);
   }
@@ -155,7 +165,6 @@ welcomeMessages: [
 
     function type() {
       if (messageIndex >= CONFIG.welcomeMessages.length) {
-        // Finished typing all messages
         promptElement.style.borderRight = 'none';
         return;
       }
@@ -168,7 +177,6 @@ welcomeMessages: [
         charIndex++;
         setTimeout(type, CONFIG.typewriterSpeed);
       } else {
-        // Finished current message, pause then continue
         setTimeout(() => {
           if (messageIndex < CONFIG.welcomeMessages.length - 1) {
             currentMessage += '\n';
@@ -218,81 +226,21 @@ welcomeMessages: [
     // Store the name
     storeName(name);
 
-    // Trigger shockwave effect
-    createShockwave();
-
-    // Create particle burst
-    createParticleBurst();
-
     // Hide input form and show welcome reveal
     setTimeout(() => {
       showWelcomeReveal(name);
-    }, 800);
+    }, 300);
 
     // Transition to portfolio
     setTimeout(() => {
       transitionToPortfolio();
-    }, 4500);
-  }
-
-  function createShockwave() {
-    const overlay = document.getElementById('welcomeOverlay');
-    const shockwave = document.createElement('div');
-    shockwave.className = 'shockwave active';
-    overlay.appendChild(shockwave);
-
-    setTimeout(() => {
-      shockwave.remove();
-    }, 1500);
-  }
-
-  function createParticleBurst() {
-    const overlay = document.getElementById('welcomeOverlay');
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    for (let i = 0; i < CONFIG.particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      
-      const angle = (Math.PI * 2 * i) / CONFIG.particleCount;
-      const velocity = 3 + Math.random() * 5;
-      const distance = 200 + Math.random() * 300;
-      
-      const endX = centerX + Math.cos(angle) * distance;
-      const endY = centerY + Math.sin(angle) * distance;
-
-      particle.style.left = centerX + 'px';
-      particle.style.top = centerY + 'px';
-
-      overlay.appendChild(particle);
-
-      // Animate particle
-      particle.animate([
-        { 
-          transform: 'translate(0, 0) scale(1)',
-          opacity: 1
-        },
-        { 
-          transform: `translate(${endX - centerX}px, ${endY - centerY}px) scale(0)`,
-          opacity: 0
-        }
-      ], {
-        duration: 1000 + Math.random() * 500,
-        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-      });
-
-      setTimeout(() => {
-        particle.remove();
-      }, 1500);
-    }
+    }, 3500);
   }
 
   function showWelcomeReveal(name) {
     const welcomeContent = document.querySelector('.welcome-content');
     const welcomeReveal = document.querySelector('.welcome-reveal');
     const visitorNameElement = document.querySelector('.visitor-name');
-    const welcomeMessage = document.querySelector('.welcome-message');
 
     if (welcomeContent) welcomeContent.style.opacity = '0';
     
@@ -303,31 +251,25 @@ welcomeMessages: [
     if (visitorNameElement) {
       visitorNameElement.textContent = name;
     }
-
-    if (welcomeMessage) {
-      setTimeout(() => {
-        welcomeMessage.classList.add('show');
-      }, 200);
-    }
   }
 
   function transitionToPortfolio() {
     const overlay = document.getElementById('welcomeOverlay');
     
     if (overlay) {
-      overlay.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
+      overlay.style.transition = 'opacity 1s ease';
       overlay.style.opacity = '0';
-      overlay.style.transform = 'scale(1.2)';
 
       setTimeout(() => {
         overlay.classList.add('hidden');
         overlay.remove();
         
         // Stop particle animation
+        isCanvasActive = false;
         if (animationFrame) {
           cancelAnimationFrame(animationFrame);
         }
-      }, 1500);
+      }, 1000);
     }
   }
 
@@ -336,7 +278,6 @@ welcomeMessages: [
   // ============================================
 
   function storeName(name) {
-    // Store in localStorage
     try {
       localStorage.setItem(CONFIG.storageKey, name);
       localStorage.setItem(CONFIG.storageKey + '_timestamp', Date.now());
@@ -344,7 +285,6 @@ welcomeMessages: [
       console.warn('localStorage not available:', e);
     }
 
-    // Send to backend (if available)
     sendToBackend(name);
   }
 
@@ -357,25 +297,16 @@ welcomeMessages: [
   }
 
   function sendToBackend(name) {
-    // This will work when you set up the backend
     fetch(CONFIG.apiEndpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: name,
         timestamp: Date.now(),
         userAgent: navigator.userAgent,
         referrer: document.referrer
       })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Name stored successfully:', data);
-    })
-    .catch(error => {
-      // Backend not available yet, that's okay
+    }).catch(error => {
       console.log('Backend storage pending:', error.message);
     });
   }
@@ -387,9 +318,6 @@ welcomeMessages: [
     }
   }
 
-  // ============================================
-  // UTILITY: Clear stored name (for testing)
-  // ============================================
   window.clearWelcomeData = function() {
     localStorage.removeItem(CONFIG.storageKey);
     localStorage.removeItem(CONFIG.storageKey + '_timestamp');
