@@ -21,12 +21,49 @@ and also throw me to the those lines where it  so i will not ask you again and a
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Varad Nagapurkar</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/welcome-popup.css" />
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap"
     rel="stylesheet" />
 </head>
 
 <body>
+
+  <!-- CINEMATIC WELCOME OVERLAY -->
+  <div id="welcomeOverlay">
+    
+    <!-- Animated Galaxy Canvas Background -->
+    <canvas id="galaxyCanvas"></canvas>
+
+    <!-- Welcome Input Form -->
+    <div class="welcome-content">
+      <div class="welcome-prompt">
+        <span class="typewriter-text"></span>
+      </div>
+
+      <div class="name-input-container">
+        <input 
+          type="text" 
+          id="nameInput" 
+          placeholder="Type your name..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+      </div>
+
+      <div class="enter-instruction">
+        Press Enter to continue
+      </div>
+    </div>
+
+    <!-- Welcome Reveal Screen (shown after name entry) -->
+    <div class="welcome-reveal">
+      <div class="welcome-message">Welcome,</div>
+      <div class="visitor-name"></div>
+      <div class="welcome-tagline">Your journey begins now</div>
+    </div>
+
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -179,6 +216,7 @@ and also throw me to the those lines where it  so i will not ask you again and a
     </div>
   </section>
 
+  <script src="js/welcome-popup.js"></script>
   <script src="js/script.js"></script>
 </body>
 

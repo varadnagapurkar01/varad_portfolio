@@ -1,0 +1,375 @@
+/* ============================================
+   CINEMATIC WELCOME POP-UP STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Welcome Overlay */
+#welcomeOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+#welcomeOverlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animated Canvas Background */
+#galaxyCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Welcome Content Container */
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  padding: 40px;
+  opacity: 0;
+  animation: fadeInContent 1.5s ease forwards 0.5s;
+}
+
+@keyframes fadeInContent {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Typewriter Prompt */
+.welcome-prompt {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  line-height: 1.6;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.typewriter-text {
+  border-right: 3px solid rgba(255, 255, 255, 0.8);
+  padding-right: 8px;
+  animation: blink 0.8s step-end infinite;
+  display: inline-block;
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+/* Glowing Input Field */
+.name-input-container {
+  position: relative;
+  margin: 40px auto;
+  max-width: 450px;
+}
+
+#nameInput {
+  width: 100%;
+  padding: 20px 30px;
+  font-size: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  outline: none;
+  text-align: center;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0, 150, 255, 0.2);
+}
+
+#nameInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 300;
+}
+
+#nameInput:focus {
+  border-color: rgba(0, 200, 255, 0.8);
+  box-shadow: 0 0 50px rgba(0, 150, 255, 0.6),
+              0 0 100px rgba(0, 150, 255, 0.3),
+              inset 0 0 20px rgba(0, 150, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
+
+/* Subtle Instruction */
+.enter-instruction {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 15px;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+/* Welcome Reveal Screen */
+.welcome-reveal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.welcome-reveal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.welcome-message {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+  letter-spacing: 3px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.welcome-message.show {
+  animation: slideUpFade 1s ease forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.visitor-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #00d4ff, #0099ff, #00ffcc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: scale(0.5);
+  animation: nameExplosion 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.3s,
+             gradientShift 3s ease infinite;
+  text-shadow: 0 0 80px rgba(0, 200, 255, 0.8);
+  filter: drop-shadow(0 0 30px rgba(0, 200, 255, 0.6));
+}
+
+@keyframes nameExplosion {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.welcome-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 30px;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 1s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shockwave Effect */
+.shockwave {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(0, 200, 255, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.shockwave.active {
+  animation: shockwaveExpand 1.5s ease-out forwards;
+}
+
+@keyframes shockwaveExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+  }
+}
+
+/* Particle Burst Effect */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #00d4ff;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow: 0 0 10px #00d4ff;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .welcome-content {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .welcome-prompt {
+    font-size: 1.3rem;
+    min-height: 100px;
+    letter-spacing: 1px;
+  }
+
+  #nameInput {
+    font-size: 1.2rem;
+    padding: 18px 25px;
+  }
+
+  .visitor-name {
+    font-size: 3rem;
+    letter-spacing: 3px;
+  }
+
+  .welcome-message {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+  }
+
+  .welcome-tagline {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-prompt {
+    font-size: 1.1rem;
+    min-height: 90px;
+  }
+
+  #nameInput {
+    font-size: 1rem;
+    padding: 15px 20px;
+  }
+
+  .visitor-name {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+
+  .welcome-message {
+    font-size: 1.4rem;
+  }
+
+  .welcome-tagline {
+    font-size: 0.9rem;
+  }
+
+  .enter-instruction {
+    font-size: 0.8rem;
+  }
+}
+
+/* Loading State */
+.loading-dots {
+  display: inline-block;
+  font-size: 2rem;
+  letter-spacing: 5px;
+}
+
+.loading-dots span {
+  animation: dotPulse 1.4s infinite;
+  opacity: 0;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
