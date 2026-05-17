@@ -28,16 +28,16 @@ if (hero && ball) {
   hero.addEventListener('mousemove', (e) => {
     const rect = hero.getBoundingClientRect();
     ball.style.transition = 'left 0.8s ease, top 0.8s ease';
-    ball.style.left  = (e.clientX - rect.left - 40) + 'px';
-    ball.style.top   = (e.clientY - rect.top  - 40) + 'px';
+    ball.style.left = (e.clientX - rect.left - 40) + 'px';
+    ball.style.top = (e.clientY - rect.top - 40) + 'px';
     ball.style.right = 'auto';
     ball.style.bottom = 'auto';
   });
   hero.addEventListener('mouseleave', () => {
     ball.style.transition = 'all 1s ease';
     ball.style.left = 'auto';
-    ball.style.top  = 'auto';
-    ball.style.right  = '80px';
+    ball.style.top = 'auto';
+    ball.style.right = '80px';
     ball.style.bottom = '60px';
   });
 }
@@ -46,7 +46,7 @@ if (hero && ball) {
 const popTextMap = {
   shegao: '50 RUNS! ⭐',
   nashik: '4 SIXES IN A ROW! 🔥',
-  jppl:   'EXCELLENT 4! 🏏'
+  jppl: 'EXCELLENT 4! 🏏'
 };
 
 function showPop(parent, text) {
@@ -65,7 +65,7 @@ function showPop(parent, text) {
   parent.appendChild(pop);
   pop.animate([
     { transform: 'translate(-50%,-50%) scale(0.5)', opacity: 1 },
-    { transform: 'translate(-50%,-230%) scale(2)',  opacity: 0 }
+    { transform: 'translate(-50%,-230%) scale(2)', opacity: 0 }
   ], { duration: 1400, easing: 'ease-out', fill: 'forwards' });
   setTimeout(() => pop.remove(), 1400);
 }
@@ -78,14 +78,14 @@ function formatTime(s) {
 
 // ─── VIDEO PLAY / PAUSE — inline timeline ────────────────────────────────────
 document.querySelectorAll('.video-box').forEach(box => {
-  const video    = box.querySelector('.timeline-video');
-  const btn      = box.querySelector('.video-ctrl-btn');
-  const icon     = btn  ? btn.querySelector('.play-icon') : null;
-  const label    = btn  ? btn.querySelector('.btn-text')  : null;
-  const zoomBtn  = box.querySelector('.video-zoom-btn');
+  const video = box.querySelector('.timeline-video');
+  const btn = box.querySelector('.video-ctrl-btn');
+  const icon = btn ? btn.querySelector('.play-icon') : null;
+  const label = btn ? btn.querySelector('.btn-text') : null;
+  const zoomBtn = box.querySelector('.video-zoom-btn');
   const matchKey = box.getAttribute('data-match') || '';
-  const title    = box.getAttribute('data-title')  || 'Video';
-  const src      = box.getAttribute('data-src')    || '';
+  const title = box.getAttribute('data-title') || 'Video';
+  const src = box.getAttribute('data-src') || '';
 
   if (!video || !btn) return;
 
@@ -94,13 +94,13 @@ document.querySelectorAll('.video-box').forEach(box => {
     if (video.paused) {
       video.play();
       box.classList.add('is-playing');
-      if (icon)  icon.textContent  = '⏸';
+      if (icon) icon.textContent = '⏸';
       if (label) label.textContent = 'PAUSE';
       showPop(box, popTextMap[matchKey] || 'PLAYING! 🎬');
     } else {
       video.pause();
       box.classList.remove('is-playing');
-      if (icon)  icon.textContent  = '▶';
+      if (icon) icon.textContent = '▶';
       if (label) label.textContent = 'PLAY';
     }
   }
@@ -110,7 +110,7 @@ document.querySelectorAll('.video-box').forEach(box => {
 
   video.addEventListener('ended', () => {
     box.classList.remove('is-playing');
-    if (icon)  icon.textContent  = '▶';
+    if (icon) icon.textContent = '▶';
     if (label) label.textContent = 'PLAY';
   });
 
@@ -124,18 +124,18 @@ document.querySelectorAll('.video-box').forEach(box => {
 });
 
 // ─── VIDEO MODAL PLAYER ───────────────────────────────────────────────────────
-const videoModal    = document.getElementById('video-modal');
-const modalVideo    = document.getElementById('modal-video');
-const modalSrc      = document.getElementById('modal-video-src');
-const modalTitle    = document.getElementById('video-modal-title');
-const modalClose    = document.getElementById('video-modal-close');
-const vmcPlay       = document.getElementById('vmc-play');
-const vmcBack       = document.getElementById('vmc-back');
-const vmcFwd        = document.getElementById('vmc-fwd');
-const vmcFs         = document.getElementById('vmc-fs');
-const vmcProgress   = document.getElementById('vmc-progress');
-const vmcCurrent    = document.getElementById('vmc-current');
-const vmcDuration   = document.getElementById('vmc-duration');
+const videoModal = document.getElementById('video-modal');
+const modalVideo = document.getElementById('modal-video');
+const modalSrc = document.getElementById('modal-video-src');
+const modalTitle = document.getElementById('video-modal-title');
+const modalClose = document.getElementById('video-modal-close');
+const vmcPlay = document.getElementById('vmc-play');
+const vmcBack = document.getElementById('vmc-back');
+const vmcFwd = document.getElementById('vmc-fwd');
+const vmcFs = document.getElementById('vmc-fs');
+const vmcProgress = document.getElementById('vmc-progress');
+const vmcCurrent = document.getElementById('vmc-current');
+const vmcDuration = document.getElementById('vmc-duration');
 
 function openVideoModal(src, title, startTime) {
   if (!videoModal || !modalVideo) return;
@@ -186,7 +186,7 @@ if (vmcFwd) vmcFwd.addEventListener('click', () => {
 if (vmcFs) vmcFs.addEventListener('click', () => {
   if (modalVideo.requestFullscreen) modalVideo.requestFullscreen();
   else if (modalVideo.webkitRequestFullscreen) modalVideo.webkitRequestFullscreen();
-  else if (modalVideo.webkitEnterFullscreen)  modalVideo.webkitEnterFullscreen();
+  else if (modalVideo.webkitEnterFullscreen) modalVideo.webkitEnterFullscreen();
 });
 
 // Progress bar sync
@@ -222,9 +222,9 @@ if (videoModal) {
 }
 
 // ─── IMAGE LIGHTBOX ───────────────────────────────────────────────────────────
-const lb        = document.getElementById('lightbox');
+const lb = document.getElementById('lightbox');
 const lbContent = document.getElementById('lightbox-content');
-const lbClose   = document.getElementById('close-lightbox');
+const lbClose = document.getElementById('close-lightbox');
 
 document.querySelectorAll('.media-box img').forEach(img => {
   img.addEventListener('click', function () {
