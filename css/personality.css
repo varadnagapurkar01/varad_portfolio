@@ -53,6 +53,63 @@ body {
 }
 .glitch-title span { display: block; color: var(--gold); text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
 
+/* ═══════════════════════════════════════════════════════════════════════════════
+   4 PILLARS INTRO SECTION - Two Hero Images at Top
+   ═══════════════════════════════════════════════════════════════════════════════ */
+.pillars-intro {
+    padding: 80px 0 60px;
+    background: var(--bg);
+}
+
+.pillars-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.pillar-hero-box {
+    position: relative;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 204, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+.pillar-hero-box:hover {
+    border-color: var(--gold);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(255, 204, 0, 0.3);
+}
+
+.pillar-hero-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(50%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.pillar-hero-box:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.pillars-headline {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    text-align: center;
+    color: var(--text);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 30px 0;
+    border-top: 3px solid var(--gold);
+    border-bottom: 3px solid var(--gold);
+    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.05), transparent);
+}
+
 /* Section Labels */
 .section-label {
     font-family: var(--font-head); font-size: 0.9rem; color: var(--accent);
@@ -136,16 +193,24 @@ body {
     .skill-breakdown { margin-top: 20px; }
     .impact-line { flex-direction: column; align-items: flex-start; gap: 15px; }
     .impact-line p { border-left: none; border-top: 2px solid var(--gold); padding-top: 15px; }
+    
+    /* 4 Pillars responsive */
+    .pillars-hero-grid { grid-template-columns: 1fr; gap: 20px; }
+    .pillar-hero-box { height: 350px; }
 }
 
 @media (max-width: 768px) {
     .glitch-title { font-size: clamp(2.5rem, 8vw, 4rem); }
     .logic-card { padding: 30px; }
     .rank-img { height: 250px; }
+    .pillar-hero-box { height: 280px; }
+    .pillars-headline { font-size: 1.5rem; letter-spacing: 2px; padding: 20px 0; }
 }
 
 @media (max-width: 400px) {
     .glitch-title { font-size: 32px; }
     .logic-card { padding: 20px; }
     .impact-word { font-size: 1.4rem; min-width: auto; }
+    .pillar-hero-box { height: 240px; }
+    .pillars-headline { font-size: 1.2rem; }
 }
