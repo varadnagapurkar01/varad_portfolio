@@ -7,7 +7,7 @@
 
   // Configuration - OPTIMIZED for performance
   const CONFIG = {
-    typewriterSpeed: 80,
+    typewriterSpeed: 40, // DOUBLED SPEED: Was 80ms, now 40ms = 2x faster typing
     typewriterDelay: 500,
     welcomeMessages: [
       "I just need to know you can ⌨️type. that's it.  👀 ",
@@ -37,6 +37,9 @@
       hideWelcomeOverlay();
       return;
     }
+
+    // Lock body scroll
+    document.body.classList.add('welcome-active');
 
     // Setup canvas and particles (but don't start immediately)
     setupCanvas();
@@ -172,15 +175,24 @@
       const fullMessage = CONFIG.welcomeMessages[messageIndex];
 
       if (charIndex < fullMessage.length) {
-        currentMessage += fullMessage[charIndex];
-        promptElement.textContent = currentMessage;
-        charIndex++;
+        const char = fullMessage[charIndex];
+        
+        // Check if we're about to type "VARAD" - highlight it
+        if (fullMessage.substring(charIndex, charIndex + 5) === 'VARAD') {
+          currentMessage += '<span class="highlight-varad">VARAD</span>';
+          charIndex += 5;
+        } else {
+          currentMessage += char;
+          charIndex++;
+        }
+        
+        promptElement.innerHTML = currentMessage;
         setTimeout(type, CONFIG.typewriterSpeed);
       } else {
         setTimeout(() => {
           if (messageIndex < CONFIG.welcomeMessages.length - 1) {
             currentMessage += '\n';
-            promptElement.textContent = currentMessage;
+            promptElement.innerHTML = currentMessage;
           }
           messageIndex++;
           charIndex = 0;
@@ -198,16 +210,65 @@
 
   function setupInputListener() {
     const nameInput = document.getElementById('nameInput');
+    const submitBtn = document.getElementById('submitNameBtn');
+    const validationHint = document.getElementById('validationHint');
+    
     if (!nameInput) return;
 
+    // Validation function
+    function validateName(name) {
+      const trimmed = name.trim();
+      
+      // Block only single character names
+      if (trimmed.length === 1) {
+        if (validationHint) {
+          validationHint.textContent = "that's a letter, not a name 🙃";
+          validationHint.style.display = 'block';
+        }
+        return false;
+      }
+      
+      // Hide hint for valid names (2+ characters)
+      if (validationHint) {
+        validationHint.style.display = 'none';
+      }
+      return trimmed.length > 0;
+    }
+
+    // Real-time validation on input
+    nameInput.addEventListener('input', () => {
+      const name = nameInput.value.trim();
+      if (name.length === 1) {
+        if (validationHint) {
+          validationHint.textContent = "that's a letter, not a name 🙃";
+          validationHint.style.display = 'block';
+        }
+      } else {
+        if (validationHint) {
+          validationHint.style.display = 'none';
+        }
+      }
+    });
+
+    // Enter key support
     nameInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         const name = nameInput.value.trim();
-        if (name.length > 0) {
+        if (validateName(name)) {
           handleNameSubmission(name);
         }
       }
     });
+
+    // Button click support
+    if (submitBtn) {
+      submitBtn.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        if (validateName(name)) {
+          handleNameSubmission(name);
+        }
+      });
+    }
 
     // Focus input after typewriter completes
     setTimeout(() => {
@@ -264,6 +325,9 @@
         overlay.classList.add('hidden');
         overlay.remove();
         
+        // Unlock body scroll
+        document.body.classList.remove('welcome-active');
+        
         // Stop particle animation
         isCanvasActive = false;
         if (animationFrame) {
@@ -315,6 +379,8 @@
     const overlay = document.getElementById('welcomeOverlay');
     if (overlay) {
       overlay.style.display = 'none';
+      // Unlock body scroll
+      document.body.classList.remove('welcome-active');
     }
   }
 
