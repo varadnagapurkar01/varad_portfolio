@@ -43,10 +43,96 @@ if (hero && ball) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// YOUTUBE VIDEO SECTION - No custom controls needed, YouTube handles playback
+// CUSTOM VIDEO CONTROLS - Play/Pause, Mute/Unmute, Fullscreen
 // ═══════════════════════════════════════════════════════════════════════════════
-// YouTube iframes are embedded with responsive wrapper
-// No custom play buttons or overlays - YouTube's native controls are used
+
+// Store videos for auto-pause
+const videoElements = {};
+
+// Initialize video controls for each video container
+document.querySelectorAll('.video-container').forEach(container => {
+  const videoId = container.dataset.videoId;
+  const video = container.querySelector('.custom-video');
+  const playPauseBtn = container.querySelector('.play-pause-btn');
+  const muteBtn = container.querySelector('.mute-btn');
+  const fullscreenBtn = container.querySelector('.fullscreen-btn');
+
+  if (!video) return;
+
+  videoElements[videoId] = video;
+
+  // ─── Play/Pause Button ───
+  playPauseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play();
+      playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
+    } else {
+      video.pause();
+      playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
+    }
+  });
+
+  // Update button when video plays/pauses
+  video.addEventListener('play', () => {
+    playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
+  });
+
+  video.addEventListener('pause', () => {
+    playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
+  });
+
+  // ─── Mute/Unmute Button ───
+  muteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (video.muted) {
+      video.muted = false;
+      muteBtn.innerHTML = '<span class="control-icon">🔊</span>';
+    } else {
+      video.muted = true;
+      muteBtn.innerHTML = '<span class="control-icon">🔇</span>';
+    }
+  });
+
+  // ─── Fullscreen Button ───
+  fullscreenBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().catch(err => {
+        console.log('Fullscreen request denied:', err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // ─── Video Click to Play/Pause ───
+  video.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  });
+});
+
+// ─── Auto-pause videos when out of view ───
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const video = entry.target;
+    if (!entry.isIntersecting) {
+      // Video is out of view - pause it
+      if (!video.paused) {
+        video.pause();
+      }
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.custom-video').forEach(video => {
+  videoObserver.observe(video);
+});
 
 // ─── IMAGE LIGHTBOX ───────────────────────────────────────────────────────────
 const lb = document.getElementById('lightbox');

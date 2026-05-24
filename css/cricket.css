@@ -368,6 +368,142 @@ a { text-decoration: none; color: inherit; }
   background: transparent;
 }
 
+/* ===== CUSTOM VIDEO CONTAINER ===== */
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--accent3);
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Default video styling */
+.custom-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #000;
+}
+
+/* ── JPPL VIDEO - 4:3 (Match the image ratio) with zoom ── */
+.jppl-video {
+  aspect-ratio: 4 / 3;
+}
+
+.jppl-video .custom-video {
+  object-fit: cover;
+  object-position: center;
+  scale: 1.15;
+}
+
+/* ── NASHIK VIDEO - 1:1 (Square) centered, crop all 4 sides equally ── */
+.nashik-video {
+  aspect-ratio: 1 / 1;
+}
+
+.nashik-video .custom-video {
+  object-fit: cover;
+  object-position: center;
+  scale: 1.25;
+}
+
+/* ── SHEGAO VIDEO - 1:1 (Square) centered, crop all 4 sides equally ── */
+.shegao-video {
+  aspect-ratio: 1 / 1;
+}
+
+.shegao-video .custom-video {
+  object-fit: cover;
+  object-position: center;
+  scale: 1;
+}
+
+/* ===== VIDEO OVERLAY (CONTROLS) ===== */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 12px;
+  pointer-events: none;
+  transition: background 0.3s ease;
+  z-index: 10;
+}
+
+.video-container:hover .video-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.video-overlay:hover {
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ===== VIDEO CONTROLS ===== */
+.video-controls {
+  display: flex;
+  gap: 8px;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-container:hover .video-controls {
+  opacity: 1;
+}
+
+/* ── Control Buttons ── */
+.control-btn {
+  background: transparent;
+  border: 1px solid rgba(108, 99, 255, 0.4);
+  color: var(--accent3);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.control-btn:hover {
+  background: rgba(108, 99, 255, 0.2);
+  border-color: var(--accent3);
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-icon {
+  display: inline-block;
+  line-height: 1;
+}
+
 /* ===== YOUTUBE BOX ===== */
 .youtube-box {
   flex: 1;
@@ -594,11 +730,71 @@ a { text-decoration: none; color: inherit; }
 
   .media-box img,
   .timeline-video,
-  .youtube-wrapper {
+  .youtube-wrapper,
+  .video-container {
     aspect-ratio: 16 / 9;
   }
 
-  .video-overlay { aspect-ratio: 16 / 9; }
+  /* JPPL VIDEO on Mobile - Keep 4:3 ratio with zoom */
+  .jppl-video {
+    aspect-ratio: 4 / 3;
+  }
+
+  .jppl-video .custom-video {
+    object-fit: cover;
+    object-position: center;
+    scale: 1.15;
+  }
+
+  /* NASHIK VIDEO on Mobile - 1:1 (Square) centered, fill with zoom ── */
+  .nashik-video {
+    aspect-ratio: 1 / 1;
+  }
+
+  .nashik-video .custom-video {
+    object-fit: cover;
+    object-position: center;
+    scale: 1.25;
+  }
+
+  /* SHEGAO VIDEO on Mobile - 1:1 (Square) centered ── */
+  .shegao-video {
+    aspect-ratio: 1 / 1;
+  }
+
+  .shegao-video .custom-video {
+    object-fit: cover;
+    object-position: center;
+    scale: 1;
+  }
+
+  /* Mobile: Always show controls */
+  .video-controls {
+    opacity: 1 !important;
+  }
+
+  .video-overlay {
+    background: rgba(0, 0, 0, 0.2) !important;
+    pointer-events: auto;
+  }
+
+  .video-overlay:hover {
+    background: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .video-overlay .video-controls {
+    padding: 8px 10px;
+  }
+
+  .control-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .video-overlay {
+    aspect-ratio: 16 / 9;
+  }
 
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
 }
@@ -610,15 +806,5 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════
-   NASHIK VIDEO SPECIAL STYLING - Portrait video handling
+   VIDEO RESPONSIVE HANDLING - All videos handled uniformly
    ═══════════════════════════════════════════════════════════════════════════════ */
-.nashik-video .timeline-video {
-  aspect-ratio: 4 / 4;
-  object-fit: fill;
-  object-position: right right;
-  background: transparent;
-}
-
-.nashik-video {
-  aspect-ratio: 4 / 4;
-}
