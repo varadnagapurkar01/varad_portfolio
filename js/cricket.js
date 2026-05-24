@@ -61,6 +61,40 @@ document.querySelectorAll('.video-container').forEach(container => {
 
   videoElements[videoId] = video;
 
+  // Ensure inline playback on mobile (prevents automatic fullscreen on play)
+  try {
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.playsInline = true;
+  } catch (e) {}
+
+  // Generate poster image from first video frame so it doesn't show a black screen
+  const generatePosterFromFrame = () => {
+    try {
+      const w = video.videoWidth || 640;
+      const h = video.videoHeight || 360;
+      if (!w || !h) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, w, h);
+      const data = canvas.toDataURL('image/jpeg', 0.85);
+      if (data) video.setAttribute('poster', data);
+    } catch (err) {
+      // ignore errors (cross-origin or video decode issues)
+    }
+  };
+
+  if (video.readyState >= 2) {
+    generatePosterFromFrame();
+  } else {
+    const onLoaded = () => { generatePosterFromFrame(); video.removeEventListener('loadeddata', onLoaded); };
+    video.addEventListener('loadeddata', onLoaded);
+    const onMeta = () => { generatePosterFromFrame(); video.removeEventListener('loadedmetadata', onMeta); };
+    video.addEventListener('loadedmetadata', onMeta);
+  }
+
   // ─── Play/Pause Button ───
   playPauseBtn.addEventListener('click', (e) => {
     e.stopPropagation();
