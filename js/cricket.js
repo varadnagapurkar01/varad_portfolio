@@ -46,8 +46,9 @@ if (hero && ball) {
 // CUSTOM VIDEO CONTROLS - Play/Pause, Mute/Unmute, Fullscreen
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// Store videos for auto-pause
+// Store videos for auto-pause and controls management
 const videoElements = {};
+const videoControlsState = {};
 
 // Initialize video controls for each video container
 document.querySelectorAll('.video-container').forEach(container => {
@@ -56,98 +57,296 @@ document.querySelectorAll('.video-container').forEach(container => {
   const playPauseBtn = container.querySelector('.play-pause-btn');
   const muteBtn = container.querySelector('.mute-btn');
   const fullscreenBtn = container.querySelector('.fullscreen-btn');
+  const videoOverlay = container.querySelector('.video-overlay');
+  const videoControls = container.querySelector('.video-controls');
 
   if (!video) return;
 
   videoElements[videoId] = video;
+  videoControlsState[videoId] = {
+    hideTimeout: null,
+    isMouseOver: false
+  };
 
-  // Ensure inline playback on mobile (prevents automatic fullscreen on play)
+  // ─── Ensure inline playback on mobile (prevents automatic fullscreen on play) ───
   try {
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.playsInline = true;
   } catch (e) {}
 
-  // Generate poster image from first video frame so it doesn't show a black screen
+  // ─── Generate poster image from first video frame so it doesn't show a black screen ───
   const generatePosterFromFrame = () => {
-    try {
-      const w = video.videoWidth || 640;
-      const h = video.videoHeight || 360;
-      if (!w || !h) return;
-      const canvas = document.createElement('canvas');
-      canvas.width = w;
-      canvas.height = h;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, w, h);
-      const data = canvas.toDataURL('image/jpeg', 0.85);
-      if (data) video.setAttribute('poster', data);
-    } catch (err) {
-      // ignore errors (cross-origin or video decode issues)
+    return new Promise((resolve) => {
+      try {
+        // Wait for video metadata to be available
+        if (video.readyState < 1) {
+          video.addEventListener('loadedmetadata', attemptCapture, { once: true });
+          return;
+        }
+        attemptCapture();
+      } catch (err) {
+        console.log(`Poster generation for ${videoId} error:`, err);
+        resolve(false);
+      }
+      
+      function attemptCapture() {
+        try {
+          const w = video.videoWidth || 640;
+          const h = video.videoHeight || 360;
+          if (!w || !h) {
+            resolve(false);
+            return;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, w, h);
+          const data = canvas.toDataURL('image/jpeg', 0.9);
+          if (data && data !== 'data:image/jpeg;base64,') {
+            video.setAttribute('poster', data);
+            console.log(`✓ Poster generated for ${videoId}`);
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        } catch (err) {
+          console.log(`Poster generation for ${videoId} skipped:`, err.message);
+          resolve(false);
+        }
+      }
+    });
+  };
+
+  // ─── Mark video as ready when it can display first frame ───
+  const markVideoAsLoaded = () => {
+    video.classList.add('loaded');
+    container.classList.add('video-ready');
+  };
+
+  // Mark as loaded immediately since video is now display:block by default
+  markVideoAsLoaded();
+  
+  // Generate poster from first frame - do this asynchronously
+  generatePosterFromFrame().then((posterGenerated) => {
+    if (!posterGenerated) {
+      console.log(`Poster auto-generation skipped for ${videoId}, relying on preload attribute`);
+    }
+  });
+  
+  // Also attempt to capture poster frame on first video frame availability
+  const onCanPlay = () => {
+    generatePosterFromFrame().then(() => {
+      video.removeEventListener('canplay', onCanPlay);
+    });
+  };
+  video.addEventListener('canplay', onCanPlay, { once: true });
+
+  // ─── Controls Visibility Helper Functions ───
+  const showControls = (duration = 2500) => {
+    if (videoControls) {
+      videoControls.classList.add('controls-visible');
+    }
+    if (videoOverlay) {
+      videoOverlay.classList.add('controls-show');
+    }
+    
+    // Clear any existing timeout
+    if (videoControlsState[videoId].hideTimeout) {
+      clearTimeout(videoControlsState[videoId].hideTimeout);
+    }
+    
+    // Set new timeout to hide controls
+    videoControlsState[videoId].hideTimeout = setTimeout(() => {
+      if (!videoControlsState[videoId].isMouseOver) {
+        hideControls();
+      }
+    }, duration);
+  };
+
+  const hideControls = () => {
+    if (videoControls) {
+      videoControls.classList.remove('controls-visible');
+    }
+    if (videoOverlay) {
+      videoOverlay.classList.remove('controls-show');
     }
   };
 
-  if (video.readyState >= 2) {
-    generatePosterFromFrame();
-  } else {
-    const onLoaded = () => { generatePosterFromFrame(); video.removeEventListener('loadeddata', onLoaded); };
-    video.addEventListener('loadeddata', onLoaded);
-    const onMeta = () => { generatePosterFromFrame(); video.removeEventListener('loadedmetadata', onMeta); };
-    video.addEventListener('loadedmetadata', onMeta);
-  }
-
   // ─── Play/Pause Button ───
-  playPauseBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (video.paused) {
-      video.play();
-      playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
-    } else {
-      video.pause();
-      playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
-    }
-  });
+  if (playPauseBtn) {
+    playPauseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showControls(2500); // Show for 2.5 seconds on click
+      if (video.paused) {
+        video.play();
+        playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
+      } else {
+        video.pause();
+        playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
+      }
+    });
+  }
 
   // Update button when video plays/pauses
   video.addEventListener('play', () => {
-    playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
+    if (playPauseBtn) {
+      playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
+    }
+    showControls(1500); // Show for 1.5 seconds then hide
   });
 
   video.addEventListener('pause', () => {
-    playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
+    if (playPauseBtn) {
+      playPauseBtn.innerHTML = '<span class="control-icon">▶</span>';
+    }
+    showControls(2500); // Show controls when paused
   });
 
   // ─── Mute/Unmute Button ───
-  muteBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (video.muted) {
-      video.muted = false;
-      muteBtn.innerHTML = '<span class="control-icon">🔊</span>';
-    } else {
-      video.muted = true;
-      muteBtn.innerHTML = '<span class="control-icon">🔇</span>';
-    }
-  });
+  if (muteBtn) {
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showControls(2500); // Show for 2.5 seconds on click
+      if (video.muted) {
+        video.muted = false;
+        muteBtn.innerHTML = '<span class="control-icon">🔊</span>';
+      } else {
+        video.muted = true;
+        muteBtn.innerHTML = '<span class="control-icon">🔇</span>';
+      }
+    });
+  }
 
-  // ─── Fullscreen Button ───
-  fullscreenBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!document.fullscreenElement) {
-      container.requestFullscreen().catch(err => {
-        console.log('Fullscreen request denied:', err);
-      });
-    } else {
-      document.exitFullscreen();
+  // ─── Fullscreen Button with Mobile Support ───
+  const requestFullscreen = (el) => {
+    // Try standard API first
+    if (el.requestFullscreen) return el.requestFullscreen();
+    
+    // Try webkit (Safari, older Chrome)
+    if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen();
+    
+    // Try moz (Firefox)
+    if (el.mozRequestFullScreen) return el.mozRequestFullScreen();
+    
+    // Try ms (older IE Edge)
+    if (el.msRequestFullscreen) return el.msRequestFullscreen();
+    
+    // iOS Safari fallback - try webkitEnterFullscreen
+    if (el.webkitEnterFullscreen) {
+      el.webkitEnterFullscreen();
+      return Promise.resolve();
     }
-  });
+    
+    // Android Chrome fallback
+    if (el.webkitEnterFullScreen) {
+      el.webkitEnterFullScreen();
+      return Promise.resolve();
+    }
+    
+    return Promise.reject(new Error('Fullscreen not supported'));
+  };
 
-  // ─── Video Click to Play/Pause ───
+  const exitFullscreen = () => {
+    if (document.exitFullscreen) return document.exitFullscreen();
+    if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+    if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
+    if (document.msExitFullscreen) return document.msExitFullscreen();
+    return Promise.reject(new Error('Exit fullscreen not supported'));
+  };
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showControls(2500); // Show for 2.5 seconds on click
+      const isFS = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+      if (!isFS) {
+        // Request fullscreen on video container for better control visibility
+        requestFullscreen(container).catch(err => {
+          // Fallback: try the video element itself
+          requestFullscreen(video).catch(err2 => {
+            console.warn('Fullscreen request failed:', err2);
+          });
+        });
+      } else {
+        exitFullscreen().catch(err => {
+          console.warn('Exit fullscreen failed:', err);
+        });
+      }
+    });
+  }
+
+  // Update fullscreen icon on change
+  const updateFsIcon = () => {
+    if (!fullscreenBtn) return;
+    const isFS = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    if (isFS) {
+      fullscreenBtn.innerHTML = '<span class="control-icon">⤢</span>';
+    } else {
+      fullscreenBtn.innerHTML = '<span class="control-icon">⛶</span>';
+    }
+  };
+
+  document.addEventListener('fullscreenchange', updateFsIcon);
+  document.addEventListener('webkitfullscreenchange', updateFsIcon);
+  document.addEventListener('mozfullscreenchange', updateFsIcon);
+  document.addEventListener('MSFullscreenChange', updateFsIcon);
+
+  // ─── Video Click to Play/Pause and Show Controls ───
   video.addEventListener('click', (e) => {
     e.stopPropagation();
+    showControls(2500); // Show for 2.5 seconds on click
     if (video.paused) {
       video.play();
     } else {
       video.pause();
     }
+  });
+
+  // ─── Mouse Events for Controls Visibility ───
+  container.addEventListener('mouseenter', () => {
+    videoControlsState[videoId].isMouseOver = true;
+    showControls(2500);
+  });
+
+  container.addEventListener('mouseleave', () => {
+    videoControlsState[videoId].isMouseOver = false;
+    if (!video.paused) {
+      hideControls();
+    }
+  });
+
+  container.addEventListener('mousemove', () => {
+    if (!videoControlsState[videoId].isMouseOver) {
+      videoControlsState[videoId].isMouseOver = true;
+    }
+    showControls(2500);
+  });
+
+  // ─── Touch Events for Mobile ───
+  container.addEventListener('touchstart', (e) => {
+    e.stopPropagation();
+    showControls(2500);
+  });
+
+  container.addEventListener('touchend', () => {
+    if (!video.paused) {
+      // On mobile, keep showing for a bit longer after touch
+      showControls(2500);
+    }
+  });
+
+  // ─── Double-tap to fullscreen on mobile (optional, improves UX) ───
+  let lastTap = 0;
+  container.addEventListener('touchend', (e) => {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 300 && tapLength > 0 && fullscreenBtn) {
+      // Double tap detected - trigger fullscreen
+      fullscreenBtn.click();
+    }
+    lastTap = currentTime;
   });
 });
 

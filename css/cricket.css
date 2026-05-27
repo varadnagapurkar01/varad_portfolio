@@ -376,10 +376,15 @@ a { text-decoration: none; color: inherit; }
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--accent3);
-  background: #000;
+  background: rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* When video is loaded, show it properly */
+.video-container.video-ready {
+  background: transparent;
 }
 
 /* Default video styling */
@@ -389,7 +394,12 @@ a { text-decoration: none; color: inherit; }
   object-fit: contain;
   object-position: center;
   display: block;
-  background: #000;
+  background: transparent;
+}
+
+/* Show video only when loaded and ready */
+.custom-video.loaded {
+  display: block;
 }
 
 /* ── JPPL VIDEO - 4:3 (Match the image ratio) with zoom ── */
@@ -443,6 +453,11 @@ a { text-decoration: none; color: inherit; }
   z-index: 10;
 }
 
+.video-overlay.controls-show {
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+}
+
 .video-container:hover .video-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
@@ -464,6 +479,10 @@ a { text-decoration: none; color: inherit; }
   border-radius: 8px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-controls.controls-visible {
+  opacity: 1;
 }
 
 .video-container:hover .video-controls {

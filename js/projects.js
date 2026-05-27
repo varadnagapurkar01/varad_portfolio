@@ -107,6 +107,33 @@ document.querySelectorAll('.clip-box').forEach(box => {
 
   if (!video || !btn) return;
 
+  // Generate poster image from first video frame
+  const generatePosterFromFrame = () => {
+    try {
+      const w = video.videoWidth || 640;
+      const h = video.videoHeight || 360;
+      if (!w || !h) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, w, h);
+      const data = canvas.toDataURL('image/jpeg', 0.9);
+      if (data) video.setAttribute('poster', data);
+    } catch (err) {
+      console.log('Poster generation for clip failed (likely CORS)');
+    }
+  };
+
+  if (video.readyState >= 2) {
+    generatePosterFromFrame();
+  } else {
+    const onLoaded = () => { generatePosterFromFrame(); video.removeEventListener('loadeddata', onLoaded); };
+    video.addEventListener('loadeddata', onLoaded);
+    const onMeta = () => { generatePosterFromFrame(); video.removeEventListener('loadedmetadata', onMeta); };
+    video.addEventListener('loadedmetadata', onMeta);
+  }
+
   // Check if video src exists
   if (video.src && video.src !== window.location.href && !video.src.endsWith('/')) {
     video.classList.add('loaded');
