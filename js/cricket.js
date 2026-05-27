@@ -95,6 +95,15 @@ document.querySelectorAll('.video-container').forEach(container => {
     video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
   }
 
+  // Fallback for mobile: load video on first user interaction
+  const loadVideoOnTouch = () => {
+    if (video.readyState === 0) {
+      video.load();
+    }
+    document.removeEventListener('touchstart', loadVideoOnTouch);
+  };
+  document.addEventListener('touchstart', loadVideoOnTouch, { once: true, passive: true });
+
   // Fallback: mark as loaded after 2 seconds regardless
   setTimeout(() => {
     video.classList.add('loaded');

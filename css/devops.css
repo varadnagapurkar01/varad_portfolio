@@ -270,21 +270,31 @@ a { text-decoration: none; color: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .tools-section { padding: 40px 20px 80px; }
-  .devops-hero { padding: 100px 20px 60px; }
-  .hero-title { font-size: clamp(36px, 8vw, 64px); }
+  .tools-section { padding: 30px 16px 60px; }
+  .devops-hero { padding: 90px 16px 40px; }
+  .hero-title { font-size: clamp(32px, 8vw, 54px); }
 
   .tool-row,
   .tool-row.reverse {
     flex-direction: column;
-    gap: 40px;
-    padding: 50px 0;
+    gap: 24px;
+    padding: 32px 0;
   }
 
-  .tool-text h2 { font-size: 36px; }
-  .tool-text p { font-size: 0.95rem; }
-  .tool-number { font-size: 3.5rem; }
-  .footer { flex-direction: column; gap: 12px; text-align: center; }
+  .tool-text h2 { font-size: 30px; }
+  .tool-text p { font-size: 0.88rem; line-height: 1.6; }
+  .tool-number { font-size: 2.5rem; margin-bottom: -5px; }
+  .tool-chips span { padding: 4px 12px; font-size: 0.75rem; }
+  .tool-image img { max-width: 260px; }
+  
+  .os-section { padding: 40px 16px; }
+  .os-grid { gap: 16px; }
+  .os-card-top { padding: 28px 20px 22px; }
+  .os-card-body { padding: 20px 20px 24px; }
+  .os-card-body h3 { font-size: 1.4rem; margin: 6px 0 10px; }
+  .os-card-body p { font-size: 0.85rem; line-height: 1.5; margin-bottom: 16px; }
+  
+  .footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 16px; }
 }
 
 /* ═══════════════════════════════════════
@@ -434,4 +444,20 @@ a { text-decoration: none; color: inherit; }
   .tool-number { font-size: 2.5rem; }
   .section-title { font-size: 1.6rem; }
   .os-card-body h3 { font-size: 1.4rem; }
+}
+
+/* ===== MOBILE TOUCH FIX (No Double Tap) ===== */
+@media (hover: none) {
+  .tool-row:hover, .os-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--border) !important;
+  }
+  .tool-image img:hover {
+    transform: none !important;
+    filter: drop-shadow(0 0 30px rgba(108,99,255,0.2)) !important;
+  }
+  a, button {
+    touch-action: manipulation;
+  }
 }

@@ -248,3 +248,15 @@ a{text-decoration:none;color:inherit;}
 }
 
 .dot.active { background: white; }
+
+/* ===== MOBILE TOUCH FIX (No Double Tap) ===== */
+@media (hover: none) {
+  .proj-card:hover, .clip-box:hover, .screenshot-box:hover, .arch-vm:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-color: var(--border) !important;
+  }
+  a, button, .filter-btn, .proj-btn {
+    touch-action: manipulation;
+  }
+}

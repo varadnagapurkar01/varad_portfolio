@@ -15,33 +15,35 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
   animationsReady = true;
   
-  document.querySelectorAll('.sec-btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      btn.style.transform = 'translateY(-4px) scale(1.03)';
+  if (window.matchMedia && window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.sec-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = 'translateY(-4px) scale(1.03)';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
 
-  const highlights = document.querySelectorAll('.highlight');
-  highlights.forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      el.style.transform = "scale(1.05)";
+    const highlights = document.querySelectorAll('.highlight');
+    highlights.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        el.style.transform = "scale(1.05)";
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = "scale(1)";
+      });
     });
-    el.addEventListener('mouseleave', () => {
-      el.style.transform = "scale(1)";
-    });
-  });
 
-  document.querySelectorAll('.bio-section').forEach(section => {
-    section.addEventListener('mouseenter', () => {
-      section.style.transform = "translateX(6px)";
+    document.querySelectorAll('.bio-section').forEach(section => {
+      section.addEventListener('mouseenter', () => {
+        section.style.transform = "translateX(6px)";
+      });
+      section.addEventListener('mouseleave', () => {
+        section.style.transform = "translateX(0)";
+      });
     });
-    section.addEventListener('mouseleave', () => {
-      section.style.transform = "translateX(0)";
-    });
-  });
+  }
 });
 
 // Console message for recruiters

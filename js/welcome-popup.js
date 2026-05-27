@@ -290,7 +290,7 @@
 
   function handleNameSubmission(name) {
     const nameInput = document.getElementById('nameInput');
-    nameInput.disabled = true;
+    if (nameInput) nameInput.disabled = true;
 
     // Store the name
     storeName(name);
@@ -300,10 +300,43 @@
       showWelcomeReveal(name);
     }, 300);
 
-    // Transition to portfolio
+    // Transition to portfolio via Logo Intro
     setTimeout(() => {
-      transitionToPortfolio();
+      showLogoIntro();
     }, 3500);
+  }
+
+  function showLogoIntro() {
+    const overlay = document.createElement('div');
+    overlay.className = 'logo-intro-overlay';
+    
+    const logo = document.createElement('img');
+    // Using the exact logo file as requested
+    logo.src = 'varad_brand_logo-removebg-preview (1).png';
+    logo.className = 'logo-intro-img';
+    
+    overlay.appendChild(logo);
+    document.body.appendChild(overlay);
+
+    // Phase 1: Fade in overlay
+    requestAnimationFrame(() => {
+      overlay.classList.add('active');
+    });
+
+    // Phase 2: Play logo animation
+    setTimeout(() => {
+      logo.classList.add('animate');
+    }, 400);
+
+    // Phase 3: Transition to portfolio
+    setTimeout(() => {
+      overlay.classList.remove('active');
+      transitionToPortfolio();
+      
+      setTimeout(() => {
+        overlay.remove();
+      }, 500);
+    }, 2000); // 400ms delay + 1.5s animation = ~1.9s, round to 2s
   }
 
   function showWelcomeReveal(name) {
