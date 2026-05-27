@@ -186,6 +186,9 @@ a{text-decoration:none;color:inherit;}
   .arch-line{width:1px;height:20px;}
   .filter-tabs{flex-wrap:wrap;border-radius:16px;}
   .footer{flex-direction:column;gap:10px;text-align:center;padding:24px 20px;}
+  .clip-video{height:auto;aspect-ratio:16/9;}
+  .ss-placeholder{height:160px;}
+  .screenshot-box img{height:160px;}
 }
 @media(max-width:400px){
   .proj-title{font-size:32px;}

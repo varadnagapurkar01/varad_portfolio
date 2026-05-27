@@ -1173,14 +1173,30 @@ a { text-decoration: none; color: inherit; }
 
   .section-buttons {
     grid-template-columns: repeat(2,1fr) !important;
-    gap: 10px !important;
+    gap: 12px !important;
     width: 100% !important;
   }
   .sec-btn {
     padding: 14px 8px !important;
     border-radius: 14px !important;
+    background: linear-gradient(145deg, rgba(30,30,40,0.8), rgba(15,15,20,0.9)) !important;
+    border: 1px solid rgba(108,99,255,0.3) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05) !important;
+    position: relative;
   }
-  .sec-icon { font-size: 1.4rem !important; }
+  .sec-btn::after {
+    content: "→";
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.3);
+  }
+  .sec-btn:active {
+    transform: translateY(2px) scale(0.96) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
+  }
+  .sec-icon { font-size: 1.4rem !important; margin-bottom: 2px !important; }
   .sec-label { font-size: 0.65rem !important; }
 
   .quick-stats {

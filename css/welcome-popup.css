@@ -178,35 +178,40 @@ body.welcome-active {
   animation: shake 0.5s ease;
 }
 
-/* Anonymous Entry Button */
+/* Anonymous Entry Button - Premium Golden/Black theme with glow */
 .anonymous-btn {
   width: 100%;
   min-height: 42px;
   padding: 11px 30px;
   font-size: 0.88rem;
   font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 215, 0, 0.4);
   border-radius: 50px;
   outline: none;
   cursor: pointer;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin-top: -4px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .anonymous-btn:hover {
-  color: rgba(255, 255, 255, 0.85);
-  border-color: rgba(255, 255, 255, 0.35);
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(-1px);
+  color: #0a0a0f;
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #ffd700, #ffb300);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .anonymous-btn:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
   transition: all 0.1s ease;
 }
 

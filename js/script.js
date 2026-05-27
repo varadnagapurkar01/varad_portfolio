@@ -189,3 +189,24 @@ const row2 = [
 
 })();
 
+// Hamburger Menu Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (hamburgerBtn && mobileNav) {
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerBtn.classList.remove('active');
+        mobileNav.classList.remove('active');
+      });
+    });
+  }
+});

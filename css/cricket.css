@@ -826,10 +826,6 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.9rem;
   }
 
-  .video-overlay {
-    aspect-ratio: 16 / 9;
-  }
-
   .footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
 }
 
