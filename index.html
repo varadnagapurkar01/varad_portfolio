@@ -31,7 +31,7 @@ and also throw me to the those lines where it  so i will not ask you again and a
 
   <!-- CINEMATIC WELCOME OVERLAY -->
   <div id="welcomeOverlay">
-    
+
     <!-- Animated Galaxy Canvas Background -->
     <canvas id="galaxyCanvas"></canvas>
 
@@ -42,14 +42,9 @@ and also throw me to the those lines where it  so i will not ask you again and a
       </div>
 
       <div class="name-input-container">
-        <input 
-          type="text" 
-          id="nameInput" 
-          placeholder="Type your name..."
-          autocomplete="off"
-          spellcheck="false"
-        >
+        <input type="text" id="nameInput" placeholder="Type your name..." autocomplete="off" spellcheck="false">
         <button id="submitNameBtn" class="submit-name-btn">Let's go →</button>
+        <button id="anonymousBtn" class="anonymous-btn">↩ Proceed Anonymously</button>
       </div>
 
       <div id="validationHint" class="validation-hint" style="display: none;"></div>
@@ -217,6 +212,7 @@ and also throw me to the those lines where it  so i will not ask you again and a
 
   <script src="js/welcome-popup.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/page-tracker.js" data-page="home"></script>
 </body>
 
 </html>

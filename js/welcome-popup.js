@@ -7,8 +7,8 @@
 
   // Configuration - OPTIMIZED for performance
   const CONFIG = {
-    typewriterSpeed: 40, // DOUBLED SPEED: Was 80ms, now 40ms = 2x faster typing
-    typewriterDelay: 500,
+    typewriterSpeed: 28, // Faster typing: 28ms per character
+    typewriterDelay: 200, // Start typewriter sooner
     welcomeMessages: [
       "I just need to know you can ⌨️type. that's it.  👀 ",
       "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",
@@ -196,8 +196,8 @@
           }
           messageIndex++;
           charIndex = 0;
-          setTimeout(type, 500);
-        }, 800);
+          setTimeout(type, 300); // Reduced from 500ms
+        }, 500); // Reduced from 800ms
       }
     }
 
@@ -273,7 +273,15 @@
     // Focus input after typewriter completes
     setTimeout(() => {
       nameInput.focus();
-    }, 5000);
+    }, 3500);
+
+    // Anonymous entry button
+    const anonymousBtn = document.getElementById('anonymousBtn');
+    if (anonymousBtn) {
+      anonymousBtn.addEventListener('click', () => {
+        handleNameSubmission('Anonymous');
+      });
+    }
   }
 
   // ============================================

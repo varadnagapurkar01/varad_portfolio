@@ -75,73 +75,31 @@ document.querySelectorAll('.video-container').forEach(container => {
     video.playsInline = true;
   } catch (e) {}
 
-  // ─── Generate poster image from first video frame so it doesn't show a black screen ───
-  const generatePosterFromFrame = () => {
-    return new Promise((resolve) => {
-      try {
-        // Wait for video metadata to be available
-        if (video.readyState < 1) {
-          video.addEventListener('loadedmetadata', attemptCapture, { once: true });
-          return;
-        }
-        attemptCapture();
-      } catch (err) {
-        console.log(`Poster generation for ${videoId} error:`, err);
-        resolve(false);
-      }
-      
-      function attemptCapture() {
-        try {
-          const w = video.videoWidth || 640;
-          const h = video.videoHeight || 360;
-          if (!w || !h) {
-            resolve(false);
-            return;
-          }
-          const canvas = document.createElement('canvas');
-          canvas.width = w;
-          canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(video, 0, 0, w, h);
-          const data = canvas.toDataURL('image/jpeg', 0.9);
-          if (data && data !== 'data:image/jpeg;base64,') {
-            video.setAttribute('poster', data);
-            console.log(`✓ Poster generated for ${videoId}`);
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        } catch (err) {
-          console.log(`Poster generation for ${videoId} skipped:`, err.message);
-          resolve(false);
-        }
-      }
-    });
+  // ─── Show first frame: seek to 0.001s once metadata is available ───
+  const showFirstFrame = () => {
+    video.currentTime = 0.001;
   };
 
-  // ─── Mark video as ready when it can display first frame ───
-  const markVideoAsLoaded = () => {
+  const onSeeked = () => {
     video.classList.add('loaded');
     container.classList.add('video-ready');
+    // Immediately pause so video shows first frame but doesn't play
+    if (!video.paused) video.pause();
   };
 
-  // Mark as loaded immediately since video is now display:block by default
-  markVideoAsLoaded();
-  
-  // Generate poster from first frame - do this asynchronously
-  generatePosterFromFrame().then((posterGenerated) => {
-    if (!posterGenerated) {
-      console.log(`Poster auto-generation skipped for ${videoId}, relying on preload attribute`);
-    }
-  });
-  
-  // Also attempt to capture poster frame on first video frame availability
-  const onCanPlay = () => {
-    generatePosterFromFrame().then(() => {
-      video.removeEventListener('canplay', onCanPlay);
-    });
-  };
-  video.addEventListener('canplay', onCanPlay, { once: true });
+  video.addEventListener('seeked', onSeeked, { once: true });
+
+  if (video.readyState >= 1) {
+    showFirstFrame();
+  } else {
+    video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
+  }
+
+  // Fallback: mark as loaded after 2 seconds regardless
+  setTimeout(() => {
+    video.classList.add('loaded');
+    container.classList.add('video-ready');
+  }, 2000);
 
   // ─── Controls Visibility Helper Functions ───
   const showControls = (duration = 2500) => {

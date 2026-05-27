@@ -34,6 +34,18 @@ db.serialize(() => {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  // Page views table for section-wise analytics
+  db.run(`
+    CREATE TABLE IF NOT EXISTS page_views (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      page TEXT NOT NULL,
+      ip_address TEXT,
+      user_agent TEXT,
+      referrer TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
 });
 
 // ============================================
@@ -116,6 +128,75 @@ app.get('/api/visitor-count', (req, res) => {
     res.json({ 
       success: true, 
       count: row.count 
+    });
+  });
+});
+
+// ─── PAGE VIEW TRACKING ───────────────────────────────────────────────────────
+
+// Track a page view
+app.post('/api/track-page', (req, res) => {
+  const { page } = req.body;
+  const ipAddress = req.ip || req.connection.remoteAddress;
+  const userAgent = req.headers['user-agent'] || '';
+  const referrer = req.headers['referer'] || '';
+
+  if (!page) {
+    return res.status(400).json({ success: false, error: 'page is required' });
+  }
+
+  const query = `INSERT INTO page_views (page, ip_address, user_agent, referrer) VALUES (?, ?, ?, ?)`;
+  db.run(query, [page, ipAddress, userAgent, referrer], function(err) {
+    if (err) {
+      console.error('Page view tracking error:', err);
+      return res.status(500).json({ success: false, error: 'Failed to record page view' });
+    }
+    res.json({ success: true, id: this.lastID });
+  });
+});
+
+// Get page view counts per section
+app.get('/api/page-views', (req, res) => {
+  const query = `
+    SELECT page, COUNT(*) as views
+    FROM page_views
+    GROUP BY page
+    ORDER BY views DESC
+  `;
+
+  db.all(query, [], (err, rows) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ success: false, error: 'Failed to get page views' });
+    }
+    res.json({ success: true, pages: rows });
+  });
+});
+
+// Get comprehensive stats (visitors + page views combined)
+app.get('/api/stats', (req, res) => {
+  const visitorCountQuery = 'SELECT COUNT(*) as count FROM visitors';
+  const pageViewsQuery = `SELECT page, COUNT(*) as views FROM page_views GROUP BY page ORDER BY views DESC`;
+  const todayQuery = `SELECT COUNT(*) as count FROM visitors WHERE date(created_at) = date('now')`;
+  const weekQuery = `SELECT COUNT(*) as count FROM visitors WHERE created_at >= datetime('now', '-7 days')`;
+
+  db.get(visitorCountQuery, [], (err, visitorRow) => {
+    if (err) return res.status(500).json({ success: false, error: err.message });
+    db.all(pageViewsQuery, [], (err, pageRows) => {
+      if (err) return res.status(500).json({ success: false, error: err.message });
+      db.get(todayQuery, [], (err, todayRow) => {
+        if (err) return res.status(500).json({ success: false, error: err.message });
+        db.get(weekQuery, [], (err, weekRow) => {
+          if (err) return res.status(500).json({ success: false, error: err.message });
+          res.json({
+            success: true,
+            totalVisitors: visitorRow.count,
+            todayVisitors: todayRow.count,
+            weekVisitors: weekRow.count,
+            pageViews: pageRows
+          });
+        });
+      });
     });
   });
 });

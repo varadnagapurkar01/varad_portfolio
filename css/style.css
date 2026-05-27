@@ -326,10 +326,22 @@ a { text-decoration: none; color: inherit; }
   align-self: flex-start;
   transition: all 0.3s ease;
   box-shadow: 0 4px 24px rgba(108,99,255,0.35);
+  animation: knowMePulse 2.5s ease-in-out infinite;
+  cursor: pointer;
 }
 .btn-know:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 36px rgba(108,99,255,0.55);
+  box-shadow: 0 8px 36px rgba(108,99,255,0.65);
+  animation: none;
+}
+.btn-know:active {
+  transform: translateY(0px);
+  transition: all 0.1s ease;
+}
+
+@keyframes knowMePulse {
+  0%, 100% { box-shadow: 0 4px 24px rgba(108,99,255,0.35); }
+  50% { box-shadow: 0 4px 32px rgba(108,99,255,0.6), 0 0 0 4px rgba(108,99,255,0.12); }
 }
 
 /* ===== SECTION BUTTONS ===== */
@@ -355,6 +367,8 @@ a { text-decoration: none; color: inherit; }
   position: relative;
   overflow: hidden;
   will-change: transform;
+  /* Subtle upward shadow to hint at elevation/clickability */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 0 0 transparent;
 }
 
 .sec-btn::before {
@@ -365,13 +379,20 @@ a { text-decoration: none; color: inherit; }
   transition: opacity 0.3s;
 }
 
+/* Hover: lift + glow border */
 .sec-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 1px currentColor;
 }
 .sec-btn:hover::before { opacity: 1; }
 
-/* Individual button accent colors */
+/* Active: press down for tactile feedback */
+.sec-btn:active {
+  transform: translateY(-1px) scale(0.98);
+  transition: all 0.1s ease;
+}
+
+/* Individual button accent colors & glow */
 .sec-btn.cricket::before  { background: linear-gradient(135deg,rgba(67,233,123,0.15),transparent); }
 .sec-btn.devops::before   { background: linear-gradient(135deg,rgba(108,99,255,0.18),transparent); }
 .sec-btn.certs::before    { background: linear-gradient(135deg,rgba(255,200,80,0.15),transparent); }
@@ -379,17 +400,19 @@ a { text-decoration: none; color: inherit; }
 .sec-btn.personality::before { background: linear-gradient(135deg,rgba(80,200,255,0.15),transparent); }
 .sec-btn.projects::before { background: linear-gradient(135deg,rgba(255,160,80,0.15),transparent); }
 
-.sec-btn.cricket:hover  { border-color: #43e97b; }
-.sec-btn.devops:hover   { border-color: var(--accent); }
-.sec-btn.certs:hover    { border-color: #ffc850; }
-.sec-btn.purohit:hover  { border-color: var(--accent2); }
-.sec-btn.personality:hover { border-color: #50c8ff; }
-.sec-btn.projects:hover { border-color: #ffa050; }
+.sec-btn.cricket:hover  { border-color: #43e97b; box-shadow: 0 8px 24px rgba(67,233,123,0.25); }
+.sec-btn.devops:hover   { border-color: var(--accent); box-shadow: 0 8px 24px rgba(108,99,255,0.25); }
+.sec-btn.certs:hover    { border-color: #ffc850; box-shadow: 0 8px 24px rgba(255,200,80,0.25); }
+.sec-btn.purohit:hover  { border-color: var(--accent2); box-shadow: 0 8px 24px rgba(255,101,132,0.25); }
+.sec-btn.personality:hover { border-color: #50c8ff; box-shadow: 0 8px 24px rgba(80,200,255,0.25); }
+.sec-btn.projects:hover { border-color: #ffa050; box-shadow: 0 8px 24px rgba(255,160,80,0.25); }
 
 .sec-icon {
   font-size: 1.6rem;
   line-height: 1;
+  transition: transform 0.3s ease;
 }
+.sec-btn:hover .sec-icon { transform: scale(1.15); }
 
 .sec-label {
   font-family: var(--font-head);
