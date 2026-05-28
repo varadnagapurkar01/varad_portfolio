@@ -26,6 +26,9 @@ const glowColors = {
   5: 'rgba(50,180,255,0.25)',   // Kubernetes - blue
   6: 'rgba(120,80,255,0.25)',   // Terraform - purple
   7: 'rgba(255,160,30,0.25)',   // AWS - orange
+  8: 'rgba(240,80,50,0.25)',    // Git - orange/red
+  9: 'rgba(255,255,255,0.15)',  // GitHub - white/grey
+  10: 'rgba(32,136,255,0.25)'   // GitHub Actions - blue
 };
 
 toolRows.forEach((row, i) => {

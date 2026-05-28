@@ -287,6 +287,11 @@ a { text-decoration: none; color: inherit; }
   .tool-chips span { padding: 4px 12px; font-size: 0.75rem; }
   .tool-image img { max-width: 260px; }
   
+  .skills-section { padding: 30px 16px 40px; }
+  .skill-category { padding: 24px 20px; }
+  .skill-category-title { font-size: 1.2rem; margin-bottom: 20px; }
+  .skill-chip { font-size: 0.85rem; padding: 10px 18px; }
+  
   .os-section { padding: 40px 16px; }
   .os-grid { gap: 16px; }
   .os-card-top { padding: 28px 20px 22px; }
@@ -295,6 +300,90 @@ a { text-decoration: none; color: inherit; }
   .os-card-body p { font-size: 0.85rem; line-height: 1.5; margin-bottom: 16px; }
   
   .footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 16px; }
+}
+
+/* ═══════════════════════════════════════
+   SKILLS SECTION
+═══════════════════════════════════════ */
+.skills-section {
+  padding: 60px 60px;
+  background: var(--bg);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.skill-category {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 40px;
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+  border-color: var(--accent);
+  box-shadow: 0 10px 40px rgba(108,99,255,0.1);
+}
+
+.skill-category-title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.skill-category-title::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 22px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.skill-chip .icon {
+  font-style: normal;
+  font-size: 1.1rem;
+}
+
+.skill-chip:hover {
+  border-color: var(--accent3);
+  background: rgba(67, 233, 123, 0.08);
+  color: var(--text);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(67, 233, 123, 0.15);
 }
 
 /* ═══════════════════════════════════════

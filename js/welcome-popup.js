@@ -19,6 +19,34 @@
     apiEndpoint: '/api/store-name'
   };
 
+  const ANONYMOUS_LINES = [
+    "Bro Entered Like a Secret Boss 😎",
+    "Unknown Legend Has Joined 🔥",
+    "Silent Entry. Heavy Aura. ✨",
+    "Someone Cool Just Spawned 👀",
+    "Mystery Person Detected 🚨",
+    "Bro Chose Stealth Mode 😌",
+    "A Different Breed Entered 💀",
+    "No Name. Pure Presence.",
+    "Stranger Energy Activated ⚡",
+    "Someone Interesting Is Watching 👁️",
+    "Lowkey Main Character Arrived 🎬",
+    "Hidden Player Unlocked 🔓",
+    "This Visitor Feels Dangerous 😏",
+    "Unknown But Confident 🔥",
+    "Bro Said “Identity Optional” 😭",
+    "A Silent Legend Appears…",
+    "Vibes Entered Before The Name ✨",
+    "Suspiciously Cool Visitor Detected 👀",
+    "Anonymous… But Not Ordinary 😎",
+    "Some Enter Names. Some Enter History. 🔥",
+    "Quiet Entry. Loud Personality.",
+    "Bro Entered With Aura Enabled ⚡",
+    "This Human Feels Important 👁️",
+    "Stealth Visitor With Main Character Energy 🎬",
+    "Unknown Visitor. Premium Vibes Only. ✨"
+  ];
+
   // State
   let canvas, ctx;
   let particles = [];
@@ -279,7 +307,8 @@
     const anonymousBtn = document.getElementById('anonymousBtn');
     if (anonymousBtn) {
       anonymousBtn.addEventListener('click', () => {
-        handleNameSubmission('Anonymous');
+        const randomLine = ANONYMOUS_LINES[Math.floor(Math.random() * ANONYMOUS_LINES.length)];
+        handleNameSubmission(randomLine, true);
       });
     }
   }
@@ -288,12 +317,12 @@
   // NAME SUBMISSION & WOW MOMENT
   // ============================================
 
-  function handleNameSubmission(name) {
+  function handleNameSubmission(name, isAnonymous = false) {
     const nameInput = document.getElementById('nameInput');
     if (nameInput) nameInput.disabled = true;
 
     // Store the name
-    storeName(name);
+    storeName(name, isAnonymous);
 
     // Hide input form and show welcome reveal
     setTimeout(() => {
@@ -382,12 +411,16 @@
   // STORAGE FUNCTIONS
   // ============================================
 
-  function storeName(name) {
+  function storeName(name, isAnonymous = false) {
     try {
-      localStorage.setItem(CONFIG.storageKey, name);
-      localStorage.setItem(CONFIG.storageKey + '_timestamp', Date.now());
+      if (isAnonymous) {
+        sessionStorage.setItem(CONFIG.storageKey, name);
+      } else {
+        localStorage.setItem(CONFIG.storageKey, name);
+        localStorage.setItem(CONFIG.storageKey + '_timestamp', Date.now());
+      }
     } catch (e) {
-      console.warn('localStorage not available:', e);
+      console.warn('Storage not available:', e);
     }
 
     sendToBackend(name);
@@ -395,7 +428,7 @@
 
   function getStoredName() {
     try {
-      return localStorage.getItem(CONFIG.storageKey);
+      return localStorage.getItem(CONFIG.storageKey) || sessionStorage.getItem(CONFIG.storageKey);
     } catch (e) {
       return null;
     }
@@ -428,6 +461,7 @@
   window.clearWelcomeData = function() {
     localStorage.removeItem(CONFIG.storageKey);
     localStorage.removeItem(CONFIG.storageKey + '_timestamp');
+    sessionStorage.removeItem(CONFIG.storageKey);
     console.log('Welcome data cleared. Refresh to see the welcome screen again.');
   };
 
