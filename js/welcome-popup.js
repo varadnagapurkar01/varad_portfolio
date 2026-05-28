@@ -20,31 +20,31 @@
   };
 
   const ANONYMOUS_LINES = [
-    "Bro Entered Like a Secret Boss 😎",
-    "Unknown Legend Has Joined 🔥",
-    "Silent Entry. Heavy Aura. ✨",
-    "Someone Cool Just Spawned 👀",
-    "Mystery Person Detected 🚨",
-    "Bro Chose Stealth Mode 😌",
-    "A Different Breed Entered 💀",
-    "No Name. Pure Presence.",
-    "Stranger Energy Activated ⚡",
-    "Someone Interesting Is Watching 👁️",
-    "Lowkey Main Character Arrived 🎬",
-    "Hidden Player Unlocked 🔓",
-    "This Visitor Feels Dangerous 😏",
-    "Unknown But Confident 🔥",
-    "Bro Said “Identity Optional” 😭",
-    "A Silent Legend Appears…",
-    "Vibes Entered Before The Name ✨",
-    "Suspiciously Cool Visitor Detected 👀",
-    "Anonymous… But Not Ordinary 😎",
-    "Some Enter Names. Some Enter History. 🔥",
-    "Quiet Entry. Loud Personality.",
-    "Bro Entered With Aura Enabled ⚡",
-    "This Human Feels Important 👁️",
-    "Stealth Visitor With Main Character Energy 🎬",
-    "Unknown Visitor. Premium Vibes Only. ✨"
+    { text: "Bro Entered Like a Secret Boss 😎", type: "cool" },
+    { text: "Unknown Legend Has Joined 🔥", type: "legend" },
+    { text: "Silent Entry. Heavy Aura. ✨", type: "silent" },
+    { text: "Someone Cool Just Spawned 👀", type: "cool" },
+    { text: "Mystery Person Detected 🚨", type: "danger" },
+    { text: "Bro Chose Stealth Mode 😌", type: "silent" },
+    { text: "A Different Breed Entered 💀", type: "mystery" },
+    { text: "No Name. Pure Presence.", type: "legend" },
+    { text: "Stranger Energy Activated ⚡", type: "main-character" },
+    { text: "Someone Interesting Is Watching 👁️", type: "mystery" },
+    { text: "Lowkey Main Character Arrived 🎬", type: "main-character" },
+    { text: "Hidden Player Unlocked 🔓", type: "mystery" },
+    { text: "This Visitor Feels Dangerous 😏", type: "danger" },
+    { text: "Unknown But Confident 🔥", type: "legend" },
+    { text: "Bro Said “Identity Optional” 😭", type: "cool" },
+    { text: "A Silent Legend Appears…", type: "silent" },
+    { text: "Vibes Entered Before The Name ✨", type: "legend" },
+    { text: "Suspiciously Cool Visitor Detected 👀", type: "mystery" },
+    { text: "Anonymous… But Not Ordinary 😎", type: "cool" },
+    { text: "Some Enter Names. Some Enter History. 🔥", type: "legend" },
+    { text: "Quiet Entry. Loud Personality.", type: "silent" },
+    { text: "Bro Entered With Aura Enabled ⚡", type: "main-character" },
+    { text: "This Human Feels Important 👁️", type: "legend" },
+    { text: "Stealth Visitor With Main Character Energy 🎬", type: "main-character" },
+    { text: "Unknown Visitor. Premium Vibes Only. ✨", type: "legend" }
   ];
 
   // State
@@ -307,8 +307,8 @@
     const anonymousBtn = document.getElementById('anonymousBtn');
     if (anonymousBtn) {
       anonymousBtn.addEventListener('click', () => {
-        const randomLine = ANONYMOUS_LINES[Math.floor(Math.random() * ANONYMOUS_LINES.length)];
-        handleNameSubmission(randomLine, true);
+        const randomObj = ANONYMOUS_LINES[Math.floor(Math.random() * ANONYMOUS_LINES.length)];
+        handleNameSubmission(randomObj.text, true, randomObj.type);
       });
     }
   }
@@ -317,7 +317,7 @@
   // NAME SUBMISSION & WOW MOMENT
   // ============================================
 
-  function handleNameSubmission(name, isAnonymous = false) {
+  function handleNameSubmission(name, isAnonymous = false, personalityType = 'default') {
     const nameInput = document.getElementById('nameInput');
     if (nameInput) nameInput.disabled = true;
 
@@ -326,7 +326,7 @@
 
     // Hide input form and show welcome reveal
     setTimeout(() => {
-      showWelcomeReveal(name);
+      showWelcomeReveal(name, personalityType);
     }, 300);
 
     // Transition to portfolio via Logo Intro
@@ -368,7 +368,7 @@
     }, 2000); // 400ms delay + 1.5s animation = ~1.9s, round to 2s
   }
 
-  function showWelcomeReveal(name) {
+  function showWelcomeReveal(name, personalityType = 'default') {
     const welcomeContent = document.querySelector('.welcome-content');
     const welcomeReveal = document.querySelector('.welcome-reveal');
     const visitorNameElement = document.querySelector('.visitor-name');
@@ -380,7 +380,17 @@
     }
 
     if (visitorNameElement) {
-      visitorNameElement.textContent = name;
+      // Clear previous personality classes
+      visitorNameElement.className = 'visitor-name';
+      
+      // Apply personality class
+      if (personalityType !== 'default') {
+        visitorNameElement.classList.add(`personality-${personalityType}`);
+      }
+
+      // Wrap emojis in span to preserve original colors and rendering
+      const nameWithEmojis = name.replace(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu, '<span class="emoji">$1</span>');
+      visitorNameElement.innerHTML = nameWithEmojis;
     }
   }
 
