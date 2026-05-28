@@ -373,7 +373,7 @@
     const welcomeReveal = document.querySelector('.welcome-reveal');
     const visitorNameElement = document.querySelector('.visitor-name');
 
-    if (welcomeContent) welcomeContent.style.opacity = '0';
+    if (welcomeContent) welcomeContent.classList.add('dimmed');
     
     if (welcomeReveal) {
       welcomeReveal.classList.add('active');

@@ -147,6 +147,8 @@ document.querySelectorAll('.video-container').forEach(container => {
       e.stopPropagation();
       showControls(2500); // Show for 2.5 seconds on click
       if (video.paused) {
+        video.muted = false;
+        if (muteBtn) muteBtn.innerHTML = '<span class="control-icon">🔊</span>';
         video.play();
         playPauseBtn.innerHTML = '<span class="control-icon">⏸</span>';
       } else {
@@ -265,6 +267,8 @@ document.querySelectorAll('.video-container').forEach(container => {
     e.stopPropagation();
     showControls(2500); // Show for 2.5 seconds on click
     if (video.paused) {
+      video.muted = false;
+      if (muteBtn) muteBtn.innerHTML = '<span class="control-icon">🔊</span>';
       video.play();
     } else {
       video.pause();
