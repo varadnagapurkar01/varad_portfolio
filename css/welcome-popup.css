@@ -57,9 +57,9 @@ body.welcome-active {
   padding: 40px;
   /* Use backwards fill mode so it doesn't lock opacity at the end */
   animation: fadeInContent 1.5s ease backwards 0.5s;
-  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-              filter 1.2s cubic-bezier(0.25, 1, 0.5, 1),
-              transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .welcome-content.dimmed {
