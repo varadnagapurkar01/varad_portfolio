@@ -8,14 +8,26 @@ const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const compression = require('compression');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(compression()); // Enable Gzip/Brotli compression
 app.use(cors());
 app.use(express.json());
-app.use(express.static(__dirname)); // Serve static files
+
+// Serve static files with Cache-Control
+app.use(express.static(__dirname, {
+  maxAge: '1d', // Cache static assets for 1 day
+  setHeaders: (res, path) => {
+    // Don't aggressively cache HTML files so updates are visible
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    }
+  }
+}));
 
 // Database setup
 const dbPath = path.join(__dirname, 'visitors.db');

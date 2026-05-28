@@ -88,27 +88,7 @@ document.querySelectorAll('.video-container').forEach(container => {
   };
 
   video.addEventListener('seeked', onSeeked, { once: true });
-
-  if (video.readyState >= 1) {
-    showFirstFrame();
-  } else {
-    video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
-  }
-
-  // Fallback for mobile: load video on first user interaction
-  const loadVideoOnTouch = () => {
-    if (video.readyState === 0) {
-      video.load();
-    }
-    document.removeEventListener('touchstart', loadVideoOnTouch);
-  };
-  document.addEventListener('touchstart', loadVideoOnTouch, { once: true, passive: true });
-
-  // Fallback: mark as loaded after 2 seconds regardless
-  setTimeout(() => {
-    video.classList.add('loaded');
-    container.classList.add('video-ready');
-  }, 2000);
+  video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
 
   // ─── Controls Visibility Helper Functions ───
   const showControls = (duration = 2500) => {
@@ -321,18 +301,24 @@ document.querySelectorAll('.video-container').forEach(container => {
   });
 });
 
-// ─── Auto-pause videos when out of view ───
+// ─── Auto-pause videos when out of view and LAZY LOAD ───
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const video = entry.target;
-    if (!entry.isIntersecting) {
+    if (entry.isIntersecting) {
+      // Lazy load video source if not set
+      if (video.dataset.src && !video.getAttribute('src')) {
+        video.setAttribute('src', video.dataset.src);
+        video.load();
+      }
+    } else {
       // Video is out of view - pause it
       if (!video.paused) {
         video.pause();
       }
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.1, rootMargin: "0px 0px 400px 0px" });
 
 document.querySelectorAll('.custom-video').forEach(video => {
   videoObserver.observe(video);
