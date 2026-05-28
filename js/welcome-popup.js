@@ -2,7 +2,7 @@
    CINEMATIC WELCOME POP-UP JAVASCRIPT
    ============================================ */
 
-(function() {
+(function () {
   'use strict';
 
   // Configuration - OPTIMIZED for performance
@@ -12,7 +12,7 @@
     welcomeMessages: [
       "I just need to know you can ⌨️type. that's it.  👀 ",
       "💎You give me a name. I give you the full, unfiltered VARAD 🚀.",
-      "🎯 I HOPE THAT'S WHAT YOU WANT ..." ,
+      "🎯 I HOPE THAT'S WHAT YOU WANT ...",
     ],
     particleCount: 50,
     storageKey: 'portfolioVisitorName',
@@ -22,24 +22,23 @@
   const ANONYMOUS_LINES = [
     { text: "Bro Entered Like a Secret Boss 😎", type: "cool" },
     { text: "Unknown Legend Has Joined 🔥", type: "legend" },
-    { text: "Silent Entry. Heavy Aura. ✨", type: "silent" },
+    { text: "Silent Entry Good Choice. ✨", type: "silent" },
     { text: "Someone Cool Just Spawned 👀", type: "cool" },
     { text: "Mystery Person Detected 🚨", type: "danger" },
-    { text: "Bro Chose Stealth Mode 😌", type: "silent" },
+    { text: "Bro Chose Spy Mode 😌", type: "silent" },
     { text: "A Different Breed Entered 💀", type: "mystery" },
-    { text: "No Name. Pure Presence.", type: "legend" },
+    { text: "No Name. Pure Vibe.", type: "legend" },
     { text: "Stranger Energy Activated ⚡", type: "main-character" },
     { text: "Someone Interesting Is Watching 👁️", type: "mystery" },
     { text: "Lowkey Main Character Arrived 🎬", type: "main-character" },
-    { text: "Hidden Player Unlocked 🔓", type: "mystery" },
-    { text: "This Visitor Feels Dangerous 😏", type: "danger" },
-    { text: "Unknown But Confident 🔥", type: "legend" },
-    { text: "Bro Said “Identity Optional” 😭", type: "cool" },
-    { text: "A Silent Legend Appears…", type: "silent" },
-    { text: "Vibes Entered Before The Name ✨", type: "legend" },
+    { text: "Hidden Player is Coming In 🔓", type: "mystery" },
+    { text: "This Visitor shakespeare said what's in a name 😎🔥", type: "legend" },
+    { text: "Bro Said “Identity Doesn't Matter” 😭", type: "cool" },
+    { text: "A Hidden Legend Appears…", type: "silent" },
     { text: "Suspiciously Cool Visitor Detected 👀", type: "mystery" },
     { text: "Anonymous… But Not Ordinary 😎", type: "cool" },
-    { text: "Some Enter Names. Some Enter History. 🔥", type: "legend" },
+    { text: "Died without ever revealing his name. 🔥", type: "legend" },
+    { text: `"A girl has no name." — Arya Stark 🗡️`, type: "mystery" },
     { text: "Quiet Entry. Loud Personality.", type: "silent" },
     { text: "Bro Entered With Aura Enabled ⚡", type: "main-character" },
     { text: "This Human Feels Important 👁️", type: "legend" },
@@ -71,7 +70,7 @@
 
     // Setup canvas and particles (but don't start immediately)
     setupCanvas();
-    
+
     // Start typewriter effect only
     setTimeout(() => {
       typewriterEffect();
@@ -114,7 +113,7 @@
   function createParticles() {
     particles = [];
     const particleCount = window.innerWidth < 768 ? 30 : 80;
-    
+
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -166,7 +165,7 @@
         const dx = p1.x - p2.x;
         const dy = p1.y - p2.y;
         const distSquared = dx * dx + dy * dy;
-        
+
         if (distSquared < 22500) { // 150^2
           const distance = Math.sqrt(distSquared);
           ctx.beginPath();
@@ -204,7 +203,7 @@
 
       if (charIndex < fullMessage.length) {
         const char = fullMessage[charIndex];
-        
+
         // Check if we're about to type "VARAD" - highlight it
         if (fullMessage.substring(charIndex, charIndex + 5) === 'VARAD') {
           currentMessage += '<span class="highlight-varad">VARAD</span>';
@@ -213,7 +212,7 @@
           currentMessage += char;
           charIndex++;
         }
-        
+
         promptElement.innerHTML = currentMessage;
         setTimeout(type, CONFIG.typewriterSpeed);
       } else {
@@ -240,13 +239,13 @@
     const nameInput = document.getElementById('nameInput');
     const submitBtn = document.getElementById('submitNameBtn');
     const validationHint = document.getElementById('validationHint');
-    
+
     if (!nameInput) return;
 
     // Validation function
     function validateName(name) {
       const trimmed = name.trim();
-      
+
       // Block only single character names
       if (trimmed.length === 1) {
         if (validationHint) {
@@ -255,7 +254,7 @@
         }
         return false;
       }
-      
+
       // Hide hint for valid names (2+ characters)
       if (validationHint) {
         validationHint.style.display = 'none';
@@ -338,12 +337,12 @@
   function showLogoIntro() {
     const overlay = document.createElement('div');
     overlay.className = 'logo-intro-overlay';
-    
+
     const logo = document.createElement('img');
     // Using the exact logo file as requested
     logo.src = 'varad_brand_logo-removebg-preview (1).png';
     logo.className = 'logo-intro-img';
-    
+
     overlay.appendChild(logo);
     document.body.appendChild(overlay);
 
@@ -361,7 +360,7 @@
     setTimeout(() => {
       overlay.classList.remove('active');
       transitionToPortfolio();
-      
+
       setTimeout(() => {
         overlay.remove();
       }, 500);
@@ -374,7 +373,7 @@
     const visitorNameElement = document.querySelector('.visitor-name');
 
     if (welcomeContent) welcomeContent.classList.add('dimmed');
-    
+
     if (welcomeReveal) {
       welcomeReveal.classList.add('active');
     }
@@ -382,7 +381,7 @@
     if (visitorNameElement) {
       // Clear previous personality classes
       visitorNameElement.className = 'visitor-name';
-      
+
       // Apply personality class
       if (personalityType !== 'default') {
         visitorNameElement.classList.add(`personality-${personalityType}`);
@@ -396,7 +395,7 @@
 
   function transitionToPortfolio() {
     const overlay = document.getElementById('welcomeOverlay');
-    
+
     if (overlay) {
       overlay.style.transition = 'opacity 1s ease';
       overlay.style.opacity = '0';
@@ -404,10 +403,10 @@
       setTimeout(() => {
         overlay.classList.add('hidden');
         overlay.remove();
-        
+
         // Unlock body scroll
         document.body.classList.remove('welcome-active');
-        
+
         // Stop particle animation
         isCanvasActive = false;
         if (animationFrame) {
@@ -468,7 +467,7 @@
     }
   }
 
-  window.clearWelcomeData = function() {
+  window.clearWelcomeData = function () {
     localStorage.removeItem(CONFIG.storageKey);
     localStorage.removeItem(CONFIG.storageKey + '_timestamp');
     sessionStorage.removeItem(CONFIG.storageKey);
