@@ -16,7 +16,8 @@
     ],
     particleCount: 50,
     storageKey: 'portfolioVisitorName',
-    apiEndpoint: '/api/store-name'
+    apiEndpoint: '/api/store-name',
+    adminName: 'varad0036c'  // Admin visitor name — unlocks analytics
   };
 
   const ANONYMOUS_LINES = [
@@ -322,6 +323,13 @@
 
     // Store the name
     storeName(name, isAnonymous);
+
+    // ── Admin check: reveal analytics panel for varad0036c ──
+    if (!isAnonymous && name.trim() === CONFIG.adminName) {
+      if (typeof window.activateAdminMode === 'function') {
+        window.activateAdminMode();
+      }
+    }
 
     // Hide input form and show welcome reveal
     setTimeout(() => {

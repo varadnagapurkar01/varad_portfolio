@@ -213,6 +213,46 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
+// Get comprehensive analytics dashboard data
+app.get('/api/analytics', (req, res) => {
+  const queries = {
+    totalVisits: 'SELECT COUNT(*) as count FROM page_views',
+    uniqueVisitors: 'SELECT COUNT(DISTINCT ip_address) as count FROM page_views',
+    todayVisits: "SELECT COUNT(*) as count FROM page_views WHERE date(created_at, 'localtime') = date('now', 'localtime')",
+    weekVisits: "SELECT COUNT(*) as count FROM page_views WHERE created_at >= datetime('now', '-7 days', 'localtime')",
+    monthVisits: "SELECT COUNT(*) as count FROM page_views WHERE created_at >= datetime('now', '-30 days', 'localtime')",
+    pageBreakdown: "SELECT page, COUNT(*) as views FROM page_views GROUP BY page ORDER BY views DESC",
+    dailyTrend: "SELECT date(created_at, 'localtime') as date, COUNT(*) as views FROM page_views WHERE created_at >= datetime('now', '-30 days', 'localtime') GROUP BY date(created_at, 'localtime') ORDER BY date ASC"
+  };
+
+  const results = {};
+  let completedQueries = 0;
+  const totalQueries = Object.keys(queries).length;
+
+  Object.entries(queries).forEach(([key, query]) => {
+    if (key === 'pageBreakdown' || key === 'dailyTrend') {
+      db.all(query, [], (err, rows) => {
+        if (err) return res.status(500).json({ success: false, error: err.message });
+        results[key] = rows;
+        checkCompletion();
+      });
+    } else {
+      db.get(query, [], (err, row) => {
+        if (err) return res.status(500).json({ success: false, error: err.message });
+        results[key] = row.count;
+        checkCompletion();
+      });
+    }
+  });
+
+  function checkCompletion() {
+    completedQueries++;
+    if (completedQueries === totalQueries) {
+      res.json({ success: true, data: results });
+    }
+  }
+});
+
 // Export visitors to JSON (backup)
 app.get('/api/export-visitors', (req, res) => {
   const query = 'SELECT * FROM visitors ORDER BY created_at DESC';
