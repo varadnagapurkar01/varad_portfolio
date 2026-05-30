@@ -1,317 +1,58 @@
-/* ============================================
-   BACKEND SERVER FOR NAME STORAGE
-   Node.js + Express + SQLite
-   ============================================ */
-
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
-const compression = require('compression');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// Middleware
-app.use(compression()); // Enable Gzip/Brotli compression
 app.use(cors());
 app.use(express.json());
+app.use(express.static(__dirname));
 
-// Serve static files with Cache-Control
-app.use(express.static(__dirname, {
-  maxAge: '1d', // Cache static assets for 1 day
-  setHeaders: (res, path) => {
-    // Don't aggressively cache HTML files so updates are visible
-    if (path.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-    }
-  }
-}));
-
-// Database setup
-const dbPath = path.join(__dirname, 'visitors.db');
+const dbPath = path.join(__dirname, 'visit_counts.db');
 const db = new sqlite3.Database(dbPath);
 
-// Create visitors table if it doesn't exist
 db.serialize(() => {
   db.run(`
-    CREATE TABLE IF NOT EXISTS visitors (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      timestamp INTEGER NOT NULL,
-      user_agent TEXT,
-      referrer TEXT,
-      ip_address TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )
-  `);
-
-  // Page views table for section-wise analytics
-  db.run(`
-    CREATE TABLE IF NOT EXISTS page_views (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      page TEXT NOT NULL,
-      ip_address TEXT,
-      user_agent TEXT,
-      referrer TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    CREATE TABLE IF NOT EXISTS page_visits (
+      page_name TEXT PRIMARY KEY,
+      count INTEGER DEFAULT 0
     )
   `);
 });
 
-// ============================================
-// API ENDPOINTS
-// ============================================
-
-// Store visitor name
-app.post('/api/store-name', (req, res) => {
-  const { name, timestamp, userAgent, referrer } = req.body;
-  const ipAddress = req.ip || req.connection.remoteAddress;
-
-  if (!name || !timestamp) {
-    return res.status(400).json({ 
-      success: false, 
-      error: 'Name and timestamp are required' 
-    });
-  }
-
-  const query = `
-    INSERT INTO visitors (name, timestamp, user_agent, referrer, ip_address)
-    VALUES (?, ?, ?, ?, ?)
-  `;
-
-  db.run(query, [name, timestamp, userAgent, referrer, ipAddress], function(err) {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Failed to store name' 
-      });
-    }
-
-    res.json({ 
-      success: true, 
-      message: 'Name stored successfully',
-      id: this.lastID
-    });
-  });
-});
-
-// Get all visitors (for admin/analytics)
-app.get('/api/visitors', (req, res) => {
-  const query = `
-    SELECT id, name, timestamp, user_agent, referrer, created_at
-    FROM visitors
-    ORDER BY created_at DESC
-    LIMIT 100
-  `;
-
-  db.all(query, [], (err, rows) => {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Failed to retrieve visitors' 
-      });
-    }
-
-    res.json({ 
-      success: true, 
-      count: rows.length,
-      visitors: rows 
-    });
-  });
-});
-
-// Get visitor count
-app.get('/api/visitor-count', (req, res) => {
-  const query = 'SELECT COUNT(*) as count FROM visitors';
-
-  db.get(query, [], (err, row) => {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Failed to get count' 
-      });
-    }
-
-    res.json({ 
-      success: true, 
-      count: row.count 
-    });
-  });
-});
-
-// ─── PAGE VIEW TRACKING ───────────────────────────────────────────────────────
-
-// Track a page view
-app.post('/api/track-page', (req, res) => {
+app.post('/api/track', (req, res) => {
   const { page } = req.body;
-  const ipAddress = req.ip || req.connection.remoteAddress;
-  const userAgent = req.headers['user-agent'] || '';
-  const referrer = req.headers['referer'] || '';
+  if (!page) return res.status(400).json({ error: 'Page required' });
 
-  if (!page) {
-    return res.status(400).json({ success: false, error: 'page is required' });
-  }
-
-  const query = `INSERT INTO page_views (page, ip_address, user_agent, referrer) VALUES (?, ?, ?, ?)`;
-  db.run(query, [page, ipAddress, userAgent, referrer], function(err) {
-    if (err) {
-      console.error('Page view tracking error:', err);
-      return res.status(500).json({ success: false, error: 'Failed to record page view' });
-    }
-    res.json({ success: true, id: this.lastID });
-  });
-});
-
-// Get page view counts per section
-app.get('/api/page-views', (req, res) => {
   const query = `
-    SELECT page, COUNT(*) as views
-    FROM page_views
-    GROUP BY page
-    ORDER BY views DESC
+    INSERT INTO page_visits (page_name, count) 
+    VALUES (?, 1) 
+    ON CONFLICT(page_name) 
+    DO UPDATE SET count = count + 1
   `;
-
-  db.all(query, [], (err, rows) => {
+  
+  db.run(query, [page], (err) => {
     if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ success: false, error: 'Failed to get page views' });
+      console.error(err);
+      return res.status(500).json({ error: 'Database error' });
     }
-    res.json({ success: true, pages: rows });
+    res.json({ success: true });
   });
 });
 
-// Get comprehensive stats (visitors + page views combined)
-app.get('/api/stats', (req, res) => {
-  const visitorCountQuery = 'SELECT COUNT(*) as count FROM visitors';
-  const pageViewsQuery = `SELECT page, COUNT(*) as views FROM page_views GROUP BY page ORDER BY views DESC`;
-  const todayQuery = `SELECT COUNT(*) as count FROM visitors WHERE date(created_at) = date('now')`;
-  const weekQuery = `SELECT COUNT(*) as count FROM visitors WHERE created_at >= datetime('now', '-7 days')`;
-
-  db.get(visitorCountQuery, [], (err, visitorRow) => {
-    if (err) return res.status(500).json({ success: false, error: err.message });
-    db.all(pageViewsQuery, [], (err, pageRows) => {
-      if (err) return res.status(500).json({ success: false, error: err.message });
-      db.get(todayQuery, [], (err, todayRow) => {
-        if (err) return res.status(500).json({ success: false, error: err.message });
-        db.get(weekQuery, [], (err, weekRow) => {
-          if (err) return res.status(500).json({ success: false, error: err.message });
-          res.json({
-            success: true,
-            totalVisitors: visitorRow.count,
-            todayVisitors: todayRow.count,
-            weekVisitors: weekRow.count,
-            pageViews: pageRows
-          });
-        });
-      });
-    });
+app.get('/api/counts', (req, res) => {
+  db.all('SELECT page_name, count FROM page_visits ORDER BY count DESC', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: 'Database error' });
+    res.json(rows);
   });
 });
-
-// Get comprehensive analytics dashboard data
-app.get('/api/analytics', (req, res) => {
-  const queries = {
-    totalVisits: 'SELECT COUNT(*) as count FROM page_views',
-    uniqueVisitors: 'SELECT COUNT(DISTINCT ip_address) as count FROM page_views',
-    todayVisits: "SELECT COUNT(*) as count FROM page_views WHERE date(created_at, 'localtime') = date('now', 'localtime')",
-    weekVisits: "SELECT COUNT(*) as count FROM page_views WHERE created_at >= datetime('now', '-7 days', 'localtime')",
-    monthVisits: "SELECT COUNT(*) as count FROM page_views WHERE created_at >= datetime('now', '-30 days', 'localtime')",
-    pageBreakdown: "SELECT page, COUNT(*) as views FROM page_views GROUP BY page ORDER BY views DESC",
-    dailyTrend: "SELECT date(created_at, 'localtime') as date, COUNT(*) as views FROM page_views WHERE created_at >= datetime('now', '-30 days', 'localtime') GROUP BY date(created_at, 'localtime') ORDER BY date ASC"
-  };
-
-  const results = {};
-  let completedQueries = 0;
-  const totalQueries = Object.keys(queries).length;
-
-  Object.entries(queries).forEach(([key, query]) => {
-    if (key === 'pageBreakdown' || key === 'dailyTrend') {
-      db.all(query, [], (err, rows) => {
-        if (err) return res.status(500).json({ success: false, error: err.message });
-        results[key] = rows;
-        checkCompletion();
-      });
-    } else {
-      db.get(query, [], (err, row) => {
-        if (err) return res.status(500).json({ success: false, error: err.message });
-        results[key] = row.count;
-        checkCompletion();
-      });
-    }
-  });
-
-  function checkCompletion() {
-    completedQueries++;
-    if (completedQueries === totalQueries) {
-      res.json({ success: true, data: results });
-    }
-  }
-});
-
-// Export visitors to JSON (backup)
-app.get('/api/export-visitors', (req, res) => {
-  const query = 'SELECT * FROM visitors ORDER BY created_at DESC';
-
-  db.all(query, [], (err, rows) => {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ 
-        success: false, 
-        error: 'Failed to export data' 
-      });
-    }
-
-    const exportPath = path.join(__dirname, 'visitors-export.json');
-    fs.writeFileSync(exportPath, JSON.stringify(rows, null, 2));
-
-    res.json({ 
-      success: true, 
-      message: 'Data exported successfully',
-      file: 'visitors-export.json',
-      count: rows.length
-    });
-  });
-});
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    message: 'Server is running',
-    timestamp: Date.now()
-  });
-});
-
-// ============================================
-// START SERVER
-// ============================================
 
 app.listen(PORT, () => {
-  console.log(`
-╔════════════════════════════════════════╗
-║   PORTFOLIO BACKEND SERVER RUNNING    ║
-╠════════════════════════════════════════╣
-║   Port: ${PORT}                          ║
-║   Database: ${dbPath}                   ║
-║   Status: ✓ Ready                      ║
-╚════════════════════════════════════════╝
-  `);
+  console.log(`Visit Counts server running on port ${PORT}`);
 });
 
-// Graceful shutdown
 process.on('SIGINT', () => {
-  console.log('\nClosing database connection...');
-  db.close((err) => {
-    if (err) {
-      console.error('Error closing database:', err);
-    } else {
-      console.log('Database connection closed.');
-    }
-    process.exit(0);
-  });
+  db.close(() => process.exit(0));
 });
