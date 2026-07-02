@@ -16,14 +16,13 @@
     ],
     particleCount: 50,
     storageKey: 'portfolioVisitorName',
-    apiEndpoint: '/api/store-name',
-    adminName: 'varad0036c'  // Admin visitor name — unlocks analytics
+    apiEndpoint: '/api/store-name'
   };
 
   const ANONYMOUS_LINES = [
     { text: "Bro Entered Like a Secret Boss 😎", type: "cool" },
     { text: "Unknown Legend Has Joined 🔥", type: "legend" },
-    { text: "Silent Entry Good Choice. ✨", type: "silent" },
+    { text: "Silent Entry , Good Choice. ✨", type: "silent" },
     { text: "Someone Cool Just Spawned 👀", type: "cool" },
     { text: "Mystery Person Detected 🚨", type: "danger" },
     { text: "Bro Chose Spy Mode 😌", type: "silent" },
@@ -40,7 +39,7 @@
     { text: "Anonymous… But Not Ordinary 😎", type: "cool" },
     { text: "Died without ever revealing his name. 🔥", type: "legend" },
     { text: `"A girl has no name." — Arya Stark 🗡️`, type: "mystery" },
-    { text: "Quiet Entry. Loud Personality.", type: "silent" },
+    { text: "Quiet Entry. Loud Impact GOOD.", type: "silent" },
     { text: "Bro Entered With Aura Enabled ⚡", type: "main-character" },
     { text: "This Human Feels Important 👁️", type: "legend" },
     { text: "Stealth Visitor With Main Character Energy 🎬", type: "main-character" },
@@ -323,13 +322,6 @@
 
     // Store the name
     storeName(name, isAnonymous);
-
-    // ── Admin check: reveal analytics panel for varad0036c ──
-    if (!isAnonymous && name.trim() === CONFIG.adminName) {
-      if (typeof window.activateAdminMode === 'function') {
-        window.activateAdminMode();
-      }
-    }
 
     // Hide input form and show welcome reveal
     setTimeout(() => {
