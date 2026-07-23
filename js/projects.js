@@ -19,6 +19,21 @@ zenity: {
     tech: ['Zenity', 'Linux', 'Bash', 'Shell Script', 'GUI', 'Automation', 'Ubuntu', 'systemctl', 'apt'],
     github: 'https://github.com/varadnagapurkar01/Linux_Admin_GUI_Tool'
   },
+  reels_automation: {
+    icon: '🤖',
+    name: 'VKVV Automatic REEL Uploader',
+    status: 'live',
+    desc: 'A fully automated, serverless distribution pipeline that synchronizes video assets from Google Drive to AWS S3, leverages multimodal AI (Gemini 2.5 Flash) to generate platform-specific captions based on video and audio content, and automatically publishes them to YouTube Shorts, Instagram Reels, and Facebook Reels.',
+    points: [
+      '<strong>Google Drive Sync (Lambda 1)</strong> — Integrated Google Drive API to scan a shared folder for new .mp4 files, transfers them to Amazon S3, and automatically moves processed videos to a "Processed" folder.',
+      '<strong>Multimodal AI Content Analyzer</strong> — Programmed Google Gemini 2.5 Flash API to analyze video frames and listen to audio tracks (e.g. Marathi language speech) to reason about the content. Generates three distinct, platform-optimized captions (Short/punchy for YouTube, high-engagement & emoji-rich for Instagram, and friendly/warm for Facebook) and associated hashtags in a structured JSON schema.',
+      '<strong>Simultaneous Multi-Platform Upload (Lambda 2)</strong> — Configured YouTube Data API (OAuth 2.0) using resumable uploads for Shorts; Instagram Reels (Meta Graph API) via S3 pre-signed URLs and container status polling; and Facebook Reels via Page access tokens and multi-stage streaming uploads.',
+      '<strong>Error Handling & S3 Clean-up</strong> — Implemented transactional logic where the source video in AWS S3 is deleted ONLY if all three social media uploads (YouTube, Instagram, Facebook) succeed. If any platform fails, the video is preserved for automated retries.',
+      '<strong>Serverless Deployment</strong> — Python script bundles handlers and dependencies into AWS Lambda-compatible deployment packages (ZIP). Secured API Gateway triggers using customized x-api-key header verification.'
+    ],
+    tech: ['Python', 'AWS Lambda', 'AWS S3', 'AWS API Gateway', 'Google Drive API', 'Meta Graph API', 'YouTube Data API', 'Gemini 2.5 Flash', 'OAuth 2.0'],
+    github: 'https://github.com/varadnagapurkar01/automatic-Reel-uploder-'
+  },
   vm: {
     icon: '🖥️',
     name: 'Virtual Machine Infrastructure',
